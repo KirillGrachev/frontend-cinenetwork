@@ -7,7 +7,7 @@ const ActivityLogSkeleton: React.FC = () => {
     const { t } = useLocale();
 
     return (
-        <div className="min-h-screen pt-32 pb-20 animate-fade-in">
+        <div className="min-h-screen pt-32 pb-20 page-reveal">
             <div className="container mx-auto px-4 md:px-8 h-full flex flex-col">
                 <div className="mb-8">
                     <Button
@@ -41,7 +41,7 @@ const ActivityLogSkeleton: React.FC = () => {
                     {Array.from({ length: 8 }).map((_, i) => (
                         <div
                             key={i}
-                            className="flex gap-4 p-4 bg-white/5 rounded-2xl animate-pulse"
+                            className="flex gap-4 p-4 bg-white/5 rounded-2xl skeleton-shimmer"
                         >
                             <Skeleton className="w-12 h-12 rounded-full flex-shrink-0" />
                             <div className="flex-1 space-y-3">

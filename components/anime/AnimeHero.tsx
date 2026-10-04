@@ -85,7 +85,7 @@ const AnimeHero: React.FC<AnimeHeroProps> = ({ anime, currentStatus, onUpdateSta
                 </div>
 
                 {/* Info */}
-                <div className="flex-1 animate-fade-in w-full">
+                <div className="flex-1 page-reveal w-full">
                     {/* Mobile Poster */}
                     <div className="md:hidden w-28 rounded-xl overflow-hidden shadow-lg border border-white/10 mb-4 bg-panel-secondary">
                         <AnimeImage

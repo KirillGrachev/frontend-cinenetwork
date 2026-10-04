@@ -56,7 +56,7 @@ const BlogPost: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen pt-32 pb-20 animate-fade-in">
+        <div className="min-h-screen pt-32 pb-20 page-reveal">
             <SEO title={t(post.title)} description={t(post.excerpt)} type="article" />
 
             <div className="container mx-auto px-4 md:px-8">

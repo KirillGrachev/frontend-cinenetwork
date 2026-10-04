@@ -20,7 +20,7 @@ const Collections: React.FC = () => {
     const { state, actions } = useCollectionsLogic();
 
     return (
-        <div className="min-h-screen pt-32 pb-20">
+        <div className="page-reveal min-h-screen pt-32 pb-20">
             <SEO title={t('collections.title')} description={t('collections.description')} />
             <div className="container mx-auto px-4 md:px-8">
                 <PageHeader

@@ -19,7 +19,7 @@ const StatusPage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-[calc(100vh-120px)] pt-32 pb-20 select-none flex flex-col justify-between animate-fade-in">
+        <div className="min-h-[calc(100vh-120px)] pt-32 pb-20 select-none flex flex-col justify-between page-reveal">
             <div className="container mx-auto px-4 md:px-8 flex-1">
                 <div className="mb-8">
                     <Button

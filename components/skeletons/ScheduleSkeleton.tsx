@@ -11,7 +11,7 @@ const ScheduleSkeleton: React.FC = () => {
                 <PageHeader title={t('schedule.title')} description={t('schedule.description')} />
 
                 {/* Days Selector Skeleton */}
-                <div className="mb-10 animate-pulse">
+                <div className="mb-10 skeleton-shimmer">
                     <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
                         {Array.from({ length: 7 }).map((_, i) => (
                             <div
@@ -26,13 +26,13 @@ const ScheduleSkeleton: React.FC = () => {
                 </div>
 
                 {/* Header Skeleton */}
-                <div className="flex items-center justify-between mb-6 animate-pulse">
+                <div className="flex items-center justify-between mb-6 skeleton-shimmer">
                     <div className="h-6 w-40 bg-white/5 rounded-lg border border-white/5"></div>
                     <div className="h-12 w-[220px] bg-white/5 rounded-xl border border-white/5"></div>
                 </div>
 
                 {/* Grid Skeleton */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 min-h-[600px] animate-pulse">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 min-h-[600px] skeleton-shimmer">
                     {Array.from({ length: 10 }).map((_, idx) => (
                         <div
                             key={idx}

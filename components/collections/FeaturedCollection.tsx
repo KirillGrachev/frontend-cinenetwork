@@ -23,7 +23,7 @@ const FeaturedCollection: React.FC<FeaturedCollectionProps> = ({ collection }) =
     };
 
     return (
-        <div className="mb-12 animate-fade-in z-0 relative">
+        <div className="mb-12 page-reveal z-0 relative">
             <div
                 onClick={handleCardClick}
                 onKeyDown={handleKeyDown}

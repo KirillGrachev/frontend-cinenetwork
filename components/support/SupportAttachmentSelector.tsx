@@ -143,7 +143,7 @@ const SupportAttachmentSelector: React.FC<SupportAttachmentSelectorProps> = ({
             {/* Content Transition Container */}
             <div className="relative flex flex-col justify-center overflow-hidden transition-all duration-300">
                 {attachmentType === AttachmentType.File ? (
-                    <div key="file-dropzone" className="w-full space-y-3 animate-fade-in">
+                    <div key="file-dropzone" className="w-full space-y-3 page-reveal">
                         <div
                             onClick={() => fileInputRef.current?.click()}
                             className={`border border-dashed rounded-2xl h-28 flex flex-col items-center justify-center gap-2 transition-all duration-300 cursor-pointer group ${
@@ -172,7 +172,7 @@ const SupportAttachmentSelector: React.FC<SupportAttachmentSelectorProps> = ({
                         </div>
 
                         {fileError && (
-                            <p className="text-xs text-red-400 font-medium animate-fade-in ml-1">
+                            <p className="text-xs text-red-400 font-medium page-reveal ml-1">
                                 {fileError}
                             </p>
                         )}
@@ -211,7 +211,7 @@ const SupportAttachmentSelector: React.FC<SupportAttachmentSelectorProps> = ({
                 ) : (
                     <div
                         key="link-input"
-                        className="w-full flex flex-col justify-center py-1 relative animate-fade-in"
+                        className="w-full flex flex-col justify-center py-1 relative page-reveal"
                     >
                         <input
                             {...register('link')}
@@ -222,7 +222,7 @@ const SupportAttachmentSelector: React.FC<SupportAttachmentSelectorProps> = ({
                             maxLength={500}
                         />
                         {error && (
-                            <p className="text-xs text-red-400 font-medium animate-fade-in mt-1.5 ml-1">
+                            <p className="text-xs text-red-400 font-medium page-reveal mt-1.5 ml-1">
                                 {error}
                             </p>
                         )}

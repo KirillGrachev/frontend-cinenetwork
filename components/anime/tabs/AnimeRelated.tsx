@@ -47,7 +47,7 @@ const AnimeRelated: React.FC<AnimeRelatedProps> = ({ franchise, similar }) => {
     const { t } = useLocale();
 
     return (
-        <div className="animate-fade-in space-y-12 pb-12">
+        <div className="page-reveal space-y-12 pb-12">
             {/* Franchise Section */}
             {franchise && franchise.length > 0 && (
                 <div>

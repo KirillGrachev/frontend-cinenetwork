@@ -33,7 +33,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                     </button>
                 )}
                 {error && (
-                    <span className="absolute -bottom-5 left-1 text-[10px] text-red-400 font-medium animate-fade-in">
+                    <span className="absolute -bottom-5 left-1 text-[10px] text-red-400 font-medium page-reveal">
                         {error}
                     </span>
                 )}

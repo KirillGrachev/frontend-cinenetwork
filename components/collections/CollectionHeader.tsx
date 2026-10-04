@@ -31,7 +31,7 @@ const CollectionHeader: React.FC<CollectionHeaderProps> = ({ collection, itemsCo
         <div className="flex flex-col md:flex-row items-end gap-8">
             <div className="flex-1">
                 {/* Updated Metadata Header */}
-                <div className="flex items-center gap-3 mb-5 animate-fade-in">
+                <div className="flex items-center gap-3 mb-5 page-reveal">
                     <div className="flex items-center gap-2 text-blue-400">
                         <i className="fa-solid fa-layer-group text-sm"></i>
                         <span className="text-sm font-bold uppercase tracking-widest">
@@ -44,11 +44,11 @@ const CollectionHeader: React.FC<CollectionHeaderProps> = ({ collection, itemsCo
                     </span>
                 </div>
 
-                <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-2xl animate-fade-in stagger-1">
+                <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-2xl page-reveal">
                     {t(collection.title)}
                 </h1>
 
-                <div className="flex items-center gap-4 animate-fade-in stagger-2">
+                <div className="flex items-center gap-4 page-reveal">
                     <div
                         className="flex -space-x-2 cursor-pointer hover:scale-105 transition-transform"
                         onClick={() =>
@@ -71,7 +71,7 @@ const CollectionHeader: React.FC<CollectionHeaderProps> = ({ collection, itemsCo
                 </div>
             </div>
 
-            <div className="flex gap-3 w-full md:w-auto animate-fade-in stagger-3">
+            <div className="flex gap-3 w-full md:w-auto page-reveal">
                 <Button
                     variant="primary"
                     size="lg"

@@ -36,7 +36,7 @@ const Notifications: React.FC = () => {
             showToast(t('history.clearHistory'), ToastType.Success);
         } else {
             // Placeholder for partial clear
-            showToast('Частичная очистка в разработке', ToastType.Info);
+            showToast(t('settings.inDevelopment.title'), ToastType.Info);
             setIsClearModalOpen(false);
         }
     };

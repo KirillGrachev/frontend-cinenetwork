@@ -2,7 +2,7 @@ import React from 'react';
 
 const HistorySkeleton: React.FC = () => {
     return (
-        <div className="min-h-screen bg-background-primary pt-32 pb-20 animate-pulse">
+        <div className="min-h-screen bg-background-primary pt-32 pb-20 skeleton-shimmer">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Header Skeleton */}
                 <div className="flex flex-col items-center text-center mb-8">

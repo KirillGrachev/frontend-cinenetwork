@@ -8,7 +8,7 @@ interface ErrorTooltipProps {
 const ErrorTooltip: React.FC<ErrorTooltipProps> = ({ message, className = '' }) => {
     return (
         <div
-            className={`absolute left-0 top-full mt-2 z-10 w-full animate-fade-in ${className}`}
+            className={`absolute left-0 top-full mt-2 z-10 w-full page-reveal ${className}`}
             style={{ animationDuration: '0.2s', animationFillMode: 'forwards', opacity: 0 }}
             role="alert"
         >

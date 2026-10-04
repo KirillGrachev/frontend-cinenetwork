@@ -19,7 +19,7 @@ export const AnimePageLayout: React.FC<AnimePageLayoutProps> = ({
 }) => {
     return (
         <div
-            className={`min-h-screen bg-background-primary pb-20 ${isSkeleton ? 'animate-fade-in' : ''}`}
+            className={`min-h-screen bg-background-primary pb-20 ${isSkeleton ? 'page-reveal' : ''}`}
         >
             {/* Hero */}
             <div className="relative w-full bg-background-primary z-20">

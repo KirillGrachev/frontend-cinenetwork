@@ -44,7 +44,7 @@ const AnimePage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-background-primary pb-20">
+        <div className="page-reveal min-h-screen bg-background-primary pb-20">
             <SEO
                 title={t(anime.title)}
                 description={t(anime.description)}

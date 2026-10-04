@@ -7,7 +7,7 @@ const UsersTableSkeleton: React.FC = () => {
     const { t } = useLocale();
 
     return (
-        <div className="min-h-screen pt-32 pb-20 animate-fade-in">
+        <div className="min-h-screen pt-32 pb-20 page-reveal">
             <div className="container mx-auto px-4 md:px-8 h-full flex flex-col">
                 <div className="mb-8">
                     <Button
@@ -60,7 +60,7 @@ const UsersTableSkeleton: React.FC = () => {
                         </thead>
                         <tbody className="divide-y divide-border-light">
                             {Array.from({ length: 8 }).map((_, i) => (
-                                <tr key={i} className="animate-pulse">
+                                <tr key={i} className="skeleton-shimmer">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-3">
                                             <Skeleton className="w-10 h-10 rounded-full" />

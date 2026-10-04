@@ -7,7 +7,7 @@ const BlogPostSkeleton: React.FC = () => {
     const { t } = useLocale();
 
     return (
-        <div className="min-h-screen pt-32 pb-20 animate-fade-in">
+        <div className="min-h-screen pt-32 pb-20 page-reveal">
             <div className="container mx-auto px-4 md:px-8">
                 {/** Back Button Skeleton */}
                 <div className="mb-8">

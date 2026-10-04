@@ -76,7 +76,7 @@ const CuratorModal: React.FC<CuratorModalProps> = ({ isOpen, onClose }) => {
         >
             {/** Step 1: Intro */}
             {step === CuratorStep.Intro && (
-                <div className="text-center animate-fade-in">
+                <div className="text-center page-reveal">
                     <div className="w-16 h-16 rounded-full bg-white/5 mx-auto flex items-center justify-center mb-6 ">
                         <i className="fa-solid fa-wand-magic-sparkles text-2xl text-white"></i>
                     </div>
@@ -103,7 +103,7 @@ const CuratorModal: React.FC<CuratorModalProps> = ({ isOpen, onClose }) => {
 
             {/** Step 2: Application Form */}
             {step === CuratorStep.Form && (
-                <form onSubmit={handleSubmit(onSubmit)} className="animate-fade-in" noValidate>
+                <form onSubmit={handleSubmit(onSubmit)} className="page-reveal" noValidate>
                     <div className="flex items-center justify-between mb-6">
                         <DialogTitle as="h3" className="text-xl font-bold text-white">
                             {t('collections.form.title')}

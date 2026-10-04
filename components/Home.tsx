@@ -34,7 +34,7 @@ const Home: React.FC = () => {
       */}
 
             {/* CHANGED: Increased top padding (pt-32) to match other pages and compensate for missing Hero */}
-            <div className="relative z-10 bg-background-primary pb-20 pt-32 flex flex-col gap-10 md:gap-12 animate-fade-in">
+            <div className="relative z-10 bg-background-primary pb-20 pt-32 flex flex-col gap-10 md:gap-12 page-reveal">
                 {/* Moved Banner to the top to act as a visual anchor since Hero is disabled */}
                 <Banner items={state.banners} isLoading={state.isLoading} />
                 <AnimeRow

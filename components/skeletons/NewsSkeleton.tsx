@@ -16,7 +16,7 @@ const NewsSkeleton: React.FC = () => {
                 />
 
                 {/* Featured Post Skeleton */}
-                <div className="mb-6 w-full h-full min-h-[350px] bg-background-secondary border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col justify-between animate-pulse">
+                <div className="mb-6 w-full h-full min-h-[350px] bg-background-secondary border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col justify-between skeleton-shimmer">
                     <div className="flex gap-3 mb-4">
                         <div className="h-[28px] w-32 bg-white/5 rounded-lg"></div>
                         <div className="h-[28px] w-20 bg-white/5 rounded-lg"></div>
@@ -42,7 +42,7 @@ const NewsSkeleton: React.FC = () => {
                     }).map((_, i) => (
                         <div
                             key={i}
-                            className="h-full min-h-[280px] bg-background-secondary border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col justify-between animate-pulse"
+                            className="h-full min-h-[280px] bg-background-secondary border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col justify-between skeleton-shimmer"
                         >
                             <div className="flex gap-3 mb-4">
                                 <div className="h-[28px] w-32 bg-white/5 rounded-lg"></div>

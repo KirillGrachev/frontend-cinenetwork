@@ -11,7 +11,7 @@ const SettingsSubscription: React.FC<SettingsSubscriptionProps> = ({ formData })
     const { t } = useLocale();
 
     return (
-        <div className="animate-fade-in">
+        <div className="page-reveal">
             <div className="bg-panel-primary border border-white/5 rounded-3xl p-8 relative overflow-hidden">
                 <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                     <div>

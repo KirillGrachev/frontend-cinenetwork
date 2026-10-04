@@ -19,7 +19,7 @@ const ProfileFriends: React.FC<ProfileFriendsProps> = ({
     const { t } = useLocale();
     const navigate = useNavigate();
     return (
-        <div className="animate-fade-in flex flex-col min-h-[500px]">
+        <div className="page-reveal flex flex-col min-h-[500px]">
             <div className="flex items-center justify-between mb-6">
                 <h3 className="text-xl font-bold text-white">{t('info.profile.friends.title')}</h3>
                 <span className="text-sm font-bold text-gray-500 bg-white/5 px-2.5 py-1 rounded-lg border border-white/5">
@@ -71,7 +71,7 @@ const ProfileFriends: React.FC<ProfileFriendsProps> = ({
 
             {/* Persistent Find Friends Block - Only show if not scrolling or at top */}
             {isOwnProfile && friends.length < 10 && (
-                <div className="mt-8 pt-8 border-t border-white/5 animate-fade-in stagger-1 mb-20">
+                <div className="mt-8 pt-8 border-t border-white/5 page-reveal mb-20">
                     <div className="bg-panel-primary border border-white/10 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
                         <div className="text-center md:text-left">
                             <h4 className="text-lg font-bold text-white mb-2">

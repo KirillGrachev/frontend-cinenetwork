@@ -105,7 +105,7 @@ const WatchPage: React.FC = () => {
                 }
                 leftColumn={
                     <>
-                        <div className="mb-8 animate-fade-in">
+                        <div className="mb-8 page-reveal">
                             <PlayerPlaceholder
                                 thumbnail={currentEpisode.image}
                                 isLoading={isVideoLoading}
@@ -114,7 +114,7 @@ const WatchPage: React.FC = () => {
                                 }}
                             />
                         </div>
-                        <div className="animate-fade-in stagger-1">
+                        <div className="page-reveal">
                             <div className="flex flex-col gap-2 mb-6">
                                 <h2 className="text-2xl font-bold text-white leading-tight">
                                     {currentEpisode.title}
@@ -124,13 +124,13 @@ const WatchPage: React.FC = () => {
                                 </p>
                             </div>
                         </div>
-                        <div className="animate-fade-in stagger-2 border-t border-white/5 pt-6">
+                        <div className="page-reveal border-t border-white/5 pt-6">
                             <CommentsSection animeId={animeId} comments={anime.comments || []} />
                         </div>
                     </>
                 }
                 rightColumn={
-                    <div className="animate-fade-in stagger-1">
+                    <div className="page-reveal">
                         <EpisodeSelector
                             episodes={episodes}
                             currentEpisodeNumber={currentEpisodeNumber}

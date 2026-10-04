@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProfileSkeleton: React.FC = () => {
     return (
-        <div className="min-h-screen bg-background-primary pb-20 animate-pulse">
+        <div className="min-h-screen bg-background-primary pb-20">
             {/* Banner Skeleton */}
             <div className="h-64 md:h-80 w-full bg-panel-primary relative overflow-hidden">
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent animate-[shimmer_1.5s_infinite]"></div>

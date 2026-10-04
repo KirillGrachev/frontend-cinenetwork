@@ -73,7 +73,7 @@ const CollectionCurators: React.FC = () => {
                     className="!mb-12"
                 />
 
-                <div className="min-h-[500px] animate-fade-in stagger-1">
+                <div className="min-h-[500px] page-reveal">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-20">
                         {curators.map((curator) => (
                             <div key={curator.id} className="w-full">

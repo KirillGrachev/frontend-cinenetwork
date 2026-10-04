@@ -1,15 +1,11 @@
 import React from 'react';
 
-interface SkeletonProps {
+interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
     className?: string;
 }
 
-const Skeleton: React.FC<SkeletonProps> = ({ className = '' }) => {
-    return (
-        <div className={`bg-white/5 relative overflow-hidden ${className}`}>
-            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
-        </div>
-    );
+const Skeleton: React.FC<SkeletonProps> = ({ className = '', ...rest }) => {
+    return <div {...rest} className={`bg-white/5 skeleton-shimmer ${className}`} />;
 };
 
 export default Skeleton;

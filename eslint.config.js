@@ -13,7 +13,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
  * `tsc --noEmit` (strict) via the `typecheck` script / CI.
  */
 export default tseslint.config(
-    { ignores: ['dist', 'node_modules', 'coverage', 'collect.cjs'] },
+    { ignores: ['dist', 'node_modules', 'coverage', 'collect.cjs', 'vendor/**', 'public/**'] },
     js.configs.recommended,
     ...tseslint.configs.recommended,
     {
@@ -42,8 +42,11 @@ export default tseslint.config(
     },
     {
         // Node-side tooling files
-        files: ['*.config.{ts,js}'],
+        files: ['*.config.{ts,js}', 'scripts/**/*.{js,mjs,cjs}'],
         languageOptions: { globals: globals.node },
+        rules: {
+            '@typescript-eslint/no-require-imports': 'off',
+        },
     },
     {
         // Tests: vitest globals + relaxed stylistic pressure

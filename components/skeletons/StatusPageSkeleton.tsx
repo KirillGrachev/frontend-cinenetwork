@@ -27,7 +27,7 @@ const StatusPageSkeleton: React.FC = () => {
                 <div className="space-y-12">
                     {/* System Health Skeleton */}
                     <div className="mb-12">
-                        <div className="rounded-2xl p-6 md:p-8 flex items-center justify-center gap-4 md:gap-6 border bg-white/5 border-white/5 animate-pulse min-h-[82px] md:min-h-[98px]">
+                        <div className="rounded-2xl p-6 md:p-8 flex items-center justify-center gap-4 md:gap-6 border bg-white/5 border-white/5 skeleton-shimmer min-h-[82px] md:min-h-[98px]">
                             <Skeleton className="w-4 h-4 rounded-full" />
                             <Skeleton className="h-8 w-64 rounded-lg" />
                         </div>
@@ -47,7 +47,7 @@ const StatusPageSkeleton: React.FC = () => {
                                     {Array.from({ length: itemCount }).map((_, j) => (
                                         <div
                                             key={j}
-                                            className="p-4 md:p-6 flex justify-between items-center h-[73px] animate-pulse"
+                                            className="p-4 md:p-6 flex justify-between items-center h-[73px] skeleton-shimmer"
                                         >
                                             <div className="flex items-center gap-4">
                                                 <Skeleton className="w-3 h-3 rounded-full" />

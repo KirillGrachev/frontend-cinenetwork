@@ -17,7 +17,7 @@ const ProfileCollections: React.FC<ProfileCollectionsProps> = ({
 }) => {
     const { t } = useLocale();
     return (
-        <div className="animate-fade-in flex flex-col min-h-[500px]">
+        <div className="page-reveal flex flex-col min-h-[500px]">
             <div className="flex items-center justify-between mb-6">
                 <h3 className="text-xl font-bold text-white">
                     {t('info.profile.collections.title')}

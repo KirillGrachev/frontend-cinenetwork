@@ -68,7 +68,7 @@ const NavbarDesktopNav: React.FC<NavbarDesktopNavProps> = ({ onOpenPost, searchI
 
     return (
         <div
-            className={`hidden md:flex relative bg-panel-primary/90 backdrop-blur-xl border border-border-medium rounded-full p-1 items-center h-[46px] transition-[width] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isSearchOpen ? 'w-[576px] max-w-xl' : 'w-fit'}`}
+            className={`hidden lg:flex relative bg-panel-primary/90 backdrop-blur-xl border border-border-medium rounded-full p-1 items-center h-[46px] transition-[width] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isSearchOpen ? 'w-[576px] max-w-xl' : 'w-fit'}`}
         >
             <div
                 className={`w-full h-full flex items-center justify-center transition-all duration-200 ease-out origin-center ${isSearchOpen ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'}`}

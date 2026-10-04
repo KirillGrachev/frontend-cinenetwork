@@ -25,7 +25,7 @@ const BlogPostFooter: React.FC<BlogPostFooterProps> = ({ onCopyLink, linkCopied 
                         <i className="fa-regular fa-copy"></i>
                         <span className="text-xs">{t('blogPost.copyLink')}</span>
                         {linkCopied && (
-                            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg animate-fade-in whitespace-nowrap pointer-events-none">
+                            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg page-reveal whitespace-nowrap pointer-events-none">
                                 {t('blogPost.copied')}
                             </div>
                         )}

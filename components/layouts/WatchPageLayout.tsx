@@ -15,7 +15,7 @@ const WatchPageLayout: React.FC<WatchPageLayoutProps> = ({
 }) => {
     return (
         <div
-            className={`min-h-screen bg-background-primary pt-24 pb-20 ${isSkeleton ? 'animate-fade-in' : ''}`}
+            className={`min-h-screen bg-background-primary pt-24 pb-20 ${isSkeleton ? 'page-reveal' : ''}`}
         >
             <div className="container mx-auto px-4 md:px-8">
                 <div className="mb-6">{backButton}</div>

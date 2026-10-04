@@ -123,7 +123,7 @@ const Favorites: React.FC = () => {
                 <PageHeader title={t('favorites.title')} description={t('favorites.description')} />
 
                 {/* Controls Container */}
-                <div className="flex flex-col md:flex-row items-center justify-center mb-10 animate-fade-in stagger-1 z-20 gap-3">
+                <div className="flex flex-col md:flex-row items-center justify-center mb-10 page-reveal z-20 gap-3">
                     {/* Centered Tabs (Anime / Collections) */}
                     <div className="bg-panel-primary p-1 rounded-full  inline-flex shadow-lg h-14 items-center">
                         {tabs.map((tab) => {
@@ -168,7 +168,7 @@ const Favorites: React.FC = () => {
                 </div>
 
                 {items.length > 0 ? (
-                    <div className="flex-1 min-h-[600px] animate-fade-in stagger-2">
+                    <div className="flex-1 min-h-[600px] page-reveal">
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 pb-20">
                             {items.map((item, index) => {
                                 if (activeTab === FavoriteTab.Anime) {
@@ -211,7 +211,7 @@ const Favorites: React.FC = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="flex flex-col items-center justify-center py-32 border border-dashed border-white/10 rounded-[32px] bg-white/5 text-center animate-fade-in stagger-2">
+                    <div className="flex flex-col items-center justify-center py-32 border border-dashed border-white/10 rounded-[32px] bg-white/5 text-center page-reveal">
                         <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/5">
                             <i className="fa-solid fa-layer-group text-3xl text-gray-500"></i>
                         </div>

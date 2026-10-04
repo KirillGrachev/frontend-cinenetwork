@@ -18,7 +18,7 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({
     const { t } = useLocale();
     const navigate = useNavigate();
     return (
-        <div className="flex flex-col min-h-[500px] animate-fade-in">
+        <div className="flex flex-col min-h-[500px] page-reveal">
             <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-white">
                     {t('media.anime.details.allEpisodes')}

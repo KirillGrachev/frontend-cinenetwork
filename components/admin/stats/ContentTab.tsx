@@ -45,7 +45,7 @@ const ContentTab: React.FC<ContentTabProps> = ({ contentDistribution, topContent
     };
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 animate-fade-in stagger-2">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 page-reveal">
             {/* Distribution Chart - Redesigned to horizontal layout */}
             <div className="bg-panel-primary border border-border-medium rounded-3xl p-6 lg:col-span-3 flex flex-col md:flex-row items-center gap-8 md:gap-16 justify-center min-h-[320px]">
                 {/* Chart Section */}

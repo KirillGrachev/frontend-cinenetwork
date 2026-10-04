@@ -13,7 +13,7 @@ const SettingsPlayer: React.FC = () => {
     const [autoNext, setAutoNext] = useState(true);
 
     return (
-        <div className="space-y-8 animate-fade-in">
+        <div className="space-y-8 page-reveal">
             {/* General Playback */}
             <div className="bg-panel-primary p-6 rounded-2xl ">
                 <h3 className="text-lg font-bold text-white mb-6">

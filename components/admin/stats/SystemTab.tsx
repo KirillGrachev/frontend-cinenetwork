@@ -61,7 +61,7 @@ const SystemTab: React.FC<SystemTabProps> = ({ platformStats, activityLog, t }) 
     };
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 animate-fade-in stagger-2 h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 page-reveal h-full">
             {/* Content-platform health */}
             <div className="bg-background-secondary border border-border-medium rounded-3xl p-6 md:p-8 flex flex-col h-full min-h-[500px]">
                 <h3 className="text-lg font-bold text-white mb-8">

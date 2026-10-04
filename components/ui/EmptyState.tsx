@@ -20,7 +20,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
 }) => {
     return (
         <div
-            className={`w-full bg-white/5 border border-dashed border-white/10 rounded-[32px] p-12 relative overflow-hidden flex flex-col items-center justify-center text-center min-h-[400px] animate-fade-in ${className}`}
+            className={`w-full bg-white/5 border border-dashed border-white/10 rounded-[32px] p-12 relative overflow-hidden flex flex-col items-center justify-center text-center min-h-[400px] page-reveal ${className}`}
         >
             <div className="relative z-10 flex flex-col items-center max-w-lg mx-auto">
                 <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/5 ring-1 ring-white/5">

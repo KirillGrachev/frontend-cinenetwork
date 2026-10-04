@@ -5,13 +5,13 @@ const FavoritesSkeleton: React.FC = () => {
         <div className="min-h-screen bg-background-primary pt-32 pb-20">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Page Header Skeleton */}
-                <div className="flex flex-col items-center text-center mb-8 animate-pulse">
+                <div className="flex flex-col items-center text-center mb-8 skeleton-shimmer">
                     <div className="h-10 w-48 bg-white/15 rounded-2xl mb-3"></div>
                     <div className="h-5 w-72 bg-white/10 rounded-md"></div>
                 </div>
 
                 {/* Controls Skeleton */}
-                <div className="flex flex-col md:flex-row items-center justify-center mb-10 gap-3 animate-pulse">
+                <div className="flex flex-col md:flex-row items-center justify-center mb-10 gap-3 skeleton-shimmer">
                     <div className="h-14 w-64 bg-panel-primary rounded-full border border-white/5"></div>
                     <div className="h-14 w-48 bg-panel-primary rounded-full border border-white/5"></div>
                 </div>

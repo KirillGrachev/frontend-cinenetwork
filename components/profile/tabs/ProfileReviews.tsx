@@ -48,7 +48,7 @@ const ProfileReviews: React.FC<ProfileReviewsProps> = ({
         onFilterChange(filters[nextIndex].id as 'all' | 'rating' | 'comment');
     };
     return (
-        <div className="animate-fade-in flex flex-col min-h-[500px]">
+        <div className="page-reveal flex flex-col min-h-[500px]">
             <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
                 <div className="flex items-center gap-4">
                     <h3 className="text-xl font-bold text-white">

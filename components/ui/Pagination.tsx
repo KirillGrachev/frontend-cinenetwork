@@ -64,7 +64,7 @@ const Pagination: React.FC<PaginationProps> = ({
                         >
                             {isActive && (
                                 <div
-                                    className="absolute inset-0 bg-white rounded-xl -z-10 animate-fade-in"
+                                    className="absolute inset-0 bg-white rounded-xl -z-10 page-reveal"
                                     style={{ animationDuration: '0.2s' }}
                                 ></div>
                             )}

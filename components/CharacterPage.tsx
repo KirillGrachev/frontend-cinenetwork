@@ -73,7 +73,7 @@ const CharacterPage: React.FC = () => {
             />
 
             <div className="container mx-auto px-4 md:px-8 relative z-10">
-                <div className="mb-8 animate-fade-in">
+                <div className="mb-8 page-reveal">
                     <Button
                         variant="ghost"
                         size="md"
@@ -87,7 +87,7 @@ const CharacterPage: React.FC = () => {
 
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
                     {/* Left Column */}
-                    <div className="w-full lg:w-[320px] flex-shrink-0 animate-fade-in space-y-6">
+                    <div className="w-full lg:w-[320px] flex-shrink-0 page-reveal space-y-6">
                         <div className="w-full aspect-[2/3] rounded-[32px] overflow-hidden border border-white/5 shadow-2xl relative group">
                             {character.imageUrl ? (
                                 <img
@@ -140,7 +140,7 @@ const CharacterPage: React.FC = () => {
                     </div>
 
                     {/* Right Column */}
-                    <div className="flex-1 w-full min-w-0 animate-fade-in stagger-1">
+                    <div className="flex-1 w-full min-w-0 page-reveal">
                         <div className="mb-10">
                             <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-2 tracking-tight break-words">
                                 {character.name}

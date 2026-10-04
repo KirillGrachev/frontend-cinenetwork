@@ -156,7 +156,7 @@ export const data = {
         newsPage: {
             title: 'News',
             description:
-                'Platform updates, development articles, and announcements of upcoming releases.',
+                'Season announcements, voiceover releases, viewing stats and everything anime.',
         },
         scheduleDays: {
             mon: { label: 'Monday', short: 'MON' },

@@ -91,7 +91,7 @@ const Profile: React.FC = () => {
     const seoDesc = profile.bio || t('profile.joined', { date: profile.joinDate });
 
     return (
-        <div className="min-h-screen bg-background-primary pb-20">
+        <div className="page-reveal min-h-screen bg-background-primary pb-20">
             <SEO
                 title={seoTitle}
                 description={seoDesc}

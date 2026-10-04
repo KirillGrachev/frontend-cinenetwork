@@ -26,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenPost }) => {
                 <div className="absolute inset-0 h-full bg-background-secondary border-b border-border-light"></div>
                 <div className="relative container mx-auto flex items-center justify-between pointer-events-auto px-4 md:px-8 h-[72px]">
                     {/** Fixed-width left slot to prevent middle nav shift on reload */}
-                    <div className="w-[180px] md:w-[220px] flex items-center justify-start shrink-0">
+                    <div className="w-[120px] sm:w-[180px] lg:w-[220px] flex items-center justify-start shrink-0">
                         <NavbarLogo onClick={() => navigate(AppRoute.Home)} />
                     </div>
 
@@ -36,7 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenPost }) => {
                     </div>
 
                     {/** Fixed-width right slot matching left slot */}
-                    <div className="w-[180px] md:w-[220px] flex items-center justify-end shrink-0">
+                    <div className="w-[120px] sm:w-[180px] lg:w-[220px] flex items-center justify-end shrink-0">
                         <NavbarActions isAuthPage={isAuthPage} />
                     </div>
                 </div>

@@ -27,7 +27,7 @@ const AnimeOverview: React.FC<AnimeOverviewProps> = ({
     const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
     return (
-        <div className="animate-fade-in">
+        <div className="page-reveal">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
                 {/* Left Column: Description & Metadata (8/12) */}
                 <div className="lg:col-span-8 space-y-8">

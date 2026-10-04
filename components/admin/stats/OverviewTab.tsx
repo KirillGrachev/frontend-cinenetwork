@@ -27,7 +27,7 @@ const OverviewTab: React.FC<OverviewTabProps> = ({ metrics, trafficHistory, t })
     };
 
     return (
-        <div className="animate-fade-in stagger-2">
+        <div className="page-reveal">
             {/* Key Metrics */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
                 {metrics.map((metric) => (

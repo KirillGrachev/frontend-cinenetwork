@@ -23,7 +23,7 @@ const ForgotPassword: React.FC = () => {
                     <form
                         key="step-email"
                         onSubmit={actions.submitEmail}
-                        className="space-y-6 animate-fade-in"
+                        className="space-y-6 page-reveal"
                     >
                         <p className="text-gray-400 text-sm text-center mb-4">
                             {t('auth.recovery.step1Desc')}
@@ -57,7 +57,7 @@ const ForgotPassword: React.FC = () => {
                     <form
                         key="step-code"
                         onSubmit={actions.submitCode}
-                        className="space-y-6 animate-fade-in"
+                        className="space-y-6 page-reveal"
                     >
                         <p className="text-gray-400 text-sm text-center mb-4">
                             {t('auth.recovery.step2Desc', { email })}
@@ -109,7 +109,7 @@ const ForgotPassword: React.FC = () => {
                     <form
                         key="step-reset"
                         onSubmit={actions.submitReset}
-                        className="space-y-6 animate-fade-in"
+                        className="space-y-6 page-reveal"
                     >
                         <p className="text-gray-400 text-sm text-center mb-4">
                             {t('auth.recovery.step3Desc')}

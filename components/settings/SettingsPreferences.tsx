@@ -23,7 +23,7 @@ const SettingsPreferences: React.FC<SettingsPreferencesProps> = ({
     const [notifyMentions, setNotifyMentions] = useState(true);
 
     return (
-        <div className="space-y-8 animate-fade-in">
+        <div className="space-y-8 page-reveal">
             {/* Language */}
             <div className="space-y-4 bg-panel-primary p-6 rounded-2xl ">
                 <h3 className="text-lg font-bold text-white mb-4">

@@ -199,7 +199,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({
                             const displayLikes = (comment.likes || 0) + (isLiked ? 1 : 0);
 
                             return (
-                                <div className="flex items-start gap-4 md:gap-6 group pb-6 animate-fade-in">
+                                <div className="flex items-start gap-4 md:gap-6 group pb-6 page-reveal">
                                     <div className="w-12 h-12 rounded-2xl bg-item-primary border border-border-medium flex-shrink-0 flex items-center justify-center text-gray-500 font-bold overflow-hidden">
                                         {comment.avatarUrl ? (
                                             <img

@@ -47,7 +47,7 @@ const NavbarActions: React.FC<NavbarActionsProps> = ({ isAuthPage }) => {
             <button
                 onClick={handleToggleSearch}
                 aria-label={isSearchOpen ? t('navbar.closeSearch') : t('navbar.openSearch')}
-                className={`hidden md:flex w-10 h-10 rounded-xl items-center justify-center transition-all duration-300  ${isSearchOpen ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/10'}`}
+                className={`hidden lg:flex w-10 h-10 rounded-xl items-center justify-center transition-all duration-300  ${isSearchOpen ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/10'}`}
             >
                 <i
                     className={`fa-solid ${isSearchOpen ? 'fa-xmark' : 'fa-magnifying-glass'} text-lg`}
@@ -59,7 +59,7 @@ const NavbarActions: React.FC<NavbarActionsProps> = ({ isAuthPage }) => {
                     <Button
                         variant="soft"
                         size="md"
-                        className="font-bold px-8 w-44 ml-2 hidden md:flex"
+                        className="font-bold px-8 w-44 ml-2 hidden lg:flex"
                         onClick={() => navigate(AppRoute.Home)}
                         icon="fa-solid fa-arrow-left"
                     >
@@ -176,12 +176,12 @@ const NavbarActions: React.FC<NavbarActionsProps> = ({ isAuthPage }) => {
                         </div>
 
                         {/* 4. User Profile */}
-                        <div className="hidden md:block">
+                        <div className="hidden lg:block">
                             <UserProfile />
                         </div>
                     </div>
                 ) : (
-                    <div className="w-44 flex justify-end hidden md:flex">
+                    <div className="w-44 flex justify-end hidden lg:flex">
                         <Button
                             variant="primary"
                             className="px-8 border border-transparent text-sm font-bold tracking-wide transition-all duration-300"

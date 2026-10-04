@@ -11,7 +11,7 @@ const CatalogSkeleton: React.FC = () => {
                 <PageHeader title={t('catalog.title')} description={t('catalog.description')} />
 
                 <div className="flex flex-col relative">
-                    <div className="mb-8 w-full animate-pulse">
+                    <div className="mb-8 w-full skeleton-shimmer">
                         <div className="bg-panel-primary/95 backdrop-blur-xl border border-border-medium rounded-2xl p-2 flex flex-col md:flex-row items-center gap-2 shadow-2xl relative z-20">
                             <div className="flex-1 w-full overflow-hidden flex items-center gap-2 px-3">
                                 <div className="h-10 w-28 bg-white/5 border border-white/5 rounded-full shrink-0"></div>

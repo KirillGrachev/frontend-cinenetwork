@@ -9,7 +9,7 @@ interface AnimePhotosProps {
 const AnimePhotos: React.FC<AnimePhotosProps> = ({ photos, totalPhotos, openViewer }) => {
     const { t } = useLocale();
     return (
-        <div className="flex flex-col min-h-[500px] animate-fade-in">
+        <div className="flex flex-col min-h-[500px] page-reveal">
             <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xl font-bold text-white">{t('media.anime.details.photos')}</h3>
                 <span className="text-2xl text-gray-500 font-bold">{totalPhotos}</span>

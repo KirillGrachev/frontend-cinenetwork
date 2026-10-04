@@ -49,7 +49,7 @@ const AnimeRow: React.FC<AnimeRowProps> = ({ title, items, onShowMore, isLoading
 
     return (
         <div
-            className={`relative group/row ${isLoading ? 'animate-pulse' : 'animate-fade-in'} last:mb-0`}
+            className={`relative group/row ${isLoading ? 'animate-pulse' : 'page-reveal'} last:mb-0`}
         >
             {/* Container ensures Title and Show More align with global grid */}
             <div className="container mx-auto px-4 md:px-8">

@@ -60,7 +60,7 @@ const ActivityLog: React.FC = () => {
     return (
         <div className="min-h-screen pt-32 pb-20">
             <div className="container mx-auto px-4 md:px-8 h-full flex flex-col">
-                <div className="mb-8 animate-fade-in">
+                <div className="mb-8 page-reveal">
                     <Button
                         variant="ghost"
                         size="md"
@@ -79,7 +79,7 @@ const ActivityLog: React.FC = () => {
                 />
 
                 {/* Toolbar */}
-                <div className="flex flex-col md:flex-row gap-4 mb-8 animate-fade-in stagger-1 items-center">
+                <div className="flex flex-col md:flex-row gap-4 mb-8 page-reveal items-center">
                     <div className="w-full md:flex-1">
                         <Input
                             placeholder={t('admin.activityLog.searchPlaceholder')}
@@ -113,7 +113,7 @@ const ActivityLog: React.FC = () => {
                 </div>
 
                 {/* Virtualized List Container */}
-                <div className="flex-1 min-h-[600px]  rounded-3xl bg-panel-primary overflow-hidden animate-fade-in stagger-2 shadow-xl">
+                <div className="flex-1 min-h-[600px]  rounded-3xl bg-panel-primary overflow-hidden page-reveal shadow-xl">
                     {visibleLogs.length > 0 ? (
                         <SmartList
                             style={{ height: '600px' }}

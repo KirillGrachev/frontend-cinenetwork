@@ -22,7 +22,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({
     const { t } = useLocale();
 
     return (
-        <div className="flex items-start gap-4 md:gap-6 animate-fade-in group">
+        <div className="flex items-start gap-4 md:gap-6 page-reveal group">
             {/* Avatar - Matches CommentsSection structure (no wrapper) */}
             <div className="w-12 h-12 rounded-2xl bg-item-primary border border-white/10 flex-shrink-0 flex items-center justify-center text-gray-500 font-bold overflow-hidden">
                 {review.avatarUrl ? (

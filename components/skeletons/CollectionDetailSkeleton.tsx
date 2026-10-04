@@ -5,7 +5,7 @@ const CollectionDetailSkeleton: React.FC = () => {
         <div className="min-h-screen bg-background-primary pt-24 pb-20">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Header Skeleton */}
-                <div className="flex flex-col md:flex-row items-end gap-8 mb-12 animate-pulse">
+                <div className="flex flex-col md:flex-row items-end gap-8 mb-12 skeleton-shimmer">
                     <div className="flex-1 w-full">
                         <div className="h-5 w-40 bg-white/10 rounded-md mb-5"></div>
                         <div className="h-10 md:h-16 w-3/4 bg-white/15 rounded-2xl mb-6"></div>

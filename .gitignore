@@ -48,3 +48,6 @@ coverage
 
 # Local engineering notes — kept OUTSIDE the project on purpose
 AUDIT.md
+
+# Locally generated demo placeholder art (real artwork lives outside the repo)
+public/assets/

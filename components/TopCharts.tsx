@@ -70,7 +70,7 @@ const TopCharts: React.FC = () => {
                     />
 
                     {/* Metric Selector */}
-                    <div className="w-full md:w-48 animate-fade-in stagger-1 relative z-30">
+                    <div className="w-full md:w-48 page-reveal relative z-30">
                         <Select
                             value={metric}
                             onChange={(val) => actions.setMetric(val as TopMetric)}
@@ -87,7 +87,7 @@ const TopCharts: React.FC = () => {
                 </div>
 
                 {/* Tabs */}
-                <div className="flex overflow-x-auto no-scrollbar gap-2 mb-10 pb-2 animate-fade-in stagger-1">
+                <div className="flex overflow-x-auto no-scrollbar gap-2 mb-10 pb-2 page-reveal">
                     {periods.map((p) => (
                         <button
                             key={p.id}
@@ -104,7 +104,7 @@ const TopCharts: React.FC = () => {
                 </div>
 
                 {/* Virtualized List */}
-                <div className="flex-1 min-h-[600px] animate-fade-in stagger-2">
+                <div className="flex-1 min-h-[600px] page-reveal">
                     <Virtuoso
                         useWindowScroll
                         totalCount={items.length}

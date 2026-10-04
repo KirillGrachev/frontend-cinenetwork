@@ -30,7 +30,7 @@ const StudioPage: React.FC = () => {
             {/* Header Section */}
             <div className="relative mb-12">
                 <div className="container mx-auto px-4 md:px-8 relative z-10">
-                    <div className="mb-8 animate-fade-in">
+                    <div className="mb-8 page-reveal">
                         <Button
                             variant="ghost"
                             size="md"
@@ -42,7 +42,7 @@ const StudioPage: React.FC = () => {
                         </Button>
                     </div>
 
-                    <div className="flex flex-col md:flex-row items-end gap-8 animate-fade-in stagger-1">
+                    <div className="flex flex-col md:flex-row items-end gap-8 page-reveal">
                         <div className="flex-1">
                             <div className="flex items-center gap-3 mb-4">
                                 <div className="flex items-center gap-2 text-blue-400">
@@ -70,11 +70,11 @@ const StudioPage: React.FC = () => {
             {/* Content Grid */}
             <div className="container mx-auto px-4 md:px-8 min-h-[500px]">
                 {animeList.length === 0 ? (
-                    <div className="text-center py-20 text-gray-500 animate-fade-in">
+                    <div className="text-center py-20 text-gray-500 page-reveal">
                         {t('search.noResults')}
                     </div>
                 ) : (
-                    <div className="animate-fade-in stagger-2">
+                    <div className="page-reveal">
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 pb-20">
                             {animeList.map((item, index) => {
                                 const content = (

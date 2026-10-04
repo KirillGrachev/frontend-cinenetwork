@@ -22,7 +22,7 @@ const HistoryGroupSection: React.FC<HistoryGroupSectionProps> = ({ label, items,
     const hiddenCount = items.length - INITIAL_LIMIT;
 
     return (
-        <div className="animate-fade-in mb-12 last:mb-0">
+        <div className="page-reveal mb-12 last:mb-0">
             <div className="flex items-center gap-4 mb-6">
                 <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
                     {label}

@@ -59,7 +59,7 @@ const History: React.FC = () => {
                 />
 
                 {isEmpty ? (
-                    <div className="flex flex-col items-center justify-center py-32 border border-dashed border-white/10 rounded-[32px] bg-white/5 text-center animate-fade-in">
+                    <div className="flex flex-col items-center justify-center py-32 border border-dashed border-white/10 rounded-[32px] bg-white/5 text-center page-reveal">
                         <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/5">
                             <i className="fa-solid fa-clock-rotate-left text-3xl text-gray-500"></i>
                         </div>
@@ -74,7 +74,7 @@ const History: React.FC = () => {
                         </Button>
                     </div>
                 ) : (
-                    <div className="flex-1 min-h-[600px] animate-fade-in stagger-1">
+                    <div className="flex-1 min-h-[600px] page-reveal">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-20">
                             {visibleItems.map((item, index) => {
                                 const content = (

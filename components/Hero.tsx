@@ -38,7 +38,7 @@ const Hero: React.FC<HeroProps> = ({ anime }) => {
             {/* Grid Container */}
             <div className="relative z-20 container mx-auto px-4 md:px-8">
                 {/* Content Block */}
-                <div className="max-w-2xl 2xl:max-w-4xl animate-fade-in">
+                <div className="max-w-2xl 2xl:max-w-4xl page-reveal">
                     <div
                         className="text-3xl md:text-5xl 2xl:text-7xl font-bold text-white mb-4 leading-tight tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
                         role="heading"

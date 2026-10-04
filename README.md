@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/74c1e9a4-d070-4f82-9171-8a1daff13d09"
+       alt="Banner"
+       width="100%">
+</p>
+
 # CineNetwork Frontend (cinenetwork-frontend)
 
 SPA-интерфейс стримингового сервиса аниме/кино: каталог, расписание, новости,
@@ -24,7 +30,7 @@ npm run test       # vitest (однократно); test:watch — режим н
 npm run verify     # typecheck + lint + test + build (CI-гейт)
 ```
 
-Pre-commit хук (simple-git-hooks + lint-staged) прогоняет ESLint и Prettier
+Pre-commit хук (husky + lint-staged) прогоняет ESLint и Prettier
 по изменённым файлам; CI (`.github/workflows/ci.yml`) выполняет `verify`
 целиком на каждый push/PR.
 
@@ -46,11 +52,35 @@ location / { try_files $uri $uri/ /index.html; }
 Шрифты (Inter) и иконки (Font Awesome) self-hosted через npm — внешних CDN
 в рантайме нет, работает строгий CSP.
 
+## Demo assets
+
+Реальные постеры/обложки/логотип — бинарные ассеты, которых нет в git
+(лицензионный контент). Для локальной разработки сгенерируйте
+градиентные плейсхолдеры по всем путям, которые используют фикстуры:
+
+```bash
+node scripts/generate-placeholder-assets.mjs
+```
+
+Каталог `public/assets/` добавлен в `.gitignore` — плейсхолдеры никогда не
+коммитятся. Компоненты при этом деградируют gracefully: `AnimeImage` и
+`NavbarLogo` показывают стилизованные fallback'и, если файл отсутствует.
+
 ## Переменные окружения
 
-См. [`.env.example`](./.env.example). По умолчанию приложение работает на
-mock-провайдерах; `VITE_API_ENABLED=true` + `VITE_API_BASE_URL` включают
-реальный REST-слой (`services/providers/apiProvider.ts`).
+См. [`.env.example`](./.env.example) — это шаблон конфигурации: скопируйте
+его в `.env` и заполните при необходимости.
+
+```bash
+cp .env.example .env
+```
+
+По умолчанию приложение работает на mock-провайдерах; `VITE_API_ENABLED=true`
+
+- `VITE_API_BASE_URL` включают реальный REST-слой
+  (`services/providers/apiProvider.ts`). Значения валидируются при старте
+  (`utils/env.ts`): некорректный `.env` падает с читаемой ошибкой, а не
+  молча misbehaves позже.
 
 ## Архитектура
 

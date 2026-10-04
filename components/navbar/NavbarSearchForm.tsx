@@ -138,10 +138,7 @@ const NavbarSearchForm: React.FC<NavbarSearchFormProps> = ({
                                 {/* Conditional Filters with Animated Mode Switch */}
                                 <div className="relative flex flex-col justify-center overflow-hidden transition-all duration-300">
                                     {searchCategory === SearchCategory.Anime ? (
-                                        <div
-                                            key="anime-filters"
-                                            className="space-y-3 animate-fade-in"
-                                        >
+                                        <div key="anime-filters" className="space-y-3 page-reveal">
                                             <div className="grid grid-cols-2 gap-3">
                                                 <div>
                                                     <label className="text-xs font-semibold text-gray-400 mb-1.5 block cursor-default">
@@ -190,7 +187,7 @@ const NavbarSearchForm: React.FC<NavbarSearchFormProps> = ({
                                     ) : (
                                         <div
                                             key="no-filters"
-                                            className="py-3 text-center text-gray-400 text-xs sm:text-sm font-medium animate-fade-in"
+                                            className="py-3 text-center text-gray-400 text-xs sm:text-sm font-medium page-reveal"
                                         >
                                             {t('common.ui.filtersUnavailable')}
                                         </div>

@@ -14,7 +14,7 @@
     "verify": "npm run typecheck && npm run lint && npm run test && npm run build",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,css,html,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,json,css,html,md}\"",
-    "prepare": "simple-git-hooks",
+    "prepare": "husky || true",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
@@ -54,15 +54,13 @@
     "lint-staged": "^16.2.7",
     "postcss": "^8.4.38",
     "prettier": "^3.9.9",
-    "simple-git-hooks": "^2.14.0",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.4.5",
     "typescript-eslint": "^8.70.1",
     "vite": "^8.1.5",
-    "vitest": "^4.1.10"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "vitest": "^4.1.10",
+    "husky": "^9.1.7",
+    "braces": "file:vendor/braces"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -72,5 +70,9 @@
     "*.{js,json,css,html,md,yml,yaml}": [
       "prettier --write"
     ]
+  },
+  "overrides": {
+    "braces": "file:vendor/braces",
+    "micromatch": "^4.0.8"
   }
 }

@@ -129,7 +129,7 @@ const Moderation: React.FC = () => {
     return (
         <div className="min-h-screen pt-32 pb-20">
             <div className="container mx-auto px-4 md:px-8 h-full flex flex-col">
-                <div className="mb-8 animate-fade-in">
+                <div className="mb-8 page-reveal">
                     <Button
                         variant="ghost"
                         size="md"
@@ -147,7 +147,7 @@ const Moderation: React.FC = () => {
                     className="!mb-8"
                 />
 
-                <div className="flex flex-col md:flex-row items-center justify-start mb-8 animate-fade-in stagger-1 gap-3">
+                <div className="flex flex-col md:flex-row items-center justify-start mb-8 page-reveal gap-3">
                     <div className="bg-panel-primary p-1 rounded-full  inline-flex shadow-lg h-14 items-center">
                         {sections.map((section) => {
                             const isActive = activeSection === section.id;
@@ -192,7 +192,7 @@ const Moderation: React.FC = () => {
                     )}
                 </div>
 
-                <div className="flex-1 min-h-[600px] animate-fade-in stagger-2">
+                <div className="flex-1 min-h-[600px] page-reveal">
                     {comments.length > 0 ? (
                         <SmartList
                             useWindowScroll

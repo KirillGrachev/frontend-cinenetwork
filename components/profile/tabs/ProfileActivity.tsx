@@ -11,7 +11,7 @@ interface ProfileActivityProps {
 const ProfileActivity: React.FC<ProfileActivityProps> = ({ activityList, onActivityClick }) => {
     const { t } = useLocale();
     return (
-        <div className="animate-fade-in">
+        <div className="page-reveal">
             <div className="max-w-4xl mx-auto min-h-[500px]">
                 {activityList.length === 0 ? (
                     <div className="text-center py-20 border border-dashed border-white/5 rounded-3xl bg-white/5">

@@ -3,7 +3,7 @@ import { useNavigate, useLocation, useSearchParams } from 'react-router';
 import PageHeader from '../ui/PageHeader';
 import Button from '../ui/Button';
 import Select from '../ui/Select';
-import LoadingSpinner from '../LoadingSpinner';
+import AdminStatsSkeleton from '../skeletons/AdminStatsSkeleton';
 import { useLocale } from '../../context/LocaleContext';
 import { useAdminStats } from '../../hooks/useAdminStats';
 import { AdminTab, AdminPeriod, AppRoute } from '../../types';
@@ -67,11 +67,7 @@ const Stats: React.FC = () => {
     ];
 
     if (isLoading) {
-        return (
-            <div className="w-full min-h-screen flex items-center justify-center">
-                <LoadingSpinner size="lg" />
-            </div>
-        );
+        return <AdminStatsSkeleton />;
     }
 
     return (
@@ -120,7 +116,7 @@ const Stats: React.FC = () => {
                 />
 
                 {/* Tab Navigation */}
-                <div className="flex flex-wrap gap-3 mb-10 animate-fade-in stagger-1">
+                <div className="flex flex-wrap gap-3 mb-10 page-reveal">
                     {tabs.map((tab) => {
                         const isActive = activeTab === tab.id;
                         return (

@@ -13,7 +13,7 @@ const ProfileDynamics: React.FC<ProfileDynamicsProps> = ({ dynamicsData, period,
     const { t, locale } = useLocale();
 
     return (
-        <div className="animate-fade-in">
+        <div className="page-reveal">
             <div className="bg-panel-primary border border-border-medium rounded-3xl p-6 md:p-10 relative">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
                     <div>

@@ -2,7 +2,6 @@ import React from 'react';
 import { useSearchParams, useNavigate } from 'react-router';
 import type { Anime, Collection, NewsItem } from '../types';
 import { SearchCategory, AppRoute } from '../types';
-import LoadingSpinner from './LoadingSpinner';
 import PageHeader from './ui/PageHeader';
 import { useLocale } from '../context/LocaleContext';
 import AnimeCard from './AnimeCard';
@@ -74,8 +73,21 @@ const SearchView: React.FC = () => {
                 />
 
                 {isLoading ? (
-                    <div className="flex justify-center items-center h-64">
-                        <LoadingSpinner size="lg" />
+                    <div className="page-reveal">
+                        <div className={getGridColumnsClass()}>
+                            {Array.from({ length: 8 }).map((_, i) => (
+                                <div
+                                    key={i}
+                                    className="aspect-[2/3] w-full bg-panel-secondary border border-border-medium rounded-2xl relative overflow-hidden"
+                                >
+                                    <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
+                                    <div className="absolute bottom-0 inset-x-0 p-4 space-y-2">
+                                        <div className="h-4 w-3/4 bg-white/10 rounded-md"></div>
+                                        <div className="h-3 w-1/2 bg-white/5 rounded-md"></div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 ) : error ? (
                     <div className="text-center py-20 text-red-500 border border-red-500/20 bg-red-500/5 rounded-2xl">
@@ -90,7 +102,7 @@ const SearchView: React.FC = () => {
                         <p className="text-gray-500">{t('search.tryDifferentQuery')}</p>
                     </div>
                 ) : (
-                    <div className="animate-fade-in min-h-[500px]">
+                    <div className="page-reveal min-h-[500px]">
                         <div className={getGridColumnsClass()}>
                             {results.map((item, index) => (
                                 <div key={item.id} className="w-full">

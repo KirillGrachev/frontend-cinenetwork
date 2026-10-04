@@ -187,7 +187,7 @@ const Documentation: React.FC = () => {
                     </div>
 
                     {isLoading || isTransitioning ? (
-                        <div className="animate-fade-in space-y-10 py-4">
+                        <div className="page-reveal space-y-10 py-4">
                             <div className="space-y-4">
                                 <div className="h-4 w-24 bg-white/5 rounded-full"></div>
                                 <div className="h-10 w-2/3 bg-white/5 rounded-xl"></div>
@@ -201,7 +201,7 @@ const Documentation: React.FC = () => {
                             <div className="h-32 w-full bg-white/5 rounded-2xl"></div>
                         </div>
                     ) : (
-                        <div className="animate-fade-in">
+                        <div className="page-reveal">
                             <header className="mb-6 pb-4 border-b border-white/10">
                                 <div className="flex items-center gap-2 text-sm font-medium text-gray-400">
                                     <span className="text-blue-400">{t('docs.title')}</span>

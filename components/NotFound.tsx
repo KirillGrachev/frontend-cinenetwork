@@ -19,15 +19,15 @@ const NotFound: React.FC = () => {
                 </div>
 
                 {/* Content */}
-                <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight animate-fade-in">
+                <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight page-reveal">
                     {t('errors.notFound.subtitle')}
                 </h1>
 
-                <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-lg mx-auto animate-fade-in stagger-1 font-medium">
+                <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-lg mx-auto page-reveal font-medium">
                     {t('errors.notFound.description')}
                 </p>
 
-                <div className="animate-fade-in stagger-2">
+                <div className="page-reveal">
                     <Button
                         variant="primary"
                         size="lg"

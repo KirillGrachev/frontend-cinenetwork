@@ -27,7 +27,7 @@ const AuthFormWrapper: React.FC<AuthFormWrapperProps> = ({
             <div className="w-full max-w-[480px] relative z-10 px-4">
                 <div className="bg-black/40 backdrop-blur-md border border-white/5 p-1 rounded-3xl shadow-2xl">
                     <div className="bg-panel-primary/80 rounded-[20px] p-6 md:p-8 border border-white/5">
-                        <div className="animate-fade-in">
+                        <div className="page-reveal">
                             {/** Title inside the main frame */}
                             <h1 className="text-3xl font-bold text-white tracking-tight text-center mb-8">
                                 {title}

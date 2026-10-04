@@ -60,7 +60,7 @@ const SettingsProfile: React.FC<SettingsProfileProps> = ({
     ];
 
     return (
-        <div className="space-y-8 animate-fade-in">
+        <div className="space-y-8 page-reveal">
             <div className="flex items-center gap-6">
                 <div className="w-24 h-24 rounded-full bg-item-primary border-2 border-border-medium flex items-center justify-center relative group cursor-pointer overflow-hidden">
                     {formData.avatarUrl ? (

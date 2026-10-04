@@ -23,7 +23,7 @@ const Catalog: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen pt-32 pb-20">
+        <div className="page-reveal min-h-screen pt-32 pb-20">
             <SEO title={t('catalog.title')} description={t('catalog.description')} />
             <div className="container mx-auto px-4 md:px-8">
                 <PageHeader

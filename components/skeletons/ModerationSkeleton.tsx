@@ -7,7 +7,7 @@ const ModerationSkeleton: React.FC = () => {
     const { t } = useLocale();
 
     return (
-        <div className="min-h-screen pt-32 pb-20 animate-fade-in">
+        <div className="min-h-screen pt-32 pb-20 page-reveal">
             <div className="container mx-auto px-4 md:px-8 h-full flex flex-col">
                 <div className="mb-8">
                     <Button
@@ -41,7 +41,7 @@ const ModerationSkeleton: React.FC = () => {
                     {Array.from({ length: 4 }).map((_, i) => (
                         <div
                             key={i}
-                            className="bg-panel-primary p-6 rounded-3xl border border-border-medium animate-pulse"
+                            className="bg-panel-primary p-6 rounded-3xl border border-border-medium skeleton-shimmer"
                         >
                             <div className="flex gap-4">
                                 <Skeleton className="w-12 h-12 rounded-full flex-shrink-0" />

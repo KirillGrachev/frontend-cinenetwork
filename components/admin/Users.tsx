@@ -60,7 +60,7 @@ const Users: React.FC = () => {
     return (
         <div className="min-h-screen pt-32 pb-20">
             <div className="container mx-auto px-4 md:px-8 h-full flex flex-col">
-                <div className="mb-8 animate-fade-in">
+                <div className="mb-8 page-reveal">
                     <Button
                         variant="ghost"
                         size="md"
@@ -79,7 +79,7 @@ const Users: React.FC = () => {
                 />
 
                 {/* Toolbar */}
-                <div className="flex flex-col md:flex-row gap-4 mb-8 animate-fade-in stagger-1 items-center">
+                <div className="flex flex-col md:flex-row gap-4 mb-8 page-reveal items-center">
                     <div className="w-full md:flex-1">
                         <Input
                             placeholder={t('admin.users.searchPlaceholder')}
@@ -113,63 +113,70 @@ const Users: React.FC = () => {
                 </div>
 
                 {/* Virtualized Table Container */}
-                <div className="bg-panel-primary border border-border-medium rounded-3xl overflow-hidden shadow-xl animate-fade-in stagger-2 flex-1 min-h-[600px] flex flex-col">
+                <div className="bg-panel-primary border border-border-medium rounded-3xl overflow-hidden shadow-xl page-reveal flex-1 min-h-[600px] flex flex-col">
                     {users.length > 0 ? (
-                        <TableVirtuoso
-                            useWindowScroll
-                            data={users}
-                            style={{ height: 600 }}
-                            components={{
-                                Table: (props) => <table {...props} className="w-full text-left" />,
-                                TableHead: React.forwardRef<
-                                    HTMLTableSectionElement,
-                                    React.HTMLAttributes<HTMLTableSectionElement>
-                                >((props, ref) => (
-                                    <thead
-                                        {...props}
-                                        ref={ref}
-                                        className="bg-white/5 text-[10px] uppercase font-bold text-gray-500 tracking-wider"
+                        <div className="overflow-x-auto">
+                            <TableVirtuoso
+                                useWindowScroll
+                                data={users}
+                                style={{ height: 600 }}
+                                components={{
+                                    Table: (props) => (
+                                        <table
+                                            {...props}
+                                            className="w-full min-w-[860px] text-left"
+                                        />
+                                    ),
+                                    TableHead: React.forwardRef<
+                                        HTMLTableSectionElement,
+                                        React.HTMLAttributes<HTMLTableSectionElement>
+                                    >((props, ref) => (
+                                        <thead
+                                            {...props}
+                                            ref={ref}
+                                            className="bg-white/5 text-[10px] uppercase font-bold text-gray-500 tracking-wider"
+                                        />
+                                    )),
+                                    TableBody: React.forwardRef<
+                                        HTMLTableSectionElement,
+                                        React.HTMLAttributes<HTMLTableSectionElement>
+                                    >((props, ref) => (
+                                        <tbody
+                                            {...props}
+                                            ref={ref}
+                                            className="divide-y divide-border-light"
+                                        />
+                                    )),
+                                }}
+                                fixedHeaderContent={() => (
+                                    <tr>
+                                        <th className="px-6 py-4 bg-panel-primary border-b border-border-light">
+                                            {t('admin.users.table.user')}
+                                        </th>
+                                        <th className="px-6 py-4 bg-panel-primary border-b border-border-light">
+                                            {t('admin.users.table.role')}
+                                        </th>
+                                        <th className="px-6 py-4 bg-panel-primary border-b border-border-light">
+                                            {t('admin.users.table.status')}
+                                        </th>
+                                        <th className="px-6 py-4 bg-panel-primary border-b border-border-light">
+                                            {t('admin.users.table.joined')}
+                                        </th>
+                                        <th className="px-6 py-4 bg-panel-primary border-b border-border-light text-right">
+                                            {t('admin.users.table.actions')}
+                                        </th>
+                                    </tr>
+                                )}
+                                itemContent={(_index, user) => (
+                                    <UserRow
+                                        user={user}
+                                        onEdit={(u) => openModal(u, 'edit')}
+                                        onBan={(u) => openModal(u, 'ban')}
+                                        onDelete={(u) => openModal(u, 'delete')}
                                     />
-                                )),
-                                TableBody: React.forwardRef<
-                                    HTMLTableSectionElement,
-                                    React.HTMLAttributes<HTMLTableSectionElement>
-                                >((props, ref) => (
-                                    <tbody
-                                        {...props}
-                                        ref={ref}
-                                        className="divide-y divide-border-light"
-                                    />
-                                )),
-                            }}
-                            fixedHeaderContent={() => (
-                                <tr>
-                                    <th className="px-6 py-4 bg-panel-primary border-b border-border-light">
-                                        {t('admin.users.table.user')}
-                                    </th>
-                                    <th className="px-6 py-4 bg-panel-primary border-b border-border-light">
-                                        {t('admin.users.table.role')}
-                                    </th>
-                                    <th className="px-6 py-4 bg-panel-primary border-b border-border-light">
-                                        {t('admin.users.table.status')}
-                                    </th>
-                                    <th className="px-6 py-4 bg-panel-primary border-b border-border-light">
-                                        {t('admin.users.table.joined')}
-                                    </th>
-                                    <th className="px-6 py-4 bg-panel-primary border-b border-border-light text-right">
-                                        {t('admin.users.table.actions')}
-                                    </th>
-                                </tr>
-                            )}
-                            itemContent={(_index, user) => (
-                                <UserRow
-                                    user={user}
-                                    onEdit={(u) => openModal(u, 'edit')}
-                                    onBan={(u) => openModal(u, 'ban')}
-                                    onDelete={(u) => openModal(u, 'delete')}
-                                />
-                            )}
-                        />
+                                )}
+                            />
+                        </div>
                     ) : (
                         <div className="flex-1 flex items-center justify-center text-gray-500 p-20">
                             {t('search.noResults')}

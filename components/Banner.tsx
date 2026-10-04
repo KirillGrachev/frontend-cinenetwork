@@ -18,9 +18,7 @@ const Banner: React.FC<BannerProps> = ({ items, isLoading = false }) => {
     }
 
     return (
-        <div
-            className={`container mx-auto px-4 md:px-8 pb-8 ${isLoading ? '' : 'animate-fade-in'}`}
-        >
+        <div className={`container mx-auto px-4 md:px-8 pb-8 ${isLoading ? '' : 'page-reveal'}`}>
             <div
                 className="w-full aspect-[2/1] md:aspect-[3/1] bg-panel-primary rounded-3xl border border-border-medium relative overflow-hidden group"
                 {...(!isLoading ? handlers : {})}

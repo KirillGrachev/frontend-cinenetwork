@@ -18,6 +18,7 @@ import {
     MockStatusProvider,
     MockUserProvider,
 } from './mockProvider';
+import { appEnv } from '../../utils/env';
 import {
     ApiAdminProvider,
     ApiAuthProvider,
@@ -37,7 +38,7 @@ import {
  * `import.meta.env` (build-time inlined); the previous `process.env` check
  * could never be true in a browser, making the API mode dead code.
  */
-const USE_API_PROVIDERS = import.meta.env.VITE_API_ENABLED === 'true';
+const USE_API_PROVIDERS = appEnv.apiEnabled;
 
 /**
  * Providers are stateless, so one lazily-created singleton per contract is
