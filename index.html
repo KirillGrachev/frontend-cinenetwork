@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" translate="no">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+        />
+        <meta name="theme-color" content="#050505" />
+        <meta name="description" content="A premium streaming interface for CineNetwork." />
+        <meta name="google" content="notranslate" />
+
+        <!-- PWA / Mobile Capable -->
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="CineNetwork" />
+        <link rel="apple-touch-icon" href="/assets/logo/white-cinenetwork.png" />
+        <link rel="icon" type="image/png" href="/assets/logo/white-cinenetwork.png" />
+
+        <title>CineNetwork</title>
+
+        <!--
+      Fonts (Inter) and icons (Font Awesome) are self-hosted via npm
+      (@fontsource-variable/inter, @fortawesome/fontawesome-free) and bundled
+      by Vite — see index.tsx. The former Google Fonts / cdnjs links were a
+      runtime dependency on third-party CDNs (SPOF + privacy + CSP issues).
+    -->
+
+        <!--
+      NOTE: the previous version of this file contained an import map that
+      pointed bare module specifiers (react, zustand, zod, date-fns, ...) at
+      a public ESM CDN with versions contradicting package.json (React 19 vs
+      installed React 18, zod 4 vs zod 3, zustand 5 vs zustand 4). Vite
+      resolves bare imports from node_modules at build time, so the map was
+      at best dead weight and at worst a source of dual-package hazards.
+      All dependencies are managed exclusively by package.json.
+    --></head>
+    <body>
+        <div id="root"></div>
+        <script type="module" src="/index.tsx"></script>
+    </body>
+</html>
