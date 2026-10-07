@@ -1,14 +1,10 @@
-import type React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router';
 import { useLocale } from '../context/LocaleContext';
 import { useToast } from '../context/ToastContext';
-import { copyToClipboard } from '../utils/clipboard';
-import { getSiteOrigin } from '../utils/siteUrl';
-import { ToastType } from '../types';
-import type { UserProfileData } from '../types';
+import { ToastType, UserProfile } from '../types';
 
-export const useProfileUiState = (profile: UserProfileData | null) => {
+export const useProfileUiState = (profile: UserProfile | null) => {
     const { t } = useLocale();
     const { showToast } = useToast();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -26,36 +22,28 @@ export const useProfileUiState = (profile: UserProfileData | null) => {
 
     useEffect(() => {
         if (!searchParams.get('tab')) {
-            setSearchParams(
-                (prev) => {
-                    const newParams = new URLSearchParams(prev);
-                    newParams.set('tab', 'overview');
-                    return newParams;
-                },
-                { replace: true },
-            );
+            setSearchParams(prev => {
+                const newParams = new URLSearchParams(prev);
+                newParams.set('tab', 'overview');
+                return newParams;
+            }, { replace: true });
         }
     }, [searchParams, setSearchParams]);
 
     const handleTabChange = (tabId: string) => {
-        setSearchParams(
-            (prev) => {
-                const newParams = new URLSearchParams(prev);
-                newParams.set('tab', tabId);
-                return newParams;
-            },
-            { replace: true },
-        );
+        setSearchParams(prev => {
+            const newParams = new URLSearchParams(prev);
+            newParams.set('tab', tabId);
+            return newParams;
+        }, { replace: true });
     };
 
     // Actions
     const handleFollow = () => {
-        setIsFollowing((prev) => !prev);
+        setIsFollowing(prev => !prev);
         showToast(
-            !isFollowing
-                ? t('info.profile.actions.followed')
-                : t('info.profile.actions.unfollowed'),
-            ToastType.Success,
+            !isFollowing ? t('info.profile.actions.followed') : t('info.profile.actions.unfollowed'),
+            ToastType.Success
         );
     };
 
@@ -64,8 +52,8 @@ export const useProfileUiState = (profile: UserProfileData | null) => {
         setIsReportModalOpen(true);
     };
 
-    const handleReportSubmit = (_reason: string, _description: string) => {
-        // TODO(api): POST the report (_reason/_description) to the backend.
+    const handleReportSubmit = (reason: string, description: string) => {
+        console.log(`Reported profile ${profile?.username}: ${reason} - ${description}`);
         showToast(t('common.toasts.reportSent'), ToastType.Success);
         setIsReportModalOpen(false);
     };
@@ -73,13 +61,36 @@ export const useProfileUiState = (profile: UserProfileData | null) => {
     const handleCopyLink = async () => {
         setIsMenuOpen(false);
         if (!profile) return;
-        // BrowserRouter: clean shareable URL without the legacy '#/' prefix.
-        const shareUrl = `${getSiteOrigin()}/profile/${profile.id}`;
-        const ok = await copyToClipboard(shareUrl);
-        showToast(
-            ok ? t('info.blogPost.copied') : t('common.toasts.copyError'),
-            ok ? ToastType.Success : ToastType.Error,
-        );
+        const shareUrl = `${window.location.origin}${window.location.pathname}#/profile/${profile.id}`;
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(shareUrl);
+                showToast(t('info.blogPost.copied'), ToastType.Success);
+            } else {
+                throw new Error('Clipboard API unavailable');
+            }
+        } catch (err) {
+            const textArea = document.createElement("textarea");
+            textArea.value = shareUrl;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast(t('info.blogPost.copied'), ToastType.Success);
+                } else {
+                    showToast(t('common.toasts.copyError'), ToastType.Error);
+                }
+            } catch (e) {
+                showToast(t('common.toasts.copyError'), ToastType.Error);
+            }
+            document.body.removeChild(textArea);
+        }
     };
 
     const handleMessageClick = (e: React.MouseEvent) => {
@@ -105,6 +116,6 @@ export const useProfileUiState = (profile: UserProfileData | null) => {
         reviewsFilter,
         setReviewsFilter,
         handleCopyLink,
-        handleMessageClick,
+        handleMessageClick
     };
 };

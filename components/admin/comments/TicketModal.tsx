@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { DialogTitle } from '@headlessui/react';
 import BaseModal from '../../ui/BaseModal';
+import Button from '../../ui/Button';
 import TextArea from '../../ui/TextArea';
-import type { Comment, TicketMessage } from '../../../types/admin';
+import { Comment, TicketMessage } from '../../../hooks/useAdminComments';
 import { useLocale } from '../../../context/LocaleContext';
-import { createLocalEntityIdString } from '../../../utils/ids';
 import { CommentStatus } from '../../../types';
-import type { TicketReplyFormValues } from '../../../utils/validationSchemas';
-import { createTicketReplySchema } from '../../../utils/validationSchemas';
+import { createTicketReplySchema, TicketReplyFormValues } from '../../../utils/validationSchemas';
 
 interface TicketModalProps {
     isOpen: boolean;
@@ -21,63 +21,65 @@ interface TicketModalProps {
 
 const TicketModal: React.FC<TicketModalProps> = ({ isOpen, onClose, ticket, onUpdate }) => {
     const { t } = useLocale();
-    // The parent remounts this modal with `key={ticket.id}`, so state can be
-    // initialised straight from props — no prop-sync effect needed.
-    const [messages, setMessages] = useState<TicketMessage[]>(ticket?.messages ?? []);
+    const [messages, setMessages] = useState<TicketMessage[]>([]);
 
     const schema = createTicketReplySchema(t);
     const {
         register,
         handleSubmit,
         reset,
-        formState: { isValid },
+        formState: { isValid }
     } = useForm<TicketReplyFormValues>({
         resolver: zodResolver(schema),
         defaultValues: { content: '' },
-        mode: 'onChange',
+        mode: 'onChange'
     });
+
+    useEffect(() => {
+        if (isOpen && ticket) {
+            setMessages(ticket.messages || []);
+            reset(); // Clear input when opening different ticket
+        }
+    }, [isOpen, ticket, reset]);
 
     if (!ticket) return null;
 
     const onSend = (data: TicketReplyFormValues) => {
         const newMessage: TicketMessage = {
-            id: createLocalEntityIdString(),
+            id: Date.now().toString(),
             sender: 'admin',
             content: data.content,
-            timestamp: t('time.justNow'),
+            timestamp: t('time.justNow')
         };
 
         const updatedMessages = [...messages, newMessage];
         setMessages(updatedMessages);
-
+        
         // Update the ticket object in parent state
         onUpdate({
             ...ticket,
             messages: updatedMessages,
-            status: CommentStatus.Pending, // Keeping it open/pending on reply
+            status: CommentStatus.Pending // Keeping it open/pending on reply
         });
 
         reset();
     };
 
     const handleStatusChange = () => {
-        const newStatus =
-            ticket.status === CommentStatus.Approved
-                ? CommentStatus.Pending
-                : CommentStatus.Approved;
-
+        const newStatus = ticket.status === CommentStatus.Approved ? CommentStatus.Pending : CommentStatus.Approved;
+        
         // Update parent state only, keep modal open
         onUpdate({
             ...ticket,
-            status: newStatus,
+            status: newStatus
         });
     };
 
     const isClosed = ticket.status === CommentStatus.Approved; // Reuse "Approved" as "Resolved/Closed" for tickets
 
     return (
-        <BaseModal
-            isOpen={isOpen}
+        <BaseModal 
+            isOpen={isOpen} 
             onClose={onClose}
             className="bg-panel-primary border border-border-medium rounded-3xl max-w-2xl h-[80vh] flex flex-col shadow-2xl overflow-hidden relative"
         >
@@ -93,13 +95,9 @@ const TicketModal: React.FC<TicketModalProps> = ({ isOpen, onClose, ticket, onUp
                             {ticket.username}
                         </DialogTitle>
                         <div className="flex items-center gap-2 text-xs">
-                            <span
-                                className={`w-2 h-2 rounded-full ${isClosed ? 'bg-green-500' : 'bg-yellow-500'}`}
-                            ></span>
+                            <span className={`w-2 h-2 rounded-full ${isClosed ? 'bg-green-500' : 'bg-yellow-500'}`}></span>
                             <span className="text-gray-400 font-medium">
-                                {isClosed
-                                    ? t('admin.comments.ticket.statusClosed')
-                                    : t('admin.comments.ticket.statusOpen')}
+                                {isClosed ? t('admin.comments.ticket.statusClosed') : t('admin.comments.ticket.statusOpen')}
                             </span>
                             <span className="text-gray-600">•</span>
                             <span className="text-gray-500">{t(ticket.animeTitle)}</span>
@@ -107,19 +105,17 @@ const TicketModal: React.FC<TicketModalProps> = ({ isOpen, onClose, ticket, onUp
                     </div>
                 </div>
                 <div className="flex gap-2">
-                    <button
+                    <button 
                         onClick={handleStatusChange}
                         className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${
-                            isClosed
-                                ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20 hover:bg-yellow-500 hover:text-black'
-                                : 'bg-green-500/10 text-green-400 border-green-500/20 hover:bg-green-500 hover:text-black'
+                            isClosed 
+                            ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20 hover:bg-yellow-500 hover:text-black' 
+                            : 'bg-green-500/10 text-green-400 border-green-500/20 hover:bg-green-500 hover:text-black'
                         }`}
                     >
-                        {isClosed
-                            ? t('admin.comments.ticket.reopenTicket')
-                            : t('admin.comments.ticket.closeTicket')}
+                        {isClosed ? t('admin.comments.ticket.reopenTicket') : t('admin.comments.ticket.closeTicket')}
                     </button>
-                    <button
+                    <button 
                         onClick={onClose}
                         className="w-8 h-8 rounded-xl flex items-center justify-center text-gray-500 hover:text-white hover:bg-white/10 transition-colors"
                     >
@@ -143,31 +139,22 @@ const TicketModal: React.FC<TicketModalProps> = ({ isOpen, onClose, ticket, onUp
                                 </span>
                             </div>
                         ),
-                        Footer: () => <div className="pb-6" />, // Padding at bottom
+                        Footer: () => <div className="pb-6" /> // Padding at bottom
                     }}
-                    itemContent={(_index, msg) => {
+                    itemContent={(index, msg) => {
                         const isAdmin = msg.sender === 'admin';
                         return (
-                            <div
-                                className={`flex ${isAdmin ? 'justify-end' : 'justify-start'} mb-4`}
-                            >
+                            <div className={`flex ${isAdmin ? 'justify-end' : 'justify-start'} mb-4`}>
                                 <div className={`max-w-[80%] ${isAdmin ? 'order-1' : 'order-2'}`}>
-                                    <div
-                                        className={`p-4 rounded-2xl text-sm leading-relaxed border ${
-                                            isAdmin
-                                                ? 'bg-blue-600 text-white border-blue-500 rounded-tr-sm shadow-[0_4px_15px_rgba(37,99,235,0.2)]'
-                                                : 'bg-panel-secondary text-gray-200 border-border-light rounded-tl-sm'
-                                        }`}
-                                    >
+                                    <div className={`p-4 rounded-2xl text-sm leading-relaxed border ${
+                                        isAdmin 
+                                        ? 'bg-blue-600 text-white border-blue-500 rounded-tr-sm shadow-[0_4px_15px_rgba(37,99,235,0.2)]' 
+                                        : 'bg-panel-secondary text-gray-200 border-border-light rounded-tl-sm'
+                                    }`}>
                                         {msg.content}
                                     </div>
-                                    <div
-                                        className={`text-[10px] text-gray-600 mt-1.5 font-medium ${isAdmin ? 'text-right' : 'text-left'}`}
-                                    >
-                                        {isAdmin
-                                            ? t('admin.comments.ticket.adminRole')
-                                            : ticket.username}{' '}
-                                        • {msg.timestamp}
+                                    <div className={`text-[10px] text-gray-600 mt-1.5 font-medium ${isAdmin ? 'text-right' : 'text-left'}`}>
+                                        {isAdmin ? t('admin.comments.ticket.adminRole') : ticket.username} • {msg.timestamp}
                                     </div>
                                 </div>
                             </div>
@@ -178,11 +165,8 @@ const TicketModal: React.FC<TicketModalProps> = ({ isOpen, onClose, ticket, onUp
 
             {/* Input Area */}
             <div className="p-4 bg-panel-secondary border-t border-border-light flex-shrink-0 -mx-4 -mb-4 sm:-mx-8 sm:-mb-8 rounded-b-3xl">
-                <form
-                    onSubmit={handleSubmit(onSend)}
-                    className="flex items-center gap-3 bg-item-primary rounded-2xl p-2  transition-colors"
-                >
-                    <TextArea
+                <form onSubmit={handleSubmit(onSend)} className="flex items-center gap-3 bg-item-primary rounded-2xl p-2  transition-colors">
+                    <TextArea 
                         {...register('content')}
                         placeholder={t('admin.comments.ticket.replyPlaceholder')}
                         className="bg-transparent border-none focus:bg-transparent min-h-[44px] max-h-[150px] py-2.5 px-2 flex-1 resize-none !rounded-none"
@@ -193,13 +177,13 @@ const TicketModal: React.FC<TicketModalProps> = ({ isOpen, onClose, ticket, onUp
                             }
                         }}
                     />
-                    <button
+                    <button 
                         type="submit"
                         disabled={!isValid}
                         className={`w-8 h-8 rounded-xl mr-1 flex-shrink-0 flex items-center justify-center transition-all ${
-                            isValid
-                                ? 'bg-white text-black shadow-md hover:scale-105'
-                                : 'bg-white/5 text-gray-600 cursor-not-allowed'
+                            isValid 
+                            ? 'bg-white text-black shadow-md hover:scale-105' 
+                            : 'bg-white/5 text-gray-600 cursor-not-allowed'
                         }`}
                     >
                         <i className="fa-solid fa-paper-plane text-xs"></i>

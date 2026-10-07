@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocale } from '../../context/LocaleContext';
-import type { SocialProviderId } from '../../types';
+import { SocialProviderId } from '../../types';
 
 interface SocialAccount {
     id: SocialProviderId;
@@ -26,25 +26,21 @@ const SocialLinkItem: React.FC<SocialLinkItemProps> = ({ account, onConnect, onD
                 </div>
                 <span className="font-medium text-sm text-white">{account.name}</span>
             </div>
-
+            
             {account.connected ? (
                 <div className="flex items-center gap-4">
                     {/* CHANGED: rounded-md -> rounded-full */}
-                    <span className="text-[10px] font-bold text-green-500 bg-green-500/10 px-3 py-1 rounded-full uppercase tracking-wider">
-                        {t('common.ui.connected')}
-                    </span>
-                    <button
+                    <span className="text-[10px] font-bold text-green-500 bg-green-500/10 px-3 py-1 rounded-full uppercase tracking-wider">{t('common.ui.connected')}</span>
+                    <button 
                         onClick={onDisconnect}
                         className="text-gray-500 hover:text-red-400 transition-colors text-xs font-bold"
-                        aria-label={t('settings.profile.disconnectSocial', {
-                            provider: account.name,
-                        })}
+                        aria-label={t('settings.profile.disconnectSocial', { provider: account.name })}
                     >
                         <i className="fa-solid fa-link-slash"></i>
                     </button>
                 </div>
             ) : (
-                <button
+                <button 
                     onClick={onConnect}
                     className="text-xs font-bold text-blue-400 hover:text-white transition-colors bg-blue-500/10 hover:bg-blue-500 px-3 py-1.5 rounded-xl border border-blue-500/20"
                     aria-label={t('settings.profile.connectSocial', { provider: account.name })}

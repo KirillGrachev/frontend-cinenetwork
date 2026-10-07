@@ -1,35 +1,34 @@
+
 import React, { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import type { FooterConfig } from '../../types';
+import { FooterConfig } from '../../types';
 import { useLocale } from '../../context/LocaleContext';
-import type { Locale } from '../../context/LocaleContext';
 
 interface FooterSocialsProps {
     config: Omit<FooterConfig, 'languages'>;
-    availableLocales: readonly Locale[];
-    currentLocale: Locale;
-    onLocaleChange: (lang: Locale) => void;
+    availableLocales: string[];
+    currentLocale: string;
+    onLocaleChange: (lang: string) => void;
     onSocialClick: (e: React.MouseEvent) => void;
 }
 
-const FooterSocials: React.FC<FooterSocialsProps> = ({
-    config,
-    availableLocales,
-    currentLocale,
-    onLocaleChange,
+const FooterSocials: React.FC<FooterSocialsProps> = ({ 
+    config, 
+    availableLocales, 
+    currentLocale, 
+    onLocaleChange, 
     onSocialClick,
 }) => {
     const { t } = useLocale();
 
     // Common style for all buttons in this row
-    const buttonClasses =
-        'w-12 h-12 bg-item-primary rounded-xl flex items-center justify-center text-gray-400 hover:bg-white hover:text-black transition-all duration-300 shadow-md focus:outline-none';
+    const buttonClasses = "w-12 h-12 bg-item-primary rounded-xl flex items-center justify-center text-gray-400 hover:bg-white hover:text-black transition-all duration-300 shadow-md focus:outline-none";
 
     return (
         <div className="flex flex-nowrap justify-center sm:justify-end items-center gap-3">
             {/* Language Selector (Square Button with Dropdown) */}
             <Menu as="div" className="relative flex-shrink-0">
-                <Menu.Button
+                <Menu.Button 
                     aria-label={t('settings.preferences.interfaceLanguage')}
                     className={`${buttonClasses} font-bold text-xs uppercase tracking-wide`}
                 >
@@ -56,9 +55,7 @@ const FooterSocials: React.FC<FooterSocialsProps> = ({
                                             } ${currentLocale === lang ? 'text-white' : ''}`}
                                         >
                                             <span>{t(`languages.${lang}`)}</span>
-                                            {currentLocale === lang && (
-                                                <i className="fa-solid fa-check text-xs"></i>
-                                            )}
+                                            {currentLocale === lang && <i className="fa-solid fa-check text-xs"></i>}
                                         </button>
                                     )}
                                 </Menu.Item>
@@ -72,7 +69,7 @@ const FooterSocials: React.FC<FooterSocialsProps> = ({
             {config.socialLinks.map((social, idx) => {
                 if (social.href && social.href !== '#') {
                     return (
-                        <a
+                        <a 
                             key={idx}
                             href={social.href}
                             target="_blank"
@@ -84,10 +81,10 @@ const FooterSocials: React.FC<FooterSocialsProps> = ({
                         </a>
                     );
                 }
-
+                
                 return (
-                    <button
-                        key={idx}
+                    <button 
+                        key={idx} 
                         onClick={onSocialClick}
                         aria-label={`${t('footer.followUsOn')} ${social.label}`}
                         className={`${buttonClasses} flex-shrink-0`}

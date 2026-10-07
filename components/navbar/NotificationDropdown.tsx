@@ -1,24 +1,23 @@
-import React, { Fragment } from 'react';
-import { formatRelativeTime } from '../../utils/datetime';
+
+import React, { Fragment, useEffect } from 'react';
 import { useLocale } from '../../context/LocaleContext';
 import { useNavigate } from 'react-router';
 import { AppRoute, ToastType } from '../../types';
 import { Virtuoso } from 'react-virtuoso';
 import { Popover, Transition } from '@headlessui/react';
 import { useToast } from '../../context/ToastContext';
-import { useNotificationStore, selectUnreadCount } from '../../store/notificationStore';
+import { useNotificationStore } from '../../store/notificationStore';
+import { formatDistanceToNow } from 'date-fns';
+import { ru, enUS } from 'date-fns/locale';
 
 const NotificationDropdown: React.FC = () => {
     const { t, locale } = useLocale();
     const navigate = useNavigate();
     const { showToast } = useToast();
 
-    // Selector-based store access (no full-store subscription).
-    const notifications = useNotificationStore((s) => s.notifications);
-    const markAsRead = useNotificationStore((s) => s.markAsRead);
-    const markAllAsRead = useNotificationStore((s) => s.markAllAsRead);
-    const isLoading = useNotificationStore((s) => s.isLoading);
-    const unreadCount = useNotificationStore(selectUnreadCount);
+    // Connect to Store
+    const { notifications, markAsRead, markAllAsRead, getUnreadCount, isLoading } = useNotificationStore();
+    const unreadCount = getUnreadCount();
 
     const handleMarkAllRead = () => {
         markAllAsRead();
@@ -38,8 +37,17 @@ const NotificationDropdown: React.FC = () => {
         close();
     };
 
-    /** Shared helper — was duplicated verbatim in Notifications.tsx. */
-    const getTimeLabel = (isoTime: string) => formatRelativeTime(isoTime, locale);
+    // Helper for relative time
+    const getTimeLabel = (isoTime: string) => {
+        try {
+            return formatDistanceToNow(new Date(isoTime), { 
+                addSuffix: true, 
+                locale: locale === 'ru' ? ru : enUS 
+            });
+        } catch (e) {
+            return isoTime;
+        }
+    };
 
     // Calculate dynamic height: ~85px per item, max 400px
     const listHeight = Math.min(notifications.length * 85, 400);
@@ -48,13 +56,11 @@ const NotificationDropdown: React.FC = () => {
         <Popover className="relative">
             {({ open, close }) => (
                 <>
-                    <Popover.Button
+                    <Popover.Button 
                         className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all relative outline-none focus:outline-none ${open ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white hover:bg-white/10'}`}
                         aria-label={t('layout.navbar.notifications.title')}
                     >
-                        <i
-                            className={`fa-regular fa-bell text-lg ${isLoading ? 'animate-pulse' : ''}`}
-                        ></i>
+                        <i className={`fa-regular fa-bell text-lg ${isLoading ? 'animate-pulse' : ''}`}></i>
                         {unreadCount > 0 && (
                             <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-blue-500 rounded-full border border-panel-primary"></span>
                         )}
@@ -71,11 +77,9 @@ const NotificationDropdown: React.FC = () => {
                     >
                         <Popover.Panel className="absolute top-full right-0 mt-3 w-80 md:w-96 bg-panel-primary/95 backdrop-blur-2xl  rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.6)] z-50 overflow-hidden origin-top-right">
                             <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-panel-primary">
-                                <h3 className="font-bold text-white text-sm">
-                                    {t('layout.navbar.notifications.title')}
-                                </h3>
+                                <h3 className="font-bold text-white text-sm">{t('layout.navbar.notifications.title')}</h3>
                                 {unreadCount > 0 && (
-                                    <button
+                                    <button 
                                         onClick={handleMarkAllRead}
                                         className="text-[10px] font-bold text-blue-400 hover:text-blue-300 transition-colors uppercase tracking-wide"
                                     >
@@ -95,59 +99,35 @@ const NotificationDropdown: React.FC = () => {
                                             return (
                                                 <button
                                                     key={note.id}
-                                                    onClick={() =>
-                                                        handleItemClick(note.link, note.id, close)
-                                                    }
+                                                    onClick={() => handleItemClick(note.link, note.id, close)}
                                                     className={`w-full flex items-start gap-3 p-4 text-left border-b border-white/5 hover:bg-white/5 transition-colors focus:outline-none focus:bg-white/5 ${!note.isRead ? 'bg-blue-500/5' : ''}`}
                                                 >
-                                                    <div
-                                                        className={`w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center border border-white/10 ${
-                                                            note.type === 'system'
-                                                                ? 'bg-purple-500/20 text-purple-400'
-                                                                : note.type === 'release'
-                                                                  ? 'bg-green-500/20 text-green-400'
-                                                                  : note.type === 'like'
-                                                                    ? 'bg-red-500/20 text-red-400'
-                                                                    : 'bg-item-primary text-gray-400'
-                                                        }`}
-                                                    >
+                                                    <div className={`w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center border border-white/10 ${
+                                                        note.type === 'system' ? 'bg-purple-500/20 text-purple-400' :
+                                                        note.type === 'release' ? 'bg-green-500/20 text-green-400' :
+                                                        note.type === 'like' ? 'bg-red-500/20 text-red-400' :
+                                                        'bg-item-primary text-gray-400'
+                                                    }`}>
                                                         {note.image ? (
-                                                            <img
-                                                                src={note.image}
-                                                                alt=""
-                                                                className="w-full h-full object-cover rounded-full"
-                                                            />
+                                                            <img src={note.image} alt="" className="w-full h-full object-cover rounded-full" />
                                                         ) : (
-                                                            <i
-                                                                className={`fa-solid ${
-                                                                    note.type === 'system'
-                                                                        ? 'fa-gear'
-                                                                        : note.type === 'release'
-                                                                          ? 'fa-play'
-                                                                          : note.type === 'like'
-                                                                            ? 'fa-heart'
-                                                                            : 'fa-comment'
-                                                                } text-sm`}
-                                                            ></i>
+                                                            <i className={`fa-solid ${
+                                                                note.type === 'system' ? 'fa-gear' :
+                                                                note.type === 'release' ? 'fa-play' :
+                                                                note.type === 'like' ? 'fa-heart' :
+                                                                'fa-comment'
+                                                            } text-sm`}></i>
                                                         )}
                                                     </div>
                                                     <div className="flex-1 min-w-0">
                                                         <div className="flex justify-between items-baseline mb-0.5">
-                                                            <span
-                                                                className={`text-sm font-bold truncate pr-2 ${!note.isRead ? 'text-white' : 'text-gray-300'}`}
-                                                            >
+                                                            <span className={`text-sm font-bold truncate pr-2 ${!note.isRead ? 'text-white' : 'text-gray-300'}`}>
                                                                 {note.title}
                                                             </span>
-                                                            {!note.isRead && (
-                                                                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                                            )}
+                                                            {!note.isRead && <span className="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>}
                                                         </div>
-                                                        <p className="text-xs text-gray-400 leading-snug line-clamp-2 mb-1.5">
-                                                            {note.description}
-                                                        </p>
-                                                        <span className="text-[10px] font-bold text-gray-600 uppercase tracking-wider">
-                                                            {getTimeLabel(note.time)}
-                                                        </span>
+                                                        <p className="text-xs text-gray-400 leading-snug line-clamp-2 mb-1.5">{note.description}</p>
+                                                        <span className="text-[10px] font-bold text-gray-600 uppercase tracking-wider">{getTimeLabel(note.time)}</span>
                                                     </div>
                                                 </button>
                                             );
@@ -159,14 +139,12 @@ const NotificationDropdown: React.FC = () => {
                                     <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-3 text-gray-600">
                                         <i className="fa-regular fa-bell-slash text-xl"></i>
                                     </div>
-                                    <p className="text-gray-500 text-xs font-medium">
-                                        {t('layout.navbar.notifications.empty')}
-                                    </p>
+                                    <p className="text-gray-500 text-xs font-medium">{t('layout.navbar.notifications.empty')}</p>
                                 </div>
                             )}
-
+                            
                             <div className="p-2 border-t border-white/5 bg-black/20 relative z-10">
-                                <button
+                                <button 
                                     onClick={() => handleViewAll(close)}
                                     className="w-full py-2 text-xs font-bold text-gray-400 hover:text-white transition-colors"
                                 >

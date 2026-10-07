@@ -1,3 +1,4 @@
+
 export const admin = {
     title: 'Панель администратора',
     description: 'Обзор ключевых показателей эффективности и мониторинг системы.',
@@ -12,7 +13,7 @@ export const admin = {
     periods: {
         d24: '24 часа',
         d7: '7 дней',
-        d30: '30 дней',
+        d30: '30 дней'
     },
     metrics: {
         totalUsers: 'Всего пользователей',
@@ -23,7 +24,7 @@ export const admin = {
     charts: {
         revenueTraffic: 'Динамика трафика и выручки',
         contentDist: 'Распределение контента',
-        platformLoad: 'Состояние платформы',
+        serverLoad: 'Нагрузка на серверы',
         storage: 'Хранилище контента',
     },
     transactions: {
@@ -36,34 +37,34 @@ export const admin = {
         statusPending: 'Ожидание',
         plans: {
             yearly: 'Premium (годовой)',
-            monthly: 'Premium (месячный)',
-        },
+            monthly: 'Premium (месячный)'
+        }
     },
     topContent: {
         title: 'Топ просмотров',
         views: 'просмотров',
-        rating: 'Рейтинг',
+        rating: 'Рейтинг'
     },
     resources: {
-        media: 'Медиатека',
-        encoding: 'Очередь кодирования',
-        streams: 'Сессии просмотра',
-        cdn: 'CDN-отдача',
-        gbps: 'Гбит/с',
+        cpu: 'Ядра ЦП',
+        ram: 'ОЗУ',
+        net: 'Сеть',
+        storage: 'Хранилище',
+        mbps: 'Мбит/с'
     },
     overview: {
-        trafficTitle: 'Динамика посещаемости',
-        trafficSubtitle: 'Статистика просмотров по дням',
-        total: 'Всего',
+      trafficTitle: 'Динамика посещаемости',
+      trafficSubtitle: 'Статистика просмотров по дням',
+      total: 'Всего'
     },
     content: {
-        filterAll: 'Все типы',
-        filterTv: 'TV Сериалы',
-        filterMovie: 'Фильмы',
-        types: {
-            tv: 'ТВ',
-            movie: 'Фильм',
-        },
+      filterAll: 'Все типы',
+      filterTv: 'TV Сериалы',
+      filterMovie: 'Фильмы',
+      types: {
+          tv: 'ТВ',
+          movie: 'Фильм'
+      }
     },
     activityLog: {
         title: 'Лог событий',
@@ -91,8 +92,8 @@ export const admin = {
             purchasedMonthly: 'Приобретена подписка Premium (Monthly)',
             flaggedComment: 'Пожаловался на комментарий ID #{id}',
             encodingError: 'Не удалось закодировать видео #{id}',
-            bannedUserForSpam: 'Забанил пользователя за спам',
-        },
+            bannedUserForSpam: 'Забанил пользователя за спам'
+        }
     },
     comments: {
         title: 'Центр поддержки',
@@ -101,25 +102,25 @@ export const admin = {
             comments: 'Комментарии',
             reviews: 'Обзоры',
             tickets: 'Обращения',
-            panel: 'Модераторская панель',
+            panel: 'Модераторская панель'
         },
         filters: {
             all: 'Все',
             pending: 'Очередь',
             flagged: 'Жалобы',
             approved: 'Одобрено',
-            rejected: 'Отклонено',
+            rejected: 'Отклонено'
         },
         actions: {
             approve: 'Одобрить',
             reject: 'Удалить',
-            ban: 'Бан',
+            ban: 'Бан'
         },
         reasons: {
             user_report: 'Жалоба пользователя',
             spam: 'Спам / Реклама',
             offensive: 'Оскорбления',
-            spoiler: 'Спойлер',
+            spoiler: 'Спойлер'
         },
         empty: 'Нет материалов для проверки.',
         avatarAlt: 'Аватар пользователя {username}',
@@ -139,8 +140,8 @@ export const admin = {
                 '1h': 'Блокировка 1 час',
                 '24h': 'Блокировка 24 часа',
                 '7d': 'Блокировка 7 дней',
-                perm: 'Перманентный бан',
-            },
+                'perm': 'Перманентный бан'
+            }
         },
         ticket: {
             chatTitle: 'Чат с пользователем',
@@ -151,8 +152,8 @@ export const admin = {
             send: 'Отправить',
             closeTicket: 'Закрыть тикет',
             reopenTicket: 'Открыть заново',
-            adminRole: 'Поддержка',
-        },
+            adminRole: 'Поддержка'
+        }
     },
     users: {
         title: 'Пользователи',
@@ -163,29 +164,29 @@ export const admin = {
             role: 'Роль',
             status: 'Статус',
             joined: 'Регистрация',
-            actions: 'Действия',
+            actions: 'Действия'
         },
         filters: {
             all: 'Все пользователи',
             admin: 'Администраторы',
             moderator: 'Модераторы',
             user: 'Пользователи',
-            banned: 'Забаненные',
+            banned: 'Забаненные'
         },
         roles: {
             admin: 'Администратор',
             moderator: 'Модератор',
-            user: 'Пользователь',
+            user: 'Пользователь'
         },
         status: {
             active: 'Активен',
-            banned: 'Забанен',
+            banned: 'Забанен'
         },
         actions: {
             edit: 'Изменить роль',
             ban: 'Забанить',
             unban: 'Разбанить',
-            delete: 'Удалить',
+            delete: 'Удалить'
         },
         modal: {
             editTitle: 'Редактирование пользователя',
@@ -195,20 +196,18 @@ export const admin = {
             banDurationLabel: 'Срок блокировки',
             reasonLabel: 'Причина',
             banReasonLabel: 'Причина блокировки',
-            confirmUnbanDescription:
-                'Вы уверены, что хотите разблокировать пользователя {user}? Доступ к аккаунту будет восстановлен.',
-            confirmDeleteDescription:
-                'Вы уверены, что хотите удалить пользователя {user}? Это действие необратимо.',
+            confirmUnbanDescription: 'Вы уверены, что хотите разблокировать пользователя {user}? Доступ к аккаунту будет восстановлен.',
+            confirmDeleteDescription: 'Вы уверены, что хотите удалить пользователя {user}? Это действие необратимо.',
             confirmSave: 'Сохранить',
             confirmBan: 'Заблокировать',
             confirmDelete: 'Удалить',
-            cancel: 'Отмена',
+            cancel: 'Отмена'
         },
         toasts: {
             roleUpdated: 'Роль пользователя обновлена',
             userBanned: 'Пользователь заблокирован',
             userUnbanned: 'Пользователь разблокирован',
-            userDeleted: 'Пользователь удален',
-        },
-    },
+            userDeleted: 'Пользователь удален'
+        }
+    }
 };

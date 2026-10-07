@@ -1,3 +1,4 @@
+
 export const auth = {
     register: 'Регистрация',
     login: 'Вход',
@@ -15,16 +16,16 @@ export const auth = {
     showPassword: 'Показать пароль',
     hidePassword: 'Скрыть пароль',
     formErrors: {
-        required: 'Пусто',
-        invalidEmail: 'Неверный формат почты',
-        passwordTooShort: 'Пароль слишком короткий',
-        passwordsDoNotMatch: 'Пароли не совпадают',
-        invalidCode: 'Код должен состоять из 6 цифр',
+      required: 'Пусто',
+      invalidEmail: 'Неверный формат почты',
+      passwordTooShort: 'Пароль слишком короткий',
+      passwordsDoNotMatch: 'Пароли не совпадают',
+      invalidCode: 'Код должен состоять из 6 цифр',
     },
     formSuccess: {
-        registerSuccess: 'Код отправлен на почту',
-        resetSuccess: 'Пароль успешно изменен',
-        verifySuccess: 'Почта подтверждена. Добро пожаловать!',
+      registerSuccess: 'Код отправлен на почту',
+      resetSuccess: 'Пароль успешно изменен',
+      verifySuccess: 'Почта подтверждена. Добро пожаловать!',
     },
     recovery: {
         title: 'Восстановление пароля',
@@ -36,12 +37,12 @@ export const auth = {
         resetPass: 'Изменить пароль',
         resendCode: 'Отправить код повторно',
         resendIn: 'через {seconds} сек',
-        backToLogin: 'Вернуться ко входу',
+        backToLogin: 'Вернуться ко входу'
     },
     verify: {
         title: 'Подтверждение почты',
         description: 'Мы отправили код подтверждения на {email}. Введите его ниже.',
         submit: 'Подтвердить',
         codePlaceholder: '000000',
-    },
+    }
 };

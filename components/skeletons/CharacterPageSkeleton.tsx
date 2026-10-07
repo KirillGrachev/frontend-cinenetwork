@@ -2,7 +2,7 @@ import React from 'react';
 
 const CharacterPageSkeleton: React.FC = () => {
     return (
-        <div className="min-h-screen bg-background-primary pt-24 pb-20 skeleton-shimmer">
+        <div className="min-h-screen bg-background-primary pt-24 pb-20 animate-pulse">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Back Button Skeleton */}
                 <div className="h-9 w-24 bg-white/10 rounded-xl mb-8"></div>
@@ -38,10 +38,7 @@ const CharacterPageSkeleton: React.FC = () => {
                             </div>
                             <div className="flex gap-4 md:gap-6 overflow-hidden">
                                 {[1, 2, 3, 4, 5].map((i) => (
-                                    <div
-                                        key={i}
-                                        className="w-[160px] md:w-[220px] aspect-[2/3] bg-panel-secondary rounded-2xl border border-white/10 shrink-0"
-                                    ></div>
+                                    <div key={i} className="w-[160px] md:w-[220px] aspect-[2/3] bg-panel-secondary rounded-2xl border border-white/10 shrink-0"></div>
                                 ))}
                             </div>
                         </div>

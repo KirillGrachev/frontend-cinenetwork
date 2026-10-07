@@ -1,5 +1,7 @@
+
 import React from 'react';
 import LoadingSpinner from '../LoadingSpinner';
+import { useLocale } from '../../context/LocaleContext';
 import AnimeImage from '../AnimeImage';
 
 interface PlayerPlaceholderProps {
@@ -9,13 +11,15 @@ interface PlayerPlaceholderProps {
 }
 
 const PlayerPlaceholder: React.FC<PlayerPlaceholderProps> = ({ thumbnail, isLoading, onPlay }) => {
+    const { t } = useLocale();
+
     return (
         <div className="relative w-full aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/5 group">
             {/* Background Image (Blurred) */}
             <div className="absolute inset-0">
-                <AnimeImage
-                    src={thumbnail}
-                    alt="Video Thumbnail"
+                <AnimeImage 
+                    src={thumbnail} 
+                    alt="Video Thumbnail" 
                     className="w-full h-full object-cover opacity-60"
                     placeholderClassName="w-12 h-12 rounded-2xl"
                     placeholderIconClassName="text-xl"
@@ -28,7 +32,7 @@ const PlayerPlaceholder: React.FC<PlayerPlaceholderProps> = ({ thumbnail, isLoad
                 {isLoading ? (
                     <LoadingSpinner size="lg" className="border-blue-500 border-t-transparent" />
                 ) : (
-                    <button
+                    <button 
                         onClick={onPlay}
                         // UPDATED: Increased size w-24 h-24
                         className="w-24 h-24 rounded-2xl bg-panel-secondary/80 backdrop-blur-md flex items-center justify-center border border-white/10 text-white shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-300 transform hover:scale-105 active:opacity-90"

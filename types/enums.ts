@@ -1,3 +1,4 @@
+
 export const FILTER_ALL = 'all';
 
 // --- Routes ---
@@ -19,13 +20,13 @@ export enum AppRoute {
     History = '/history',
     Search = '/search',
     TopCharts = '/top',
-    Watch = '/watch',
+    Watch = '/watch', 
     Profile = '/profile',
     Notifications = '/notifications',
     AdminStats = '/admin/stats',
     AdminModeration = '/admin/moderation',
     AdminActivity = '/admin/activity',
-    AdminUsers = '/admin/users',
+    AdminUsers = '/admin/users'
 }
 
 // --- Query Keys ---
@@ -47,26 +48,26 @@ export enum QueryKey {
     FeaturedAnime = 'featuredAnime',
     NewReleases = 'newReleases',
     TrendingAnime = 'trendingAnime',
-    HomeBanners = 'homeBanners',
+    HomeBanners = 'homeBanners'
 }
 
 // --- Roles ---
 export enum CuratorRole {
     Admin = 'admin',
     Moderator = 'moderator',
-    Contributor = 'contributor',
+    Contributor = 'contributor'
 }
 
 // --- User Management Roles ---
 export enum UserRole {
     Admin = 'admin',
     Moderator = 'moderator',
-    User = 'user',
+    User = 'user'
 }
 
 export enum UserStatus {
     Active = 'active',
-    Banned = 'banned',
+    Banned = 'banned'
 }
 
 // --- Genres ---
@@ -117,128 +118,128 @@ export enum AnimeGenre {
     Family = 'family',
     Food = 'food',
     Idol = 'idol',
-    Supernatural = 'supernatural',
+    Supernatural = 'supernatural'
 }
 
 export enum SearchCategory {
-    Anime = 'anime',
-    Collections = 'collections',
-    News = 'news',
+  Anime = 'anime',
+  Collections = 'collections',
+  News = 'news'
 }
 
 export enum AppView {
-    Home = 'home',
-    Catalog = 'catalog',
-    Collections = 'collections',
-    Schedule = 'schedule',
-    News = 'news',
-    Docs = 'docs',
-    Login = 'login',
-    Register = 'register',
-    Settings = 'settings',
-    Status = 'status',
-    Support = 'support',
-    Favorites = 'favorites',
-    History = 'history',
-    AdminStats = 'admin/stats',
-    AdminModeration = 'admin/moderation',
-    AdminUsers = 'admin/users',
-    Search = 'search',
-    BlogPost = 'blog-post',
-    TopCharts = 'top-charts',
-    Watch = 'watch',
-    Profile = 'profile',
-    Notifications = 'notifications',
+  Home = 'home',
+  Catalog = 'catalog',
+  Collections = 'collections',
+  Schedule = 'schedule',
+  News = 'news',
+  Docs = 'docs',
+  Login = 'login',
+  Register = 'register',
+  Settings = 'settings',
+  Status = 'status',
+  Support = 'support',
+  Favorites = 'favorites',
+  History = 'history',
+  AdminStats = 'admin/stats',
+  AdminModeration = 'admin/moderation',
+  AdminUsers = 'admin/users',
+  Search = 'search',
+  BlogPost = 'blog-post',
+  TopCharts = 'top-charts',
+  Watch = 'watch',
+  Profile = 'profile',
+  Notifications = 'notifications'
 }
 
 export enum FavoriteStatus {
-    Watching = 'watching',
-    Planned = 'planned',
-    Completed = 'completed',
-    Dropped = 'dropped',
-    Paused = 'paused',
+  Watching = 'watching',
+  Planned = 'planned',
+  Completed = 'completed',
+  Dropped = 'dropped',
+  Paused = 'paused'
 }
 
 export enum FavoriteTab {
-    Anime = 'anime',
-    Collections = 'collections',
+  Anime = 'anime',
+  Collections = 'collections'
 }
 
 export enum ServiceStatus {
-    Operational = 'operational',
-    Degraded = 'degraded',
-    Outage = 'outage',
-    Maintenance = 'maintenance',
+  Operational = 'operational',
+  Degraded = 'degraded',
+  Outage = 'outage',
+  Maintenance = 'maintenance'
 }
 
 export enum AnimeType {
-    TV = 'TV',
-    Movie = 'Movie',
+  TV = 'TV',
+  Movie = 'Movie'
 }
 
 export enum CatalogSelection {
-    Trending = 'trending',
-    New = 'new',
-    Best = 'best',
-    Movies = 'movies',
+  Trending = 'trending',
+  New = 'new',
+  Best = 'best',
+  Movies = 'movies'
 }
 
 export enum CatalogFilterType {
-    Seasons = 'seasons',
-    Genres = 'genres',
-    Studios = 'studios',
-    Selections = 'selections',
+  Seasons = 'seasons',
+  Genres = 'genres',
+  Studios = 'studios',
+  Selections = 'selections'
 }
 
 export enum SortOptionValue {
-    Popularity = 'popularity',
-    Rating = 'rating',
-    Newest = 'newest',
-    Alphabet = 'alphabet',
+  Popularity = 'popularity',
+  Rating = 'rating',
+  Newest = 'newest',
+  Alphabet = 'alphabet'
 }
 
 export enum CollectionFilter {
-    All = 'all',
-    Editorial = 'editorial',
-    Community = 'community',
+  All = 'all',
+  Editorial = 'editorial',
+  Community = 'community'
 }
 
 export enum SettingsTab {
-    Profile = 'profile',
-    Preferences = 'preferences',
-    Player = 'player',
+  Profile = 'profile',
+  Preferences = 'preferences',
+  Player = 'player'
 }
 
 export enum SocialProviderId {
-    Google = 'google',
-    Telegram = 'telegram',
-    Discord = 'discord',
-    Yandex = 'yandex',
+  Google = 'google',
+  Telegram = 'telegram',
+  Discord = 'discord',
+  Yandex = 'yandex'
 }
 
 export enum AttachmentType {
-    File = 'file',
-    Link = 'link',
+  File = 'file',
+  Link = 'link'
 }
 
 export enum SortDirection {
-    Asc = 'asc',
-    Desc = 'desc',
+  Asc = 'asc',
+  Desc = 'desc'
 }
 
 // Admin Enums
 export enum CommentStatus {
-    Pending = 'pending',
-    Flagged = 'flagged',
-    Approved = 'approved',
-    Rejected = 'rejected',
+  Pending = 'pending',
+  Flagged = 'flagged',
+  Approved = 'approved',
+  Rejected = 'rejected'
 }
 
 export enum FlagReason {
-    UserReport = 'user_report',
-    Spam = 'spam',
-    Offensive = 'offensive',
-    Spoiler = 'spoiler',
+  UserReport = 'user_report',
+  Spam = 'spam',
+  Offensive = 'offensive',
+  Spoiler = 'spoiler'
 }
 
 export enum BanDuration {
@@ -246,56 +247,55 @@ export enum BanDuration {
     Hour1 = '1h',
     Day24 = '24h',
     Week1 = '7d',
-    Permanent = 'perm',
+    Permanent = 'perm'
 }
 
 export enum Trend {
-    Up = 'up',
-    Down = 'down',
-    Neutral = 'neutral',
+  Up = 'up',
+  Down = 'down',
+  Neutral = 'neutral'
 }
 
 export enum TransactionStatus {
-    Completed = 'completed',
-    Pending = 'pending',
+  Completed = 'completed',
+  Pending = 'pending'
 }
 
 export enum ActivityType {
-    Success = 'success',
-    Warning = 'warning',
-    Info = 'info',
+  Success = 'success',
+  Warning = 'warning',
+  Info = 'info'
 }
 
 export enum AdminTab {
-    Overview = 'overview',
-    Content = 'content',
-    Finance = 'finance',
-    System = 'system',
+  Overview = 'overview',
+  Content = 'content',
+  System = 'system'
 }
 
 export enum AdminContentFilter {
     All = 'all',
     TV = 'tv',
-    Movie = 'movie',
+    Movie = 'movie'
 }
 
 export enum AdminPeriod {
-    Day24 = 'd24',
-    Day7 = 'd7',
-    Day30 = 'd30',
+  Day24 = 'd24',
+  Day7 = 'd7',
+  Day30 = 'd30'
 }
 
 // History Enums
 export enum HistoryGroup {
-    Today = 'today',
-    Yesterday = 'yesterday',
-    Earlier = 'earlier',
+  Today = 'today',
+  Yesterday = 'yesterday',
+  Earlier = 'earlier'
 }
 
 export enum HistoryClearPeriod {
     LastHour = 'hour',
     Today = 'today',
-    AllTime = 'all',
+    AllTime = 'all'
 }
 
 // Top Charts Enums
@@ -303,36 +303,36 @@ export enum TopPeriod {
     Week = 'week',
     Month = 'month',
     Year = 'year',
-    AllTime = 'all',
+    AllTime = 'all'
 }
 
 export enum TopMetric {
     Views = 'views',
-    Rating = 'rating',
+    Rating = 'rating'
 }
 
 // Curator Modal Enums
 export enum CuratorStep {
-    Intro = 'intro',
-    Form = 'form',
+  Intro = 'intro',
+  Form = 'form'
 }
 
 // Blog & User Enums
 export enum ContentType {
-    Paragraph = 'paragraph',
-    Heading = 'heading',
-    GridFeatures = 'grid-features',
+  Paragraph = 'paragraph',
+  Heading = 'heading',
+  GridFeatures = 'grid-features'
 }
 
 export enum VideoQuality {
-    Q1080p = '1080p',
-    Q4k = '4k',
+  Q1080p = '1080p',
+  Q4k = '4k'
 }
 
 // Toast Enums
 export enum ToastType {
-    Success = 'success',
-    Error = 'error',
-    Info = 'info',
-    Warning = 'warning',
+  Success = 'success',
+  Error = 'error',
+  Info = 'info',
+  Warning = 'warning'
 }

@@ -1,3 +1,4 @@
+
 export const media = {
     catalog: {
         title: 'Каталог',
@@ -14,7 +15,7 @@ export const media = {
                 new: 'Новинки',
                 best: 'Лучшее',
                 movies: 'Фильмы',
-            },
+            }
         },
         showAll: 'Показать все',
         showLess: 'Скрыть',
@@ -41,17 +42,16 @@ export const media = {
         titlesCount: {
             one: '{count} тайтл',
             few: '{count} тайтла',
-            many: '{count} тайтлов',
+            many: '{count} тайтлов'
         },
         animeCount: {
             one: '{count} аниме',
             few: '{count} аниме',
-            many: '{count} аниме',
+            many: '{count} аниме'
         },
         curators: 'Кураторы',
         becomeCurator: 'Станьте куратором',
-        curatorDescription:
-            'Создавайте свои уникальные подборки, делитесь ими с друзьями и попадайте на главную страницу сервиса.',
+        curatorDescription: 'Создавайте свои уникальные подборки, делитесь ими с друзьями и попадайте на главную страницу сервиса.',
         start: 'Начать',
         cancel: 'Отмена',
         loadingError: 'Не удалось загрузить коллекции.',
@@ -71,14 +71,14 @@ export const media = {
             edits: {
                 one: '{count} правка',
                 few: '{count} правки',
-                many: '{count} правок',
+                many: '{count} правок'
             },
             joined: 'Присоединился',
             roles: {
                 admin: 'Администратор',
                 moderator: 'Модератор',
-                contributor: 'Участник',
-            },
+                contributor: 'Участник'
+            }
         },
         filters: {
             all: 'Все коллекции',
@@ -95,7 +95,7 @@ export const media = {
             motivationPlaceholder: 'Почему вы хотите создавать подборки?',
             submit: 'Отправить',
             successToast: 'Анкета отправлена! Мы свяжемся с вами.',
-        },
+        }
     },
     anime: {
         viewDetails: 'Просмотреть детали {title}',
@@ -126,30 +126,30 @@ export const media = {
             allEpisodes: 'Все серии',
             characterRoles: {
                 main: 'Главный',
-                supporting: 'Второстепенный',
+                supporting: 'Второстепенный'
             },
             statuses: {
                 ongoing: 'Выходит',
                 released: 'Вышел',
-                announced: 'Анонс',
+                announced: 'Анонс'
             },
             sources: {
                 manga: 'Манга',
                 original: 'Оригинал',
                 light_novel: 'Ранобэ',
                 game: 'Игра',
-                visual_novel: 'Визуальная новелла',
-            },
+                visual_novel: 'Визуальная новелла'
+            }
         },
         comments: {
             title: 'Комментарии',
             sort: {
                 newest: 'Сначала новые',
                 oldest: 'Сначала старые',
-                popular: 'Популярные',
+                popular: 'Популярные'
             },
             emptyTitle: 'Тишина в зале...',
-            emptyDescription: 'Комментариев пока нет. Станьте первым, кто поделится своим мнением!',
+            emptyDescription: 'Комментариев пока нет. Станьте первым, кто поделится своим мнением!'
         },
         reviews: {
             title: 'Оценки и комментарии',
@@ -162,8 +162,7 @@ export const media = {
             placeholder: 'Поделитесь впечатлениями об этом аниме...',
             submit: 'Отправить',
             loginToWrite: 'Войдите, чтобы оценить',
-            authDescription:
-                'Только авторизованные пользователи могут оставлять оценки и писать рецензии к аниме.',
+            authDescription: 'Только авторизованные пользователи могут оставлять оценки и писать рецензии к аниме.',
             emptyTitle: 'Отзывов пока нет',
             emptyDescription: 'Это аниме еще никто не оценил. Будьте первым!',
             containsSpoiler: 'Содержит спойлер',
@@ -174,9 +173,9 @@ export const media = {
                 newest: 'Сначала новые',
                 oldest: 'Сначала старые',
                 highest: 'Высокая оценка',
-                lowest: 'Низкая оценка',
-            },
-        },
+                lowest: 'Низкая оценка'
+            }
+        }
     },
     favorites: {
         title: 'Избранное',
@@ -190,8 +189,8 @@ export const media = {
             planned: 'В планах',
             completed: 'Просмотрено',
             dropped: 'Брошено',
-            paused: 'На паузе',
-        },
+            paused: 'На паузе'
+        }
     },
     history: {
         title: 'История просмотра',
@@ -208,20 +207,19 @@ export const media = {
         timeLeft: {
             one: 'Осталась {mins} мин',
             few: 'Осталось {mins} мин', // 2-4 минуты
-            many: 'Осталось {mins} мин', // 5 минут
+            many: 'Осталось {mins} мин' // 5 минут
         },
         confirmClear: 'Вы уверены, что хотите очистить всю историю?',
         clearOptions: {
             lastHour: 'Последний час',
             today: 'За 24 часа',
-            all: 'Всю историю',
+            all: 'Всю историю'
         },
         removeModal: {
             title: 'Удалить из истории?',
-            description:
-                'Вы действительно хотите удалить этот эпизод из истории? Прогресс просмотра этого эпизода будет безвозвратно потерян.',
+            description: 'Вы действительно хотите удалить этот эпизод из истории? Прогресс просмотра этого эпизода будет безвозвратно потерян.',
             confirm: 'Удалить',
-            ariaLabelRemove: 'Удалить из истории',
+            ariaLabelRemove: 'Удалить из истории'
         },
         showMoreFor: 'Показать еще для {group}',
         continueWatching: 'Продолжить просмотр {title}',
@@ -235,15 +233,15 @@ export const media = {
             week: 'За неделю',
             month: 'За месяц',
             year: 'За год',
-            all: 'За все время',
+            all: 'За все время'
         },
         metrics: {
             views: 'По просмотрам',
-            rating: 'По рейтингу',
+            rating: 'По рейтингу'
         },
         views: 'просмотров',
         rating: 'Рейтинг',
-        ratingLabel: 'Рейтинг',
+        ratingLabel: 'Рейтинг'
     },
     character: {
         notFound: 'Персонаж не найден',
@@ -251,5 +249,5 @@ export const media = {
         voiceActors: 'Актеры озвучки',
         about: 'О персонаже',
         appearsIn: 'Появления',
-    },
+    }
 };

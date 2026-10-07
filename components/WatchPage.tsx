@@ -1,7 +1,9 @@
+
 import React, { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { useLocale } from '../context/LocaleContext';
 import { useWatchPageLogic } from '../hooks/useWatchPageLogic';
+import LoadingSpinner from './LoadingSpinner';
 import Button from './ui/Button';
 import PlayerPlaceholder from './watch/PlayerPlaceholder';
 import EpisodeSelector from './watch/EpisodeSelector';
@@ -20,18 +22,9 @@ const WatchPage: React.FC = () => {
     const animeId = Number(id);
 
     const { state, actions } = useWatchPageLogic(animeId);
-    const {
-        anime,
-        currentEpisode,
-        episodes,
-        isLoading,
-        isVideoLoading,
-        error,
-        currentEpisodeNumber,
-        historyProgress,
-    } = state;
+    const { anime, currentEpisode, episodes, isLoading, isVideoLoading, error, currentEpisodeNumber, historyProgress } = state;
 
-    /**
+    /** 
      * Handle Back Navigation to prevent history loops.
      */
     const handleBack = () => {
@@ -45,24 +38,25 @@ const WatchPage: React.FC = () => {
     // Generate Structured Data (Episode + Breadcrumbs)
     const structuredData = useMemo(() => {
         if (!anime || !currentEpisode) return undefined;
-
-        const episodeSchema = generateEpisodeSchema(anime, currentEpisode, window.location.href);
+        
+        const episodeSchema = generateEpisodeSchema(
+            anime,
+            currentEpisode,
+            window.location.href
+        );
 
         const breadcrumbSchema = generateBreadcrumbSchema([
             { name: t('navbar.home'), path: AppRoute.Home },
             { name: anime.title, path: `/anime/${anime.id}` },
-            {
-                name: `${t('media.schedule.episodeShort')} ${currentEpisode.number}`,
-                path: window.location.href,
-            },
+            { name: `${t('media.schedule.episodeShort')} ${currentEpisode.number}`, path: window.location.href }
         ]);
 
         return [episodeSchema, breadcrumbSchema];
     }, [anime, currentEpisode, t]);
 
-    if (isLoading) {
-        return <WatchPageSkeleton />;
-    }
+  if (isLoading) {
+      return <WatchPageSkeleton />;
+  }
 
     if (error || !anime || !currentEpisode) {
         return <NotFound />;
@@ -72,21 +66,21 @@ const WatchPage: React.FC = () => {
 
     return (
         <>
-            <SEO
-                title={pageTitle}
+            <SEO 
+                title={pageTitle} 
                 description={t(anime.description)}
                 image={currentEpisode.image}
-                type="video.episode"
+                type="video.episode" 
                 structuredData={structuredData}
             />
             <WatchPageLayout
                 backButton={
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                icon="fa-solid fa-arrow-left"
+                            <Button 
+                                variant="ghost" 
+                                size="sm" 
+                                icon="fa-solid fa-arrow-left" 
                                 onClick={handleBack}
                                 className="pl-0 hover:!bg-transparent text-gray-400 hover:text-white"
                             >
@@ -97,24 +91,20 @@ const WatchPage: React.FC = () => {
                                 {t(anime.title)}
                             </h1>
                             <span className="text-gray-600 hidden sm:inline">•</span>
-                            <span className="text-white font-bold hidden sm:inline">
-                                {t('media.schedule.episodeShort')} {currentEpisode.number}
-                            </span>
+                            <span className="text-white font-bold hidden sm:inline">{t('media.schedule.episodeShort')} {currentEpisode.number}</span>
                         </div>
                     </div>
                 }
                 leftColumn={
                     <>
-                        <div className="mb-8 page-reveal">
-                            <PlayerPlaceholder
-                                thumbnail={currentEpisode.image}
+                        <div className="mb-8 animate-fade-in">
+                            <PlayerPlaceholder 
+                                thumbnail={currentEpisode.image} 
                                 isLoading={isVideoLoading}
-                                onPlay={() => {
-                                    // TODO(player): mount the real video player here.
-                                }}
+                                onPlay={() => console.log('Play clicked')}
                             />
                         </div>
-                        <div className="page-reveal">
+                        <div className="animate-fade-in stagger-1">
                             <div className="flex flex-col gap-2 mb-6">
                                 <h2 className="text-2xl font-bold text-white leading-tight">
                                     {currentEpisode.title}
@@ -124,14 +114,17 @@ const WatchPage: React.FC = () => {
                                 </p>
                             </div>
                         </div>
-                        <div className="page-reveal border-t border-white/5 pt-6">
-                            <CommentsSection animeId={animeId} comments={anime.comments || []} />
+                        <div className="animate-fade-in stagger-2 border-t border-white/5 pt-6">
+                            <CommentsSection 
+                                animeId={animeId} 
+                                comments={anime.comments || []} 
+                            />
                         </div>
                     </>
                 }
                 rightColumn={
-                    <div className="page-reveal">
-                        <EpisodeSelector
+                    <div className="animate-fade-in stagger-1">
+                        <EpisodeSelector 
                             episodes={episodes}
                             currentEpisodeNumber={currentEpisodeNumber}
                             onSelect={actions.setEpisode}
@@ -144,4 +137,4 @@ const WatchPage: React.FC = () => {
     );
 };
 
-export default WatchPage;
+export default WatchPage;e;

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import SmartList from '../ui/SmartList';
 import { DialogTitle } from '@headlessui/react';
@@ -7,47 +8,32 @@ import Button from '../ui/Button';
 import LoadingSpinner from '../LoadingSpinner';
 import { useLocale } from '../../context/LocaleContext';
 import { useDebounce } from '../../hooks/useDebounce';
-import { pickNickname } from '../../data/mock/content';
 
 interface FindFriendModalProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
-interface FriendSearchResult {
-    id: string;
-    username: string;
-    avatar: string | null;
-}
-
 const FindFriendModal: React.FC<FindFriendModalProps> = ({ isOpen, onClose }) => {
     const { t } = useLocale();
     const [searchQuery, setSearchQuery] = useState('');
     const debouncedQuery = useDebounce(searchQuery, 500);
-
+    
     const [isLoading, setIsLoading] = useState(false);
-    const [results, setResults] = useState<FriendSearchResult[]>([]);
+    const [results, setResults] = useState<any[]>([]);
     const [hasSearched, setHasSearched] = useState(false);
     const [sentRequests, setSentRequests] = useState<Set<string>>(new Set());
 
-    // Reset search state when the modal closes (render-phase prop-change
-    // adjustment instead of a syncing effect).
-    const [wasOpen, setWasOpen] = useState(isOpen);
-    if (wasOpen !== isOpen) {
-        setWasOpen(isOpen);
+    useEffect(() => {
         if (!isOpen) {
             setSearchQuery('');
             setResults([]);
             setHasSearched(false);
             setSentRequests(new Set());
         }
-    }
+    }, [isOpen]);
 
     useEffect(() => {
-        // Cancellation guard: without it a slow earlier request could
-        // overwrite the results of a newer one (classic async race).
-        let cancelled = false;
-
         const search = async () => {
             if (!debouncedQuery.trim()) {
                 setResults([]);
@@ -58,35 +44,35 @@ const FindFriendModal: React.FC<FindFriendModalProps> = ({ isOpen, onClose }) =>
             setIsLoading(true);
             setHasSearched(true);
 
-            // TODO(api): replace with userService.searchUsers(debouncedQuery)
-            // once the backend endpoint exists. Simulated latency for now.
-            await new Promise((r) => setTimeout(r, 800));
-            if (cancelled) return;
+            // Simulate API Request
+            await new Promise(r => setTimeout(r, 800));
 
-            const normalizedQuery = debouncedQuery.toLowerCase();
-            // Сообщество аниме-сервиса: ники из общего пула с детерминированными
-            // вариациями. Прежние «User_<запрос>_<i>» были техническим мусором в UI.
-            const matches: FriendSearchResult[] = Array.from({ length: 40 }, (_, i) => {
-                const nickname = pickNickname(`find_${debouncedQuery}_${i}`);
-                return {
-                    id: `gen_${i}`,
-                    username: i % 3 === 0 ? `${nickname}_${10 + i}` : nickname,
-                    avatar: null,
-                };
-            });
+            // Mock Search Logic with generated results to demonstrate scrolling
+            const baseUsers = [
+                { id: '101', username: 'AnimeKiller_99', avatar: null },
+                { id: '102', username: 'ZeroTwo_Best', avatar: null },
+                { id: '103', username: 'Naruto_Kun', avatar: null },
+                { id: '104', username: 'MakimaWoof', avatar: null },
+                { id: '105', username: 'GigaChad', avatar: null },
+            ];
+            
+            // Generate more mock data if query is generic
+            const moreUsers = Array.from({ length: 50 }).map((_, i) => ({
+                id: `gen_${i}`,
+                username: `User_${debouncedQuery}_${i}`,
+                avatar: null
+            }));
 
-            setResults(matches.filter((u) => u.username.toLowerCase().includes(normalizedQuery)));
+            const combined = [...baseUsers.filter(u => u.username.toLowerCase().includes(debouncedQuery.toLowerCase())), ...moreUsers];
+            setResults(combined);
             setIsLoading(false);
         };
 
-        void search();
-        return () => {
-            cancelled = true;
-        };
+        search();
     }, [debouncedQuery]);
 
     const toggleRequest = (id: string) => {
-        setSentRequests((prev) => {
+        setSentRequests(prev => {
             const newSet = new Set(prev);
             if (newSet.has(id)) {
                 newSet.delete(id);
@@ -98,8 +84,8 @@ const FindFriendModal: React.FC<FindFriendModalProps> = ({ isOpen, onClose }) =>
     };
 
     return (
-        <BaseModal
-            isOpen={isOpen}
+        <BaseModal 
+            isOpen={isOpen} 
             onClose={onClose}
             className="bg-panel-primary border border-border-medium rounded-3xl p-6 max-w-md h-[600px] max-h-[80vh] flex flex-col shadow-2xl relative"
         >
@@ -107,8 +93,8 @@ const FindFriendModal: React.FC<FindFriendModalProps> = ({ isOpen, onClose }) =>
                 <DialogTitle as="h3" className="text-xl font-bold text-white">
                     {t('info.profile.friends.find')}
                 </DialogTitle>
-                <button
-                    onClick={onClose}
+                <button 
+                    onClick={onClose} 
                     className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
                     aria-label={t('collections.cancel')}
                 >
@@ -117,7 +103,7 @@ const FindFriendModal: React.FC<FindFriendModalProps> = ({ isOpen, onClose }) =>
             </div>
 
             <div className="mb-6 flex-shrink-0">
-                <Input
+                <Input 
                     placeholder={t('info.profile.friends.findPlaceholder')}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -135,9 +121,7 @@ const FindFriendModal: React.FC<FindFriendModalProps> = ({ isOpen, onClose }) =>
                 ) : hasSearched && results.length === 0 ? (
                     <div className="flex flex-col items-center justify-center h-full text-gray-500">
                         <i className="fa-regular fa-face-frown text-3xl mb-3 opacity-50"></i>
-                        <span className="text-sm font-medium">
-                            {t('info.profile.friends.searchEmpty')}
-                        </span>
+                        <span className="text-sm font-medium">{t('info.profile.friends.searchEmpty')}</span>
                     </div>
                 ) : results.length > 0 ? (
                     <SmartList
@@ -151,40 +135,23 @@ const FindFriendModal: React.FC<FindFriendModalProps> = ({ isOpen, onClose }) =>
                                 <div className="pb-3 pr-2">
                                     <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
                                         <div className="w-12 h-12 rounded-full bg-item-primary flex items-center justify-center font-bold text-gray-500 text-lg ">
-                                            {user.avatar ? (
-                                                <img
-                                                    src={user.avatar}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            ) : (
-                                                user.username.charAt(0)
-                                            )}
+                                            {user.avatar ? <img src={user.avatar} className="w-full h-full object-cover" /> : user.username.charAt(0)}
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                            <h4 className="text-white font-bold truncate">
-                                                {user.username}
-                                            </h4>
+                                            <h4 className="text-white font-bold truncate">{user.username}</h4>
                                         </div>
-                                        <Button
-                                            size="sm"
+                                        <Button 
+                                            size="sm" 
                                             variant={isSent ? 'soft' : 'primary'}
                                             onClick={() => toggleRequest(user.id)}
                                             className={`rounded-lg px-4 h-9 text-xs min-w-[100px] ${isSent ? 'text-gray-400 hover:text-red-400 hover:bg-red-500/10 hover:border-red-500/30' : ''}`}
                                         >
                                             {isSent ? (
                                                 <>
-                                                    <span className="group-hover:hidden">
-                                                        <i className="fa-solid fa-check mr-2"></i>
-                                                        {t('info.profile.friends.requestSent')}
-                                                    </span>
-                                                    <span className="hidden group-hover:inline">
-                                                        <i className="fa-solid fa-xmark mr-2"></i>
-                                                        {t('collections.cancel')}
-                                                    </span>
+                                                    <span className="group-hover:hidden"><i className="fa-solid fa-check mr-2"></i>{t('info.profile.friends.requestSent')}</span>
+                                                    <span className="hidden group-hover:inline"><i className="fa-solid fa-xmark mr-2"></i>{t('collections.cancel')}</span>
                                                 </>
-                                            ) : (
-                                                t('info.profile.friends.add')
-                                            )}
+                                            ) : t('info.profile.friends.add')}
                                         </Button>
                                     </div>
                                 </div>

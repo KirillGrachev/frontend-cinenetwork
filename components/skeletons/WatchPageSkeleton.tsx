@@ -6,19 +6,21 @@ const WatchPageSkeleton: React.FC = () => {
     return (
         <WatchPageLayout
             isSkeleton={true}
-            backButton={<Skeleton className="h-9 w-24 rounded-xl" />}
+            backButton={
+                <Skeleton className="h-9 w-24 rounded-xl" />
+            }
             leftColumn={
                 <>
                     {/* Player Skeleton */}
                     <Skeleton className="w-full aspect-video rounded-2xl mb-8" />
-
+                    
                     {/* Info Skeleton */}
                     <div className="space-y-4 mb-8">
                         <Skeleton className="h-8 md:h-10 w-3/4 rounded-xl" />
                         <Skeleton className="h-6 w-1/4 rounded-md" />
                         <Skeleton className="h-12 w-full rounded-2xl" />
                     </div>
-
+                    
                     {/* Comments Section Skeleton */}
                     <div className="space-y-6">
                         <Skeleton className="h-8 w-48 rounded-xl" />

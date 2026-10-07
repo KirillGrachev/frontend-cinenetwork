@@ -1,7 +1,9 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import type { BannerItem } from '../../types';
+import { BannerItem, ToastType } from '../../types';
 import { useImageLoading } from '../../hooks/useImageLoading';
+import { useToast } from '../../context/ToastContext';
 import { useLocale } from '../../context/LocaleContext';
 import ConfirmationModal from '../ui/ConfirmationModal';
 
@@ -18,6 +20,7 @@ const BannerSlide: React.FC<BannerSlideProps> = ({ banner, isActive }) => {
     /** useImageLoading manages loading state. It attaches to the <img> tag onLoad event. */
     /** The event fires regardless of which source <picture> selects. */
     const { isLoaded, handleLoad, handleError } = useImageLoading(desktopSrc);
+    const { showToast } = useToast();
     const { t } = useLocale();
 
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
@@ -42,7 +45,7 @@ const BannerSlide: React.FC<BannerSlideProps> = ({ banner, isActive }) => {
 
     return (
         <>
-            <div
+            <div 
                 onClick={handleClick}
                 className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${banner.link ? 'cursor-pointer' : 'cursor-default'} ${
                     isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
@@ -50,25 +53,21 @@ const BannerSlide: React.FC<BannerSlideProps> = ({ banner, isActive }) => {
             >
                 <picture className="w-full h-full block">
                     <source media="(max-width: 768px)" srcSet={mobileSrc} />
-                    <img
-                        src={desktopSrc}
-                        alt={t(banner.alt)}
+                    <img 
+                        src={desktopSrc} 
+                        alt={t(banner.alt)} 
                         className={`w-full h-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                         onLoad={handleLoad}
                         onError={(e) => {
                             handleError();
                             e.currentTarget.style.display = 'none';
-                            e.currentTarget.parentElement?.parentElement?.classList.add(
-                                'bg-panel-tertiary',
-                            );
+                            e.currentTarget.parentElement?.parentElement?.classList.add('bg-panel-tertiary');
                         }}
                     />
                 </picture>
-
+                
                 {/** Fallback Text (Visible if image fails or hasn't loaded yet) */}
-                <div
-                    className={`absolute inset-0 flex items-center justify-center -z-10 ${isLoaded ? 'hidden' : 'flex'}`}
-                >
+                <div className={`absolute inset-0 flex items-center justify-center -z-10 ${isLoaded ? 'hidden' : 'flex'}`}>
                     <span className="text-gray-600 font-medium tracking-widest uppercase text-xs md:text-sm">
                         {t(banner.alt)}
                     </span>

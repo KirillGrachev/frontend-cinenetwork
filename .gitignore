@@ -15,7 +15,6 @@ node_modules
 dist
 dist-ssr
 *.local
-*.tsbuildinfo
 
 # Editor directories and files
 .vscode/*
@@ -39,15 +38,5 @@ dist-ssr
 build/
 coverage/
 patch.js
-collect.cjs
 collect code.cjs
-collect.js
-collected.txt
 project_dump.txt
-coverage
-
-# Local engineering notes — kept OUTSIDE the project on purpose
-AUDIT.md
-
-# Locally generated demo placeholder art (real artwork lives outside the repo)
-public/assets/

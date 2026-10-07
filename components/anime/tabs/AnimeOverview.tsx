@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import type { AnimeDetails } from '../../../types';
+import { AnimeDetails } from '../../../types';
 import { useLocale } from '../../../context/LocaleContext';
 import AnimeImage from '../../AnimeImage';
 import AnimeReviews from '../AnimeReviews';
@@ -14,40 +15,34 @@ interface AnimeOverviewProps {
     formatSource: (src?: string) => string;
 }
 
-const AnimeOverview: React.FC<AnimeOverviewProps> = ({
-    anime,
-    screenshots,
-    setActiveTab,
-    openViewer,
-    formatDuration,
-    formatSource,
+const AnimeOverview: React.FC<AnimeOverviewProps> = ({ 
+    anime, 
+    screenshots, 
+    setActiveTab, 
+    openViewer, 
+    formatDuration, 
+    formatSource 
 }) => {
     const { t } = useLocale();
     const navigate = useNavigate();
     const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
 
     return (
-        <div className="page-reveal">
+        <div className="animate-fade-in">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
                 {/* Left Column: Description & Metadata (8/12) */}
                 <div className="lg:col-span-8 space-y-8">
                     <div>
-                        <h3 className="text-xl font-bold text-white mb-4">
-                            {t('media.anime.details.synopsis')}
-                        </h3>
-                        <div
-                            className={`relative ${!isDescriptionExpanded ? 'line-clamp-4' : ''} text-gray-300 leading-relaxed text-base transition-all`}
-                        >
+                        <h3 className="text-xl font-bold text-white mb-4">{t('media.anime.details.synopsis')}</h3>
+                        <div className={`relative ${!isDescriptionExpanded ? 'line-clamp-4' : ''} text-gray-300 leading-relaxed text-base transition-all`}>
                             {t(anime.description)}
                         </div>
-                        {t(anime.description).length > 250 && (
-                            <button
+                        {(t(anime.description).length > 250) && (
+                            <button 
                                 onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
                                 className="text-blue-400 text-xs font-bold uppercase tracking-wider mt-2 hover:text-blue-300 transition-colors"
                             >
-                                {isDescriptionExpanded
-                                    ? t('media.anime.details.readLess')
-                                    : t('media.anime.details.readMore')}
+                                {isDescriptionExpanded ? t('media.anime.details.readLess') : t('media.anime.details.readMore')}
                             </button>
                         )}
                     </div>
@@ -55,23 +50,15 @@ const AnimeOverview: React.FC<AnimeOverviewProps> = ({
                     {/* Metadata Grid */}
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-6 gap-x-8">
                         <div>
-                            <span className="block text-xs font-bold text-gray-500 uppercase mb-1">
-                                {t('media.anime.details.type')}
-                            </span>
-                            <span className="text-white font-medium">
-                                {t(`admin.content.types.${anime.type?.toLowerCase() || 'tv'}`)}
-                            </span>
+                            <span className="block text-xs font-bold text-gray-500 uppercase mb-1">{t('media.anime.details.type')}</span>
+                            <span className="text-white font-medium">{t(`admin.content.types.${anime.type?.toLowerCase() || 'tv'}`)}</span>
                         </div>
                         <div>
-                            <span className="block text-xs font-bold text-gray-500 uppercase mb-1">
-                                {t('media.anime.details.status')}
-                            </span>
-                            <span className="text-white font-medium capitalize">
-                                {t(`media.anime.details.statuses.${anime.status}`)}
-                            </span>
+                            <span className="block text-xs font-bold text-gray-500 uppercase mb-1">{t('media.anime.details.status')}</span>
+                            <span className="text-white font-medium capitalize">{t(`media.anime.details.statuses.${anime.status}`)}</span>
                         </div>
                         {/* Interactive Episode Count -> Switches to Episodes Tab */}
-                        <div
+                        <div 
                             className="cursor-pointer w-fit"
                             onClick={() => setActiveTab('episodes')}
                             role="button"
@@ -82,42 +69,24 @@ const AnimeOverview: React.FC<AnimeOverviewProps> = ({
                                 }
                             }}
                         >
-                            <span className="block text-xs font-bold text-gray-500 uppercase mb-1">
-                                {t('media.anime.details.episodesCount')}
-                            </span>
+                            <span className="block text-xs font-bold text-gray-500 uppercase mb-1">{t('media.anime.details.episodesCount')}</span>
                             <div className="flex items-center gap-2">
-                                <span className="text-white font-medium transition-colors border-b border-transparent pb-0.5">
-                                    {anime.episodesCount}
-                                </span>
+                                <span className="text-white font-medium transition-colors border-b border-transparent pb-0.5">{anime.episodesCount}</span>
                             </div>
                         </div>
                         <div>
-                            <span className="block text-xs font-bold text-gray-500 uppercase mb-1">
-                                {t('media.anime.details.duration')}
-                            </span>
-                            <span className="text-white font-medium">
-                                {formatDuration(anime.duration)}
-                            </span>
+                            <span className="block text-xs font-bold text-gray-500 uppercase mb-1">{t('media.anime.details.duration')}</span>
+                            <span className="text-white font-medium">{formatDuration(anime.duration)}</span>
                         </div>
                         <div>
-                            <span className="block text-xs font-bold text-gray-500 uppercase mb-1">
-                                {t('media.anime.details.source')}
-                            </span>
-                            <span className="text-white font-medium">
-                                {formatSource(anime.source)}
-                            </span>
+                            <span className="block text-xs font-bold text-gray-500 uppercase mb-1">{t('media.anime.details.source')}</span>
+                            <span className="text-white font-medium">{formatSource(anime.source)}</span>
                         </div>
                         <div>
-                            <span className="block text-xs font-bold text-gray-500 uppercase mb-1">
-                                {t('media.anime.details.studio')}
-                            </span>
+                            <span className="block text-xs font-bold text-gray-500 uppercase mb-1">{t('media.anime.details.studio')}</span>
                             {anime.studio ? (
-                                <button
-                                    onClick={() =>
-                                        navigate(
-                                            `/studio/${encodeURIComponent(anime.studio || '')}`,
-                                        )
-                                    }
+                                <button 
+                                    onClick={() => navigate(`/studio/${encodeURIComponent(anime.studio || '')}`)}
                                     className="text-white font-medium hover:text-blue-400 hover:border-b hover:border-blue-400 transition-colors border-b border-transparent pb-0.5"
                                     title={t('media.catalog.studio')}
                                 >
@@ -128,17 +97,10 @@ const AnimeOverview: React.FC<AnimeOverviewProps> = ({
                             )}
                         </div>
                         <div className="col-span-2 sm:col-span-3">
-                            <span className="block text-xs font-bold text-gray-500 uppercase mb-2">
-                                {t('media.catalog.genres')}
-                            </span>
+                            <span className="block text-xs font-bold text-gray-500 uppercase mb-2">{t('media.catalog.genres')}</span>
                             <div className="flex flex-wrap gap-2">
-                                {anime.genres.map((g) => (
-                                    <span
-                                        key={g}
-                                        className="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300 border border-white/5 hover:bg-white/10 transition-colors cursor-default"
-                                    >
-                                        {t(`genres.${g}`)}
-                                    </span>
+                                {anime.genres.map(g => (
+                                    <span key={g} className="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300 border border-white/5 hover:bg-white/10 transition-colors cursor-default">{t(`genres.${g}`)}</span>
                                 ))}
                             </div>
                         </div>
@@ -148,23 +110,21 @@ const AnimeOverview: React.FC<AnimeOverviewProps> = ({
                 {/* Right Column: Screenshots Preview (4/12) */}
                 <div className="lg:col-span-4 flex flex-col h-full">
                     <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-xl font-bold text-white">
-                            {t('media.anime.details.photos')}
-                        </h3>
+                        <h3 className="text-xl font-bold text-white">{t('media.anime.details.photos')}</h3>
                     </div>
-
+                    
                     {/* Screenshots Grid - Fixed 4 items */}
                     <div className="grid grid-cols-2 gap-3 mb-3">
                         {screenshots.slice(0, 4).map((src, idx) => (
-                            <div
-                                key={idx}
+                            <div 
+                                key={idx} 
                                 onClick={() => openViewer(idx)}
                                 className="relative aspect-video rounded-lg overflow-hidden bg-panel-secondary cursor-pointer group"
                             >
-                                <AnimeImage
-                                    src={src}
-                                    alt="Screenshot"
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                <AnimeImage 
+                                    src={src} 
+                                    alt="Screenshot" 
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                                     placeholderClassName="w-8 h-8 rounded-xl"
                                     placeholderIconClassName="text-xs"
                                 />
@@ -179,13 +139,11 @@ const AnimeOverview: React.FC<AnimeOverviewProps> = ({
 
                     {/* 'Show More' Button -> Redirects to Photos tab */}
                     {screenshots.length > 4 && (
-                        <button
-                            onClick={() => setActiveTab('photos')}
+                        <button 
+                            onClick={() => setActiveTab('photos')} 
                             className="w-full py-3 rounded-xl border border-dashed border-white/10 text-xs font-bold text-gray-500 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all uppercase tracking-wide flex items-center justify-center gap-2"
                         >
-                            <span>
-                                {t('common.ui.showMore')} ({screenshots.length - 4})
-                            </span>
+                            <span>{t('common.ui.showMore')} ({ screenshots.length - 4 })</span>
                             <i className="fa-solid fa-chevron-right"></i>
                         </button>
                     )}

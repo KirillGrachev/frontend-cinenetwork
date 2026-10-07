@@ -1,3 +1,4 @@
+
 import { useReducer, useMemo, useEffect, useState } from 'react';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { animeService } from '../services/apiService';
@@ -25,110 +26,100 @@ const scheduleReducer = (state: ScheduleState, action: ScheduleAction): Schedule
         case 'SET_PAGE':
             return { ...state, currentPage: action.payload };
         case 'TOGGLE_SORT':
-            return {
-                ...state,
-                sortOrder:
-                    state.sortOrder === SortDirection.Asc ? SortDirection.Desc : SortDirection.Asc,
-                currentPage: 1,
+            return { 
+                ...state, 
+                sortOrder: state.sortOrder === SortDirection.Asc ? SortDirection.Desc : SortDirection.Asc,
+                currentPage: 1
             };
         default:
             return state;
     }
 };
 
-/** JS getDay() order: 0 = Sunday. */
-const DAY_ORDER = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-
 export const useScheduleLogic = () => {
-    const { t } = useLocale();
-    const scheduleDays = useMemo(() => getScheduleDays(t), [t]);
+  const { t } = useLocale();
+  const scheduleDays = useMemo(() => getScheduleDays(t), [t]);
 
-    // Smooth loading state for initial mount
-    const [isInitialLoading, setIsInitialLoading] = useState(true);
+  // Smooth loading state for initial mount
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsInitialLoading(false);
-        }, 600); // 600ms minimum load time for skeleton
-        return () => clearTimeout(timer);
-    }, []);
+  useEffect(() => {
+      const timer = setTimeout(() => {
+          setIsInitialLoading(false);
+      }, 600); // 600ms minimum load time for skeleton
+      return () => clearTimeout(timer);
+  }, []);
 
-    /** Initial Day Logic */
-    const getCurrentDayId = () => DAY_ORDER[new Date().getDay()];
+  /** Initial Day Logic */
+  const getCurrentDayId = () => {
+      const dayIndex = new Date().getDay();
+      const map = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+      return map[dayIndex];
+  };
 
-    const initialState: ScheduleState = {
-        activeDay: getCurrentDayId(),
-        sortOrder: SortDirection.Desc,
-        currentPage: 1,
+  const initialState: ScheduleState = {
+      activeDay: getCurrentDayId(),
+      sortOrder: SortDirection.Desc,
+      currentPage: 1,
+  };
+
+  const [state, dispatch] = useReducer(scheduleReducer, initialState);
+
+  /** Data Fetching */
+  const { data: scheduleData, isLoading: isQueryLoading, error, isPlaceholderData } = useQuery({
+    queryKey: [QueryKey.FullCatalog, state.activeDay], // Include activeDay for SWR behavior
+    queryFn: animeService.getFullCatalog,
+    staleTime: 1000 * 60 * 5,
+    placeholderData: keepPreviousData
+  });
+
+  // Combined loading state: True if initial timer is running OR if query is legitimately loading (and not just refreshing with stale data)
+  const isLoading = isInitialLoading || (isQueryLoading && !isPlaceholderData);
+
+  /** Filtering & Sorting Logic */
+  const { allFiltered, pagedItems, totalPages } = useMemo(() => {
+    if (!scheduleData || scheduleData.length === 0) {
+        return { allFiltered: [], pagedItems: [], totalPages: 0 };
+    }
+    
+    /** Mock logic: filter by activeDay. Using full list for demo. */
+    let filtered = [...scheduleData];
+    
+    if (state.sortOrder === SortDirection.Asc) {
+        filtered.reverse();
+    }
+
+    const total = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+    const start = (state.currentPage - 1) * ITEMS_PER_PAGE;
+    const paged = filtered.slice(start, start + ITEMS_PER_PAGE);
+
+    return { 
+        allFiltered: filtered, 
+        pagedItems: paged, 
+        totalPages: total 
     };
+  }, [scheduleData, state.activeDay, state.sortOrder, state.currentPage]);
 
-    const [state, dispatch] = useReducer(scheduleReducer, initialState);
+  /** Actions Facade */
+  const actions = {
+      setActiveDay: (dayId: string) => dispatch({ type: 'SET_DAY', payload: dayId }),
+      toggleSort: () => dispatch({ type: 'TOGGLE_SORT' }),
+      setPage: (page: number) => dispatch({ type: 'SET_PAGE', payload: page }),
+  };
 
-    /** Data Fetching */
-    const {
-        data: scheduleData,
-        isLoading: isQueryLoading,
-        error,
-        isPlaceholderData,
-    } = useQuery({
-        queryKey: [QueryKey.FullCatalog, state.activeDay], // Include activeDay for SWR behavior
-        queryFn: animeService.getFullCatalog,
-        staleTime: 1000 * 60 * 5,
-        placeholderData: keepPreviousData,
-    });
-
-    // Combined loading state: True if initial timer is running OR if query is legitimately loading (and not just refreshing with stale data)
-    const isLoading = isInitialLoading || (isQueryLoading && !isPlaceholderData);
-
-    /** Filtering & Sorting Logic */
-    const { allFiltered, pagedItems, totalPages } = useMemo(() => {
-        if (!scheduleData || scheduleData.length === 0) {
-            return { allFiltered: [], pagedItems: [], totalPages: 0 };
-        }
-
-        /**
-         * Mock airing-day assignment: deterministic per title (id % 7) so each
-         * day shows a distinct, stable list. Previously every day rendered the
-         * full catalog, making the day selector a no-op.
-         */
-        const dayIndex = Math.max(0, DAY_ORDER.indexOf(state.activeDay));
-        const filtered = scheduleData.filter((anime) => anime.id % 7 === dayIndex);
-
-        if (state.sortOrder === SortDirection.Asc) {
-            filtered.reverse();
-        }
-
-        const total = Math.ceil(filtered.length / ITEMS_PER_PAGE);
-        const start = (state.currentPage - 1) * ITEMS_PER_PAGE;
-        const paged = filtered.slice(start, start + ITEMS_PER_PAGE);
-
-        return {
-            allFiltered: filtered,
-            pagedItems: paged,
-            totalPages: total,
-        };
-    }, [scheduleData, state.activeDay, state.sortOrder, state.currentPage]);
-
-    /** Actions Facade */
-    const actions = {
-        setActiveDay: (dayId: string) => dispatch({ type: 'SET_DAY', payload: dayId }),
-        toggleSort: () => dispatch({ type: 'TOGGLE_SORT' }),
-        setPage: (page: number) => dispatch({ type: 'SET_PAGE', payload: page }),
-    };
-
-    return {
-        state: {
-            isLoading,
-            error,
-            activeDay: state.activeDay,
-            sortOrder: state.sortOrder,
-            scheduleDays,
-            items: pagedItems, // Currently visible items
-            totalItemsCount: allFiltered.length,
-            totalPages: totalPages,
-            currentPage: state.currentPage,
-            placeholdersCount: 0,
-        },
-        actions,
-    };
+  return {
+      state: {
+          isLoading,
+          error,
+          activeDay: state.activeDay,
+          sortOrder: state.sortOrder,
+          scheduleDays,
+          items: pagedItems, // Currently visible items
+          totalItemsCount: allFiltered.length,
+          totalPages: totalPages,
+          currentPage: state.currentPage,
+          placeholdersCount: 0
+      },
+      actions
+  };
 };

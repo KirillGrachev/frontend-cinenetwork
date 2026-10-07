@@ -7,22 +7,22 @@ import { FAQ } from './ru/FAQ';
 export const ruDocs = {
     agreement: {
         title: Agreement.title,
-        content: Agreement.content,
+        content: Agreement.content
     },
     privacy: {
         title: Privacy.title,
-        content: Privacy.content,
+        content: Privacy.content
     },
     rights: {
         title: Rights.title,
-        content: Rights.content,
+        content: Rights.content
     },
     dmca: {
         title: DMCA.title,
-        content: DMCA.content,
+        content: DMCA.content
     },
     faq: {
         title: FAQ.title,
-        content: FAQ.content,
-    },
+        content: FAQ.content
+    }
 };

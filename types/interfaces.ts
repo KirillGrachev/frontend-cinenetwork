@@ -1,31 +1,33 @@
-import type React from 'react';
-import type {
-    AnimeType,
-    ContentType,
-    SortOptionValue,
-    CatalogSelection,
-    ServiceStatus,
-    VideoQuality,
-    ToastType,
+
+import React from 'react';
+import { 
+    AnimeType, 
+    ContentType, 
+    SortOptionValue, 
+    CatalogSelection, 
+    AppView, 
+    ServiceStatus, 
+    VideoQuality, 
+    ToastType, 
     AnimeGenre,
     CuratorRole,
     UserRole,
-    UserStatus,
+    UserStatus
 } from './enums';
 
 // --- DATA INTERFACES ---
 
 export interface Anime {
-    id: number;
-    title: string;
-    description: string;
-    thumbnailUrl: string; // Vertical poster
-    coverUrl: string; // Horizontal wide image
-    rating: number; // 0-10
-    genres: AnimeGenre[]; // Updated to use Enum
-    year: number;
-    studio?: string;
-    type?: AnimeType;
+  id: number;
+  title: string;
+  description: string;
+  thumbnailUrl: string; // Vertical poster
+  coverUrl: string; // Horizontal wide image
+  rating: number; // 0-10
+  genres: AnimeGenre[]; // Updated to use Enum
+  year: number;
+  studio?: string;
+  type?: AnimeType;
 }
 
 export interface Collection {
@@ -34,12 +36,6 @@ export interface Collection {
     count: number;
     image: string;
     color: string;
-}
-
-/** Collection enriched with preview imagery for grids/carousels. */
-export interface CollectionViewModel extends Collection {
-    previews: string[];
-    bgImages: string[];
 }
 
 export interface Curator {
@@ -142,43 +138,43 @@ export interface AdminUser {
 }
 
 export interface HistoryItem {
-    id: string; // Unique ID for the history record
-    anime: Anime;
-    episode: number;
-    timestamp: number; // Unix timestamp
-    progress: number; // Percentage 0-100
-    lastWatchedAt: string; // ISO String or display string
+  id: string; // Unique ID for the history record
+  anime: Anime;
+  episode: number;
+  timestamp: number; // Unix timestamp
+  progress: number; // Percentage 0-100
+  lastWatchedAt: string; // ISO String or display string
 }
 
 export interface SectionProps {
-    title: string;
-    items: Anime[];
+  title: string;
+  items: Anime[];
 }
 
 export interface BannerItem {
-    id: number;
-    imageUrl: string;
-    alt: string;
-    link?: string;
+  id: number;
+  imageUrl: string;
+  alt: string;
+  link?: string;
 }
 
 export interface ContentBlock {
-    type: ContentType;
-    content?: string;
-    items?: { title: string; subtitle: string; desc: string; color: string }[]; // For feature grids
+  type: ContentType;
+  content?: string;
+  items?: { title: string; subtitle: string; desc: string; color: string }[]; // For feature grids
 }
 
 export interface NewsItem {
-    id: number;
-    title: string;
-    excerpt: string;
-    date: string;
-    readTime: string;
-    tags: string[];
-    isFeatured?: boolean;
-    // Full post data
-    contentBlocks?: ContentBlock[];
-    toc?: string[]; // Table of Contents headers
+  id: number;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  tags: string[];
+  isFeatured?: boolean;
+  // Full post data
+  contentBlocks?: ContentBlock[]; 
+  toc?: string[]; // Table of Contents headers
 }
 
 export interface Notification {
@@ -195,43 +191,43 @@ export interface Notification {
 // --- CONFIGURATION TYPES ---
 
 export interface SortOption {
-    label: string;
-    value: SortOptionValue;
-    icon: string;
+  label: string;
+  value: SortOptionValue;
+  icon: string;
 }
 
 export interface CatalogConfig {
-    seasons: string[];
-    genres: string[];
-    studios: string[];
-    yearRange: { min: number; max: number };
-    selections: { label: string; value: CatalogSelection }[];
-    sortOptions: SortOption[];
+  seasons: string[];
+  genres: string[];
+  studios: string[];
+  yearRange: { min: number; max: number };
+  selections: { label: string; value: CatalogSelection }[];
+  sortOptions: SortOption[];
 }
 
 export interface FooterConfig {
-    navLinks: { label: string; view: string }[];
-    userLinks: { label: string; view: string }[];
-    socialLinks: { label: string; icon: string; href: string }[];
-    emails: { copyright: string; contact: string };
-    legalText: string;
-    copyrightText: string;
-    languages: { code: string; label: string }[];
+  navLinks: { label: string; view: string }[];
+  userLinks: { label: string; view: string }[];
+  socialLinks: { label: string; icon: string; href: string }[];
+  emails: { copyright: string; contact: string };
+  legalText: string;
+  copyrightText: string;
+  languages: { code: string; label: string }[];
 }
 
 export interface AuthConfig {
-    socialProviders: string[];
+  socialProviders: string[];
 }
 
 export interface ScheduleDay {
-    id: string;
-    label: string;
-    short: string;
+  id: string;
+  label: string;
+  short: string;
 }
 
 export interface NewsPageConfig {
-    title: string;
-    description: string;
+  title: string;
+  description: string;
 }
 
 export interface ServiceItem {
@@ -266,13 +262,11 @@ export interface UserSettings {
     email: string;
     avatarUrl?: string;
     isPremium: boolean;
-    /** Access role; absent for legacy persisted sessions (treated as User). */
-    role?: UserRole;
     preferences: {
         autoplay: boolean;
         quality: VideoQuality;
         notifications: boolean;
-    };
+    }
 }
 
 // --- PROFILE TYPES ---
@@ -327,42 +321,25 @@ export interface DocSection {
     content: string | React.ReactNode;
 }
 
-export interface AuthCredentials {
-    email: string;
-    password: string;
-}
-
-/** Result of a successful login: session token + the full profile. */
-export interface AuthSession {
-    token: string;
-    user: UserProfileData;
-}
-
 export interface AuthContextType {
-    isAuthenticated: boolean;
-    user: UserProfileData | null;
-    /**
-     * Authenticates the user. `credentials` are optional because some flows
-     * (e.g. auto-login right after e-mail verification) have no form values;
-     * with a real backend the session token would come from the verification
-     * step instead.
-     */
-    login: (credentials?: AuthCredentials) => Promise<void>;
-    logout: () => void;
+  isAuthenticated: boolean;
+  user: UserSettings | null;
+  login: () => Promise<void>;
+  logout: () => void;
 }
 
 export interface Toast {
-    id: string;
-    message: string;
-    type: ToastType;
-    isClosing?: boolean;
+  id: string;
+  message: string;
+  type: ToastType;
+  isClosing?: boolean;
 }
 
 export interface ToastContextType {
-    toasts: Toast[];
-    showToast: (message: string, type: ToastType) => void;
-    removeToast: (id: string) => void;
-    hasToasts: boolean;
+  toasts: Toast[];
+  showToast: (message: string, type: ToastType) => void;
+  removeToast: (id: string) => void;
+  hasToasts: boolean;
 }
 
 export interface SearchFilters {
@@ -400,6 +377,7 @@ export interface ICollectionService {
 }
 
 export interface IUserService {
+    getHistory(): Promise<HistoryItem[]>;
     getUserSettings(): Promise<UserSettings>;
     getUserProfile(id?: string | number): Promise<UserProfileData>;
 }

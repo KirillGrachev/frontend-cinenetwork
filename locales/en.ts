@@ -7,21 +7,21 @@ import { info } from './en/info';
 import { data } from './en/data';
 
 export const en = {
-    langName: 'English',
-    languages: {
-        ru: 'Russian',
-        en: 'English',
-    },
-    admin,
-    auth,
-    ...layout,
-    layout,
-    ...common,
-    common,
-    ...media,
-    media,
-    ...info,
-    info,
-    ...data,
-    data,
+  langName: 'English',
+  languages: {
+    ru: 'Russian',
+    en: 'English',
+  },
+  admin,
+  auth,
+  ...layout,
+  layout,
+  ...common,
+  common,
+  ...media,
+  media,
+  ...info,
+  info,
+  ...data,
+  data,
 };

@@ -1,3 +1,4 @@
+
 export const media = {
     catalog: {
         title: 'Catalog',
@@ -14,7 +15,7 @@ export const media = {
                 new: 'New Releases',
                 best: 'The Best',
                 movies: 'Movies',
-            },
+            }
         },
         showAll: 'Show All',
         showLess: 'Show Less',
@@ -40,16 +41,15 @@ export const media = {
         updatedYesterday: 'Updated yesterday',
         titlesCount: {
             one: '{count} title',
-            other: '{count} titles',
+            other: '{count} titles'
         },
         animeCount: {
             one: '{count} Anime',
-            other: '{count} Anime',
+            other: '{count} Anime'
         },
         curators: 'Curators',
         becomeCurator: 'Become a Curator',
-        curatorDescription:
-            'Create your unique collections, share them with friends, and get featured on the main page.',
+        curatorDescription: 'Create your unique collections, share them with friends, and get featured on the main page.',
         start: 'Get Started',
         cancel: 'Cancel',
         loadingError: 'Failed to load collections.',
@@ -68,14 +68,14 @@ export const media = {
             description: 'Contributors who worked on the collection',
             edits: {
                 one: '{count} edit',
-                other: '{count} edits',
+                other: '{count} edits'
             },
             joined: 'Joined',
             roles: {
                 admin: 'Admin',
                 moderator: 'Moderator',
-                contributor: 'Contributor',
-            },
+                contributor: 'Contributor'
+            }
         },
         filters: {
             all: 'All Collections',
@@ -92,7 +92,7 @@ export const media = {
             motivationPlaceholder: 'Why do you want to create collections?',
             submit: 'Submit Application',
             successToast: 'Application sent! We will contact you.',
-        },
+        }
     },
     anime: {
         viewDetails: 'View details for {title}',
@@ -123,30 +123,30 @@ export const media = {
             allEpisodes: 'All Episodes',
             characterRoles: {
                 main: 'Main',
-                supporting: 'Supporting',
+                supporting: 'Supporting'
             },
             statuses: {
                 ongoing: 'Ongoing',
                 released: 'Released',
-                announced: 'Announced',
+                announced: 'Announced'
             },
             sources: {
                 manga: 'Manga',
                 original: 'Original',
                 light_novel: 'Light Novel',
                 game: 'Game',
-                visual_novel: 'Visual Novel',
-            },
+                visual_novel: 'Visual Novel'
+            }
         },
         comments: {
             title: 'Comments',
             sort: {
                 newest: 'Newest First',
                 oldest: 'Oldest First',
-                popular: 'Popular',
+                popular: 'Popular'
             },
             emptyTitle: 'Silence in the hall...',
-            emptyDescription: 'No comments yet. Be the first to share your opinion!',
+            emptyDescription: 'No comments yet. Be the first to share your opinion!'
         },
         reviews: {
             title: 'Ratings & Comments',
@@ -170,15 +170,15 @@ export const media = {
                 newest: 'Newest First',
                 oldest: 'Oldest First',
                 highest: 'Highest Rated',
-                lowest: 'Lowest Rated',
-            },
-        },
+                lowest: 'Lowest Rated'
+            }
+        }
     },
     favorites: {
         title: 'Favorites',
         description: 'Your personal watchlist.',
         emptyTitle: 'List is empty',
-        emptyDescription: "Add anime to favorites so you don't lose them.",
+        emptyDescription: 'Add anime to favorites so you don\'t lose them.',
         exploreCatalog: 'Explore Catalog',
         tabs: {
             all: 'All',
@@ -186,8 +186,8 @@ export const media = {
             planned: 'Planned',
             completed: 'Completed',
             dropped: 'Dropped',
-            paused: 'Paused',
-        },
+            paused: 'Paused'
+        }
     },
     history: {
         title: 'Watch History',
@@ -203,20 +203,19 @@ export const media = {
         episode: 'Episode',
         timeLeft: {
             one: '{mins} min left',
-            other: '{mins} min left',
+            other: '{mins} min left'
         },
         confirmClear: 'Are you sure you want to clear your entire history?',
         clearOptions: {
             lastHour: 'Last Hour',
             today: 'Last 24 Hours',
-            all: 'All History',
+            all: 'All History'
         },
         removeModal: {
             title: 'Remove from history?',
-            description:
-                'Are you sure you want to remove this episode from history? Your viewing progress will be permanently lost.',
+            description: 'Are you sure you want to remove this episode from history? Your viewing progress will be permanently lost.',
             confirm: 'Remove',
-            ariaLabelRemove: 'Remove from history',
+            ariaLabelRemove: 'Remove from history'
         },
         showMoreFor: 'Show more for {group}',
         continueWatching: 'Continue watching {title}',
@@ -230,15 +229,15 @@ export const media = {
             week: 'This Week',
             month: 'This Month',
             year: 'This Year',
-            all: 'All Time',
+            all: 'All Time'
         },
         metrics: {
             views: 'By Views',
-            rating: 'By Rating',
+            rating: 'By Rating'
         },
         views: 'views',
         rating: 'Rating',
-        ratingLabel: 'Rating',
+        ratingLabel: 'Rating'
     },
     character: {
         notFound: 'Character not found',
@@ -246,5 +245,5 @@ export const media = {
         voiceActors: 'Voice Actors',
         about: 'About Character',
         appearsIn: 'Appears In',
-    },
+    }
 };

@@ -35,14 +35,14 @@ const HomeSkeleton: React.FC = () => {
                     {/* Cards Row Skeleton */}
                     <div className="flex gap-4 md:gap-6 overflow-hidden pb-4">
                         {Array.from({ length: 6 }).map((__, j) => (
-                            <div
-                                key={j}
+                            <div 
+                                key={j} 
                                 className="w-[140px] md:w-[240px] flex-shrink-0 aspect-[2/3] bg-panel-primary rounded-2xl border border-white/10 relative overflow-hidden shadow-sm"
                             >
                                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
                                 {/* Rating Badge Skeleton */}
                                 <div className="absolute top-3 left-3 w-[42px] h-[28px] bg-white/10 rounded-xl"></div>
-
+                                
                                 {/* Bottom Title & Meta Skeleton */}
                                 <div className="absolute bottom-0 left-0 right-0 p-4 space-y-2">
                                     <div className="h-5 w-4/5 bg-white/15 rounded-md"></div>

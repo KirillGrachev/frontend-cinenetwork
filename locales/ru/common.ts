@@ -1,3 +1,4 @@
+
 export const common = {
     appName: 'CineNetwork',
     toasts: {
@@ -22,20 +23,19 @@ export const common = {
         general: {
             title: 'Ошибка',
             subtitle: 'Проблемы в кинопроекторной',
-            description:
-                'Что-то пошло не так. Наши механики уже работают над устранением неполадок.',
+            description: 'Что-то пошло не так. Наши механики уже работают над устранением неполадок.',
             reload: 'Перезагрузить страницу',
             backToHome: 'На главную',
-        },
+        }
     },
     search: {
-        placeholder: 'Поиск по документации...',
-        resultsFor: 'Результаты поиска для',
-        noResults: 'Ничего не найдено',
-        tryDifferentQuery: 'Попробуйте другой запрос или измените категорию.',
-        searching: 'Идет поиск...',
-        searchError: 'Ошибка поиска. Пожалуйста, попробуйте позже.',
-        possibleResults: 'Возможно, Вы Искали',
+        placeholder: "Поиск по документации...",
+        resultsFor: "Результаты поиска для",
+        noResults: "Ничего не найдено",
+        tryDifferentQuery: "Попробуйте другой запрос или измените категорию.",
+        searching: "Идет поиск...",
+        searchError: "Ошибка поиска. Пожалуйста, попробуйте позже.",
+        possibleResults: "Возможно, Вы Искали",
     },
     pagination: {
         previous: 'Предыдущая страница',
@@ -43,8 +43,6 @@ export const common = {
     },
     ui: {
         back: 'Назад',
-        addToFavorites: 'Добавить в избранное',
-        removeFromFavorites: 'Убрать из избранного',
         scrollLeft: 'Прокрутить влево',
         scrollRight: 'Прокрутить вправо',
         category: 'Категория',
@@ -77,7 +75,7 @@ export const common = {
     time: {
         minutesAgo: '{count} мин. назад',
         hoursAgo: '{count} ч. назад',
-        justNow: 'Только что',
+        justNow: 'Только что'
     },
     report: {
         title: 'Пожаловаться на контент',
@@ -90,7 +88,7 @@ export const common = {
             spam: 'Спам или реклама',
             spoiler: 'Спойлер без метки',
             offensive: 'Оскорбления или токсичность',
-            other: 'Другое',
-        },
-    },
+            other: 'Другое'
+        }
+    }
 };

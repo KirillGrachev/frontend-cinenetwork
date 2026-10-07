@@ -1,3 +1,4 @@
+
 export const layout = {
     navbar: {
         home: 'Home',
@@ -7,9 +8,9 @@ export const layout = {
         news: 'News',
         searchPlaceholder: 'Search for {category}...',
         searchCategories: {
-            anime: 'anime',
-            collections: 'collections',
-            news: 'news',
+          anime: 'anime',
+          collections: 'collections',
+          news: 'news',
         },
         searchCategoryLabels: {
             anime: 'Anime',
@@ -32,15 +33,15 @@ export const layout = {
             empty: 'No new notifications',
         },
         userMenu: {
-            admin: 'Admin Dashboard',
-            profile: 'Profile',
-            favorites: 'Favorites',
-            history: 'History',
-            settings: 'Settings',
-            logout: 'Logout',
-            toggle: 'Open user menu',
-            avatarAlt: 'User Avatar',
-        },
+          admin: 'Admin Dashboard',
+          profile: 'Profile',
+          favorites: 'Favorites',
+          history: 'History',
+          settings: 'Settings',
+          logout: 'Logout',
+          toggle: 'Open user menu',
+          avatarAlt: 'User Avatar',
+        }
     },
     footer: {
         slogan: 'This is how anime sounds!',
@@ -55,21 +56,21 @@ export const layout = {
             vk: 'VK',
             telegram: 'Telegram',
             discord: 'Discord',
-            youtube: 'YouTube',
+            youtube: 'YouTube'
         },
         navLinks: {
-            home: 'Home',
-            catalog: 'Catalog',
-            schedule: 'Schedule',
-            news: 'News',
-            docs: 'Documents',
+            home: "Home",
+            catalog: "Catalog",
+            schedule: "Schedule",
+            news: "News",
+            docs: "Documentation"
         },
         userLinks: {
-            login: 'Login',
-            register: 'Register',
-            settings: 'Settings',
-            status: 'Service Status',
-            support: 'Support',
-        },
-    },
+            login: "Login",
+            register: "Register",
+            settings: "Settings",
+            status: "Service Status",
+            support: "Support"
+        }
+    }
 };

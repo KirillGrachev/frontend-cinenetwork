@@ -1,8 +1,8 @@
+
 export const common = {
     appName: 'CineNetwork',
     toasts: {
-        socialsUnavailable:
-            'Our social networks are temporarily unavailable. We are working on it!',
+        socialsUnavailable: 'Our social networks are temporarily unavailable. We are working on it!',
         dismiss: 'Dismiss notification',
         addedToFavorites: 'Added to favorites',
         removedFromFavorites: 'Removed from favorites',
@@ -26,16 +26,16 @@ export const common = {
             description: 'Something went wrong. Our mechanics are already working on fixing it.',
             reload: 'Reload Page',
             backToHome: 'Back to Home',
-        },
+        }
     },
     search: {
-        placeholder: 'Search documentation...',
-        resultsFor: 'Search results for',
-        noResults: 'No results found',
-        tryDifferentQuery: 'Try a different query or change the search category.',
-        searching: 'Searching...',
-        searchError: 'Search error. Please try again later.',
-        possibleResults: 'You might be looking for',
+        placeholder: "Search documentation...",
+        resultsFor: "Search results for",
+        noResults: "No results found",
+        tryDifferentQuery: "Try a different query or change the search category.",
+        searching: "Searching...",
+        searchError: "Search error. Please try again later.",
+        possibleResults: "You might be looking for",
     },
     pagination: {
         previous: 'Previous page',
@@ -43,8 +43,6 @@ export const common = {
     },
     ui: {
         back: 'Back',
-        addToFavorites: 'Add to favorites',
-        removeFromFavorites: 'Remove from favorites',
         scrollLeft: 'Scroll left',
         scrollRight: 'Scroll right',
         category: 'Category',
@@ -77,7 +75,7 @@ export const common = {
     time: {
         minutesAgo: '{count}m ago',
         hoursAgo: '{count}h ago',
-        justNow: 'Just now',
+        justNow: 'Just now'
     },
     report: {
         title: 'Report Content',
@@ -90,7 +88,7 @@ export const common = {
             spam: 'Spam or advertising',
             spoiler: 'Spoiler without tag',
             offensive: 'Insults or toxicity',
-            other: 'Other',
-        },
-    },
+            other: 'Other'
+        }
+    }
 };

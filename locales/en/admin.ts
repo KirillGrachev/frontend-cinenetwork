@@ -1,8 +1,8 @@
+
 export const admin = {
     title: 'Admin Dashboard',
     description: 'Overview of key performance indicators and system monitoring.',
     goToComments: 'Moderation',
-    goToUsers: 'Users',
     tabs: {
         overview: 'Overview',
         content: 'Content',
@@ -12,7 +12,7 @@ export const admin = {
     periods: {
         d24: '24 hours',
         d7: '7 days',
-        d30: '30 days',
+        d30: '30 days'
     },
     metrics: {
         totalUsers: 'Total Users',
@@ -23,7 +23,7 @@ export const admin = {
     charts: {
         revenueTraffic: 'Traffic & Revenue Dynamics',
         contentDist: 'Content Distribution',
-        platformLoad: 'Platform Health',
+        serverLoad: 'Server Load',
         storage: 'Content Storage',
     },
     transactions: {
@@ -36,34 +36,34 @@ export const admin = {
         statusPending: 'Pending',
         plans: {
             yearly: 'Premium (Yearly)',
-            monthly: 'Premium (Monthly)',
-        },
+            monthly: 'Premium (Monthly)'
+        }
     },
     topContent: {
         title: 'Top Viewed',
         views: 'views',
-        rating: 'Rating',
+        rating: 'Rating'
     },
     resources: {
-        media: 'Media Library',
-        encoding: 'Encoding Queue',
-        streams: 'Viewing Sessions',
-        cdn: 'CDN Delivery',
-        gbps: 'Gbit/s',
+        cpu: 'CPU Core',
+        ram: 'RAM Usage',
+        net: 'Network In/Out',
+        storage: 'Storage',
+        mbps: 'Mbps'
     },
     overview: {
-        trafficTitle: 'Traffic Dynamics',
-        trafficSubtitle: 'Daily viewing statistics',
-        total: 'Total',
+      trafficTitle: 'Traffic Dynamics',
+      trafficSubtitle: 'Daily viewing statistics',
+      total: 'Total'
     },
     content: {
-        filterAll: 'All Types',
-        filterTv: 'TV Series',
-        filterMovie: 'Movies',
-        types: {
-            tv: 'TV',
-            movie: 'Movie',
-        },
+      filterAll: 'All Types',
+      filterTv: 'TV Series',
+      filterMovie: 'Movies',
+      types: {
+          tv: 'TV',
+          movie: 'Movie'
+      }
     },
     activityLog: {
         title: 'Event Log',
@@ -91,8 +91,8 @@ export const admin = {
             purchasedMonthly: 'Purchased Premium (Monthly)',
             flaggedComment: 'Flagged comment ID #{id}',
             encodingError: 'Failed to encode video #{id}',
-            bannedUserForSpam: 'Banned user for spam',
-        },
+            bannedUserForSpam: 'Banned user for spam'
+        }
     },
     comments: {
         title: 'Moderation Center',
@@ -101,25 +101,25 @@ export const admin = {
             comments: 'Comments',
             reviews: 'Reviews',
             tickets: 'Tickets',
-            panel: 'Moderator Panel',
+            panel: 'Moderator Panel'
         },
         filters: {
             all: 'All',
             pending: 'Pending',
             flagged: 'Reports',
             approved: 'Approved',
-            rejected: 'Rejected',
+            rejected: 'Rejected'
         },
         actions: {
             approve: 'Approve',
             reject: 'Delete',
-            ban: 'Ban',
+            ban: 'Ban'
         },
         reasons: {
             user_report: 'User Report',
             spam: 'Spam / Ads',
             offensive: 'Offensive',
-            spoiler: 'Spoiler',
+            spoiler: 'Spoiler'
         },
         empty: 'No items to review.',
         avatarAlt: 'Avatar for user {username}',
@@ -139,20 +139,9 @@ export const admin = {
                 '1h': '1 Hour Ban',
                 '24h': '24 Hour Ban',
                 '7d': '7 Day Ban',
-                perm: 'Permanent Ban',
-            },
-        },
-        ticket: {
-            chatTitle: 'Chat with user',
-            context: 'Context',
-            statusOpen: 'Open',
-            statusClosed: 'Closed',
-            replyPlaceholder: 'Type a reply...',
-            send: 'Send',
-            closeTicket: 'Close Ticket',
-            reopenTicket: 'Reopen Ticket',
-            adminRole: 'Support',
-        },
+                'perm': 'Permanent Ban'
+            }
+        }
     },
     users: {
         title: 'Users',
@@ -163,29 +152,29 @@ export const admin = {
             role: 'Role',
             status: 'Status',
             joined: 'Joined',
-            actions: 'Actions',
+            actions: 'Actions'
         },
         filters: {
             all: 'All Users',
             admin: 'Admins',
             moderator: 'Moderators',
             user: 'Users',
-            banned: 'Banned',
+            banned: 'Banned'
         },
         roles: {
             admin: 'Administrator',
             moderator: 'Moderator',
-            user: 'User',
+            user: 'User'
         },
         status: {
             active: 'Active',
-            banned: 'Banned',
+            banned: 'Banned'
         },
         actions: {
             edit: 'Edit Role',
             ban: 'Ban',
             unban: 'Unban',
-            delete: 'Delete',
+            delete: 'Delete'
         },
         modal: {
             editTitle: 'Edit User',
@@ -195,20 +184,18 @@ export const admin = {
             banDurationLabel: 'Ban Duration',
             reasonLabel: 'Reason',
             banReasonLabel: 'Ban Reason',
-            confirmUnbanDescription:
-                'Are you sure you want to unban {user}? Access will be restored.',
-            confirmDeleteDescription:
-                'Are you sure you want to delete {user}? This action cannot be undone.',
+            confirmUnbanDescription: 'Are you sure you want to unban {user}? Access will be restored.',
+            confirmDeleteDescription: 'Are you sure you want to delete {user}? This action cannot be undone.',
             confirmSave: 'Save',
             confirmBan: 'Ban',
             confirmDelete: 'Delete',
-            cancel: 'Cancel',
+            cancel: 'Cancel'
         },
         toasts: {
             roleUpdated: 'User role updated',
             userBanned: 'User banned',
             userUnbanned: 'User unbanned',
-            userDeleted: 'User deleted',
-        },
-    },
+            userDeleted: 'User deleted'
+        }
+    }
 };

@@ -1,39 +1,39 @@
-import type { Collection } from '../../types';
+import { Collection } from '../../types';
 
 export const COLLECTIONS: Collection[] = [
     {
         id: 1,
-        title: 'mock.collections.best2026',
+        title: "mock.collections.best2026",
         count: 12,
-        image: '',
-        color: '',
+        image: "",
+        color: ""
     },
     {
         id: 2,
-        title: 'mock.collections.mappa',
+        title: "mock.collections.mappa",
         count: 8,
-        image: '',
-        color: '',
+        image: "",
+        color: ""
     },
-    {
+     {
         id: 3,
-        title: 'mock.collections.isekai',
+        title: "mock.collections.isekai",
         count: 15,
-        image: '',
-        color: '',
+        image: "",
+        color: ""
     },
     {
         id: 4,
-        title: 'mock.collections.romance',
+        title: "mock.collections.romance",
         count: 22,
-        image: '',
-        color: '',
+        image: "",
+        color: ""
     },
     {
         id: 5,
-        title: 'mock.collections.darkFantasy',
+        title: "mock.collections.darkFantasy",
         count: 7,
-        image: '',
-        color: '',
-    },
+        image: "",
+        color: ""
+    }
 ];

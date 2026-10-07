@@ -1,12 +1,8 @@
-import type { CollectionViewModel, UserProfileData } from '../types';
-import type { TFunction } from './i18n';
-import { hashString, seededRandom, seededShuffle } from './random';
-
-export type ReviewsFilter = 'all' | 'rating' | 'comment';
+import { UserProfile, CollectionViewModel } from '../types';
 
 export interface ReviewItem {
     id: string;
-    type: 'comment' | 'rating';
+    type: string;
     title: string;
     date: string;
     content: string | null;
@@ -15,19 +11,16 @@ export interface ReviewItem {
 }
 
 /**
- * Profile-page list builders.
- *
- * Deterministic by design: every "filler" is derived from a seeded PRNG, so
- * repeated renders/refetches produce the same list. The previous
- * `Math.random()`-based versions re-shuffled content on every call, which
- * made the UI flicker and defeated memoisation.
+ * Builds full reviews/comments/ratings list with fillers if needed.
  */
-
-export function buildFullReviewsList(profile: UserProfileData | null, t: TFunction): ReviewItem[] {
+export const buildFullReviewsList = (
+    profile: UserProfile | null, 
+    t: (key: string, options?: Record<string, any>) => string
+): ReviewItem[] => {
     if (!profile) return [];
 
-    const comments: ReviewItem[] = profile.comments.map((c) => {
-        const matchingAnime = profile.ratedAnime.find((r) => r.title === c.animeTitle);
+    const comments: ReviewItem[] = profile.comments.map(c => {
+        const matchingAnime = profile.ratedAnime.find(r => r.title === c.animeTitle);
         return {
             id: `c_${c.id}`,
             type: 'comment',
@@ -35,7 +28,7 @@ export function buildFullReviewsList(profile: UserProfileData | null, t: TFuncti
             date: c.date,
             content: c.content,
             rating: null,
-            image: matchingAnime ? matchingAnime.image : null,
+            image: matchingAnime ? matchingAnime.image : null
         };
     });
 
@@ -46,63 +39,102 @@ export function buildFullReviewsList(profile: UserProfileData | null, t: TFuncti
         date: t('time.hoursAgo', { count: (index + 1) * 5 }),
         content: null,
         rating: r.rating,
-        image: r.image,
+        image: r.image
     }));
 
-    // No synthetic "filler" entries: the previous version padded the list
-    // with fake comments/ratings to simulate volume. Real empty/short states
-    // are honest to the data and are already styled by the tab components.
-    return seededShuffle([...comments, ...ratings], hashString(`reviews_${profile.id}`));
-}
+    const currentCount = comments.length + ratings.length;
+    const fillersCount = Math.max(0, 16 - currentCount); 
+    
+    const fillers: ReviewItem[] = Array.from({ length: fillersCount }).map((_, i) => ({
+         id: `filler_${i}`,
+         type: i % 2 === 0 ? 'comment' : 'rating',
+         title: i % 2 === 0 ? 'mock.chainsawMan.title' : 'mock.jujutsuKaisen.title',
+         date: t('time.hoursAgo', { count: 20 + i }),
+         content: i % 2 === 0 ? 'Круто!' : null,
+         rating: i % 2 !== 0 ? 8 : null,
+         image: '/assets/jujutsu-kaisen/poster.jpeg'
+    }));
 
-export function filterReviewsList(reviews: ReviewItem[], filter: ReviewsFilter): ReviewItem[] {
+    return [...comments, ...ratings, ...fillers].sort(() => 0.5 - Math.random());
+};
+
+/**
+ * Filters review items by type ('all' | 'rating' | 'comment')
+ */
+export const filterReviewsList = (
+    reviews: ReviewItem[], 
+    filter: 'all' | 'rating' | 'comment'
+): ReviewItem[] => {
     if (filter === 'all') return reviews;
-    return reviews.filter((item) => item.type === filter);
-}
+    return reviews.filter(item => item.type === filter);
+};
 
-export function buildFullCollectionsList(profile: UserProfileData | null): CollectionViewModel[] {
+/**
+ * Builds collections list ensuring required minimum items.
+ */
+export const buildFullCollectionsList = (
+    profile: UserProfile | null,
+    t: (key: string) => string
+): CollectionViewModel[] => {
     if (!profile) return [];
-
-    const mappedCollections: CollectionViewModel[] = profile.collections.map((c) => ({
+    
+    const mappedCollections: CollectionViewModel[] = profile.collections.map(c => ({
         ...c,
         previews: c.image ? [c.image, c.image, c.image] : [],
-        bgImages: [],
+        bgImages: [] 
     }));
 
+    if (mappedCollections.length < 12) {
+         const needed = 12 - mappedCollections.length;
+         const extras = Array.from({ length: needed }).map((_, i) => ({
+             ...mappedCollections[0] || { title: 'Mock Collection', count: 0, image: '', color: 'blue' },
+             id: 9000 + i,
+             title: `${t('media.collections.collection')} ${i + 1}`,
+             previews: mappedCollections[0]?.previews || []
+         }));
+         return [...mappedCollections, ...extras];
+    }
     return mappedCollections;
-}
+};
 
-export interface FriendListItem {
-    id: string;
-    username: string;
-    avatarUrl?: string | null;
-    level: number;
-}
-
-export function buildFullFriendsList(profile: UserProfileData | null): FriendListItem[] {
+/**
+ * Builds friends list ensuring required minimum items.
+ */
+export const buildFullFriendsList = (profile: UserProfile | null) => {
     if (!profile) return [];
+    if (profile.friends.length < 29) {
+        const needed = 29 - profile.friends.length;
+        const extra = Array.from({ length: needed }).map((_, i) => ({
+            id: `gen_friend_${i}`,
+            username: `Friend_${i}`,
+            avatarUrl: null,
+            level: Math.floor(Math.random() * 50)
+        }));
+        return [...profile.friends, ...extra];
+    }
     return profile.friends;
-}
+};
 
-export function buildFullActivityList(profile: UserProfileData | null) {
+/**
+ * Builds activity feed list.
+ */
+export const buildFullActivityList = (profile: UserProfile | null) => {
     if (!profile) return [];
-    return profile.recentActivity;
-}
+    const base = [...profile.recentActivity];
+    let extended = [...base];
+    for (let i = 0; i < 5; i++) {
+        extended = [...extended, ...base.map(a => ({ ...a, id: a.id + '_gen_' + i }))];
+    }
+    return extended;
+};
 
-export type DynamicsPeriod = '14' | '30' | '90';
-
-export function generateDynamicsData(
-    dynamicsPeriod: DynamicsPeriod,
-    profileId: string | number = 'me',
-    viewingDynamics: number[] = [],
-) {
-    const days = parseInt(dynamicsPeriod, 10);
-    // Real per-day episode counts when the profile provides them; the tail
-    // (or the whole range for demo profiles) is filled deterministically.
-    const random = seededRandom(hashString(`dynamics_${profileId}_${dynamicsPeriod}`));
-    const today = Date.now();
-    return Array.from({ length: days }, (_, i) => ({
-        date: new Date(today - (days - 1 - i) * 24 * 60 * 60 * 1000),
-        value: viewingDynamics[i] ?? Math.floor(random() * 12),
+/**
+ * Generates dynamics period chart data.
+ */
+export const generateDynamicsData = (dynamicsPeriod: '14' | '30' | '90') => {
+    const days = parseInt(dynamicsPeriod);
+    return Array.from({ length: days }).map((_, i) => ({
+        date: new Date(Date.now() - (days - 1 - i) * 24 * 60 * 60 * 1000),
+        value: Math.floor(Math.random() * 12)
     }));
-}
+};

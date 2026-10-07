@@ -21,15 +21,15 @@ const AnimePageSkeleton: React.FC = () => {
 
                     {/* Desktop Poster Skeleton */}
                     <Skeleton className="hidden md:block w-64 2xl:w-80 aspect-[2/3] rounded-2xl shrink-0 shadow-2xl" />
-
+                    
                     {/* Info */}
                     <div className="flex-1 w-full">
                         {/* Mobile Poster Skeleton */}
                         <Skeleton className="md:hidden w-28 aspect-[2/3] rounded-xl mb-4" />
-
+                        
                         {/* Title Skeleton */}
                         <Skeleton className="h-8 sm:h-10 md:h-14 2xl:h-16 w-3/4 rounded-2xl mb-2" />
-
+                        
                         {/* Meta Skeleton */}
                         <div className="flex items-center gap-3 mb-6">
                             <Skeleton className="h-5 md:h-6 w-16 rounded-md" />
@@ -37,7 +37,7 @@ const AnimePageSkeleton: React.FC = () => {
                             <span className="w-1 h-1 rounded-full bg-white/10"></span>
                             <Skeleton className="h-5 md:h-6 w-16 rounded-md" />
                         </div>
-
+                        
                         {/* Buttons Skeleton */}
                         <div className="flex flex-wrap gap-3">
                             <Skeleton className="h-12 md:h-14 flex-1 md:flex-none md:w-44 rounded-xl" />
@@ -46,9 +46,11 @@ const AnimePageSkeleton: React.FC = () => {
                     </div>
                 </>
             }
-            tabs={[1, 2, 3, 4, 5].map((i) => (
-                <Skeleton key={i} className="h-5 w-24 rounded-md shrink-0" />
-            ))}
+            tabs={
+                [1, 2, 3, 4, 5].map((i) => (
+                    <Skeleton key={i} className="h-5 w-24 rounded-md shrink-0" />
+                ))
+            }
             mainContent={
                 <>
                     <div>

@@ -1,3 +1,4 @@
+
 export const auth = {
     register: 'Sign Up',
     login: 'Sign In',
@@ -15,16 +16,16 @@ export const auth = {
     showPassword: 'Show password',
     hidePassword: 'Hide password',
     formErrors: {
-        required: 'Empty',
-        invalidEmail: 'Invalid email format',
-        passwordTooShort: 'Password is too short',
-        passwordsDoNotMatch: 'Passwords do not match',
-        invalidCode: 'Code must be 6 digits',
+      required: 'Empty',
+      invalidEmail: 'Invalid email format',
+      passwordTooShort: 'Password is too short',
+      passwordsDoNotMatch: 'Passwords do not match',
+      invalidCode: 'Code must be 6 digits',
     },
     formSuccess: {
-        registerSuccess: 'Code sent to email',
-        resetSuccess: 'Password successfully changed',
-        verifySuccess: 'Email verified. Welcome!',
+      registerSuccess: 'Code sent to email',
+      resetSuccess: 'Password successfully changed',
+      verifySuccess: 'Email verified. Welcome!',
     },
     recovery: {
         title: 'Reset Password',
@@ -36,12 +37,12 @@ export const auth = {
         resetPass: 'Change Password',
         resendCode: 'Resend Code',
         resendIn: 'in {seconds}s',
-        backToLogin: 'Back to Login',
+        backToLogin: 'Back to Login'
     },
     verify: {
         title: 'Verify Email',
         description: 'We sent a verification code to {email}. Enter it below.',
         submit: 'Verify',
         codePlaceholder: '000000',
-    },
+    }
 };

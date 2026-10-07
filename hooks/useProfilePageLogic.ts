@@ -9,7 +9,7 @@ import {
     buildFullCollectionsList,
     buildFullFriendsList,
     buildFullActivityList,
-    generateDynamicsData,
+    generateDynamicsData
 } from '../utils/profileDataUtils';
 
 const ACTIVITY_INCREMENT = 10;
@@ -17,13 +17,10 @@ const ACTIVITY_INCREMENT = 10;
 export const useProfilePageLogic = () => {
     const { t, locale } = useLocale();
     const navigate = useNavigate();
-
+    
     // Core Data Fetching Logic
     const { state: profileState } = useProfileLogic();
-    const { isLoading, error, isOwnProfile } = profileState;
-    // React Query yields `undefined` before first load; the pure helpers
-    // below are typed against `null` — normalise once, at the boundary.
-    const profile = profileState.profile ?? null;
+    const { profile, isLoading, error, isOwnProfile } = profileState;
 
     // UI & Modal States
     const uiState = useProfileUiState(profile);
@@ -35,32 +32,27 @@ export const useProfilePageLogic = () => {
     const fullReviewsList = useMemo(() => buildFullReviewsList(profile, t), [profile, t]);
     const filteredReviewsList = useMemo(
         () => filterReviewsList(fullReviewsList, uiState.reviewsFilter),
-        [fullReviewsList, uiState.reviewsFilter],
+        [fullReviewsList, uiState.reviewsFilter]
     );
 
-    const fullCollectionsList = useMemo(() => buildFullCollectionsList(profile), [profile]);
+    const fullCollectionsList = useMemo(() => buildFullCollectionsList(profile, t), [profile, t]);
     const fullFriendsList = useMemo(() => buildFullFriendsList(profile), [profile]);
     const fullActivityList = useMemo(() => buildFullActivityList(profile), [profile]);
 
     const visibleActivity = useMemo(
         () => fullActivityList.slice(0, activityVisibleCount),
-        [fullActivityList, activityVisibleCount],
+        [fullActivityList, activityVisibleCount]
     );
 
     const hasMoreActivity = visibleActivity.length < fullActivityList.length;
 
     const loadMoreActivity = () => {
-        setActivityVisibleCount((prev) => prev + ACTIVITY_INCREMENT);
+        setActivityVisibleCount(prev => prev + ACTIVITY_INCREMENT);
     };
 
     const dynamicsData = useMemo(
-        () =>
-            generateDynamicsData(
-                uiState.dynamicsPeriod,
-                profile?.id ?? 'me',
-                profile?.viewingDynamics ?? [],
-            ),
-        [uiState.dynamicsPeriod, profile?.id, profile?.viewingDynamics],
+        () => generateDynamicsData(uiState.dynamicsPeriod),
+        [uiState.dynamicsPeriod]
     );
 
     const handleActivityClick = (activity: { link?: string }) => {
@@ -76,7 +68,7 @@ export const useProfilePageLogic = () => {
         error,
         isOwnProfile,
         activeTab: uiState.activeTab,
-
+        
         // Computed Collections
         collections: fullCollectionsList,
         totalCollectionsCount: fullCollectionsList.length,
@@ -97,7 +89,7 @@ export const useProfilePageLogic = () => {
 
         // Dynamics
         dynamicsData,
-
+        
         // UI State Handlers
         isFollowing: uiState.isFollowing,
         isFindFriendOpen: uiState.isFindFriendOpen,
@@ -117,10 +109,10 @@ export const useProfilePageLogic = () => {
         handleCopyLink: uiState.handleCopyLink,
         handleMessageClick: uiState.handleMessageClick,
         handleActivityClick,
-
+        
         // Utils
         t,
         locale,
-        navigate,
+        navigate
     };
 };

@@ -1,25 +1,19 @@
-import type { Anime, CatalogConfig } from '../types';
-import { CatalogSelection, AnimeType, SortOptionValue } from '../types';
+import { Anime, CatalogSelection, AnimeType, CatalogConfig, SortOptionValue } from '../types';
 
 /** Helper to check if an anime matches a specific selection */
 export const matchesSelection = (anime: Anime, selection: CatalogSelection): boolean => {
     switch (selection) {
-        case CatalogSelection.Trending:
-            return anime.rating > 9.0;
-        case CatalogSelection.New:
-            return anime.year >= 2024;
-        case CatalogSelection.Best:
-            return anime.rating > 9.5;
-        case CatalogSelection.Movies:
-            return anime.type === AnimeType.Movie;
-        default:
-            return true;
+        case CatalogSelection.Trending: return anime.rating > 9.0;
+        case CatalogSelection.New: return anime.year >= 2024;
+        case CatalogSelection.Best: return anime.rating > 9.5;
+        case CatalogSelection.Movies: return anime.type === AnimeType.Movie;
+        default: return true;
     }
 };
 
 /** Generic helper to toggle an item in an array (Immutable update) */
 export function toggleArrayItem<T>(array: T[], item: T): T[] {
-    return array.includes(item) ? array.filter((i) => i !== item) : [...array, item];
+    return array.includes(item) ? array.filter(i => i !== item) : [...array, item];
 }
 
 export interface FilterState {
@@ -43,7 +37,7 @@ const yieldToMain = (): Promise<void> => {
     if (typeof window !== 'undefined' && window.scheduler?.yield) {
         return window.scheduler.yield();
     }
-    return new Promise((resolve) => setTimeout(resolve, 0));
+    return new Promise(resolve => setTimeout(resolve, 0));
 };
 
 /**
@@ -58,7 +52,7 @@ export const filterAndPaginateCatalogAsync = async (
     itemsPerPage: number,
     currentPage: number,
     t: (key: string) => string,
-    signal?: AbortSignal,
+    signal?: AbortSignal
 ) => {
     if (rawCatalog.length === 0) return { pagedItems: [], totalPages: 0, totalCount: 0 };
 
@@ -100,22 +94,20 @@ export const filterAndPaginateCatalogAsync = async (
     const hasActiveStudios = active.studios.length > 0;
     const hasActiveSelections = active.selections.length > 0;
 
-    const filtered: Anime[] = [];
+    let filtered: Anime[] = [];
     const CHUNK_SIZE = 500; // Process 500 items per tick to prevent main thread blocking
 
     for (let i = 0; i < rawCatalog.length; i += CHUNK_SIZE) {
         if (signal?.aborted) throw new Error('Aborted');
 
         const chunk = rawCatalog.slice(i, i + CHUNK_SIZE);
-        const filteredChunk = chunk.filter((anime) => {
-            if (anime.year < active.yearRange.min || anime.year > active.yearRange.max)
-                return false;
-
+        const filteredChunk = chunk.filter(anime => {
+            if (anime.year < active.yearRange.min || anime.year > active.yearRange.max) return false;
+            
             if (q && !getTitleLower(anime.title).includes(q)) return false;
-
-            if (hasActiveStudios && (!anime.studio || !active.studios.includes(anime.studio)))
-                return false;
-
+            
+            if (hasActiveStudios && (!anime.studio || !active.studios.includes(anime.studio))) return false;
+            
             if (hasActiveGenres) {
                 let hasAll = true;
                 for (let i = 0; i < active.genres.length; i++) {
@@ -134,7 +126,7 @@ export const filterAndPaginateCatalogAsync = async (
                 }
                 if (!hasAll) return false;
             }
-
+            
             if (hasActiveSelections) {
                 let matchesAny = false;
                 for (let i = 0; i < active.selections.length; i++) {
@@ -145,12 +137,12 @@ export const filterAndPaginateCatalogAsync = async (
                 }
                 if (!matchesAny) return false;
             }
-
+            
             return true;
         });
 
         filtered.push(...filteredChunk);
-
+        
         // Yield execution to allow UI paints and event handling
         await yieldToMain();
     }
@@ -159,19 +151,15 @@ export const filterAndPaginateCatalogAsync = async (
 
     const sortOption = config.sortOptions[sortIndex]?.value;
     if (sortOption !== undefined) {
-        filtered.sort((a, b) => {
-            switch (sortOption) {
-                case SortOptionValue.Rating:
-                    return b.rating - a.rating;
-                case SortOptionValue.Newest:
-                    return b.year - a.year;
-                case SortOptionValue.Alphabet:
-                    return getTitle(a.title).localeCompare(getTitle(b.title));
-                default:
-                    return 0;
-            }
+        filtered.sort((a, b) => { 
+             switch (sortOption) {
+                 case SortOptionValue.Rating: return b.rating - a.rating;
+                 case SortOptionValue.Newest: return b.year - a.year;
+                 case SortOptionValue.Alphabet: return getTitle(a.title).localeCompare(getTitle(b.title));
+                 default: return 0;
+             }
         });
-
+        
         // Yield once more after heavy sort
         await yieldToMain();
     }
@@ -184,7 +172,7 @@ export const filterAndPaginateCatalogAsync = async (
     return {
         pagedItems: filtered.slice(start, start + itemsPerPage),
         totalPages: pages,
-        totalCount: filtered.length,
+        totalCount: filtered.length
     };
 };
 
@@ -198,7 +186,7 @@ export const filterAndPaginateCatalog = (
     config: CatalogConfig,
     itemsPerPage: number,
     currentPage: number,
-    t: (key: string) => string,
+    t: (key: string) => string
 ) => {
     if (rawCatalog.length === 0) return { pagedItems: [], totalPages: 0, totalCount: 0 };
 
@@ -240,14 +228,13 @@ export const filterAndPaginateCatalog = (
     const hasActiveStudios = active.studios.length > 0;
     const hasActiveSelections = active.selections.length > 0;
 
-    const filtered = rawCatalog.filter((anime) => {
+    let filtered = rawCatalog.filter(anime => {
         if (anime.year < active.yearRange.min || anime.year > active.yearRange.max) return false;
-
+        
         if (q && !getTitleLower(anime.title).includes(q)) return false;
-
-        if (hasActiveStudios && (!anime.studio || !active.studios.includes(anime.studio)))
-            return false;
-
+        
+        if (hasActiveStudios && (!anime.studio || !active.studios.includes(anime.studio))) return false;
+        
         if (hasActiveGenres) {
             let hasAll = true;
             for (let i = 0; i < active.genres.length; i++) {
@@ -266,7 +253,7 @@ export const filterAndPaginateCatalog = (
             }
             if (!hasAll) return false;
         }
-
+        
         if (hasActiveSelections) {
             let matchesAny = false;
             for (let i = 0; i < active.selections.length; i++) {
@@ -277,23 +264,19 @@ export const filterAndPaginateCatalog = (
             }
             if (!matchesAny) return false;
         }
-
+        
         return true;
     });
 
     const sortOption = config.sortOptions[sortIndex]?.value;
     if (sortOption !== undefined) {
         filtered.sort((a, b) => {
-            switch (sortOption) {
-                case SortOptionValue.Rating:
-                    return b.rating - a.rating;
-                case SortOptionValue.Newest:
-                    return b.year - a.year;
-                case SortOptionValue.Alphabet:
-                    return getTitle(a.title).localeCompare(getTitle(b.title));
-                default:
-                    return 0;
-            }
+             switch (sortOption) {
+                 case SortOptionValue.Rating: return b.rating - a.rating;
+                 case SortOptionValue.Newest: return b.year - a.year;
+                 case SortOptionValue.Alphabet: return getTitle(a.title).localeCompare(getTitle(b.title));
+                 default: return 0;
+             }
         });
     }
 
@@ -302,6 +285,6 @@ export const filterAndPaginateCatalog = (
     return {
         pagedItems: filtered.slice(start, start + itemsPerPage),
         totalPages: pages,
-        totalCount: filtered.length,
+        totalCount: filtered.length
     };
 };

@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,14 +7,9 @@ import BaseModal from '../../ui/BaseModal';
 import Button from '../../ui/Button';
 import Select from '../../ui/Select';
 import Input from '../../ui/Input';
-import type { AdminUser } from '../../../types';
-import { UserRole, UserStatus, BanDuration } from '../../../types';
+import { AdminUser, UserRole, UserStatus, BanDuration } from '../../../types';
 import { useLocale } from '../../../context/LocaleContext';
-import type { AdminUserEditValues, AdminUserBanValues } from '../../../utils/validationSchemas';
-import {
-    createAdminUserEditSchema,
-    createAdminUserBanSchema,
-} from '../../../utils/validationSchemas';
+import { createAdminUserEditSchema, createAdminUserBanSchema, AdminUserEditValues, AdminUserBanValues } from '../../../utils/validationSchemas';
 
 interface UserModalProps {
     isOpen: boolean;
@@ -21,20 +17,13 @@ interface UserModalProps {
     user: AdminUser | null;
     mode: 'edit' | 'ban' | 'delete';
     onSaveRole: (id: string, role: UserRole) => void;
-    onSaveBan: (id: string) => void;
+    onSaveBan: (id: string) => void; 
     onUnban: (id: string) => void;
     onDelete: (id: string) => void;
 }
 
-const UserModal: React.FC<UserModalProps> = ({
-    isOpen,
-    onClose,
-    user,
-    mode,
-    onSaveRole,
-    onSaveBan,
-    onUnban,
-    onDelete,
+const UserModal: React.FC<UserModalProps> = ({ 
+    isOpen, onClose, user, mode, onSaveRole, onSaveBan, onUnban, onDelete
 }) => {
     const { t } = useLocale();
 
@@ -43,25 +32,25 @@ const UserModal: React.FC<UserModalProps> = ({
     const banSchema = createAdminUserBanSchema(t);
 
     // Form setup for Edit Mode
-    const {
-        control: editControl,
-        handleSubmit: handleEditSubmit,
-        reset: resetEdit,
+    const { 
+        control: editControl, 
+        handleSubmit: handleEditSubmit, 
+        reset: resetEdit 
     } = useForm<AdminUserEditValues>({
         resolver: zodResolver(editSchema),
-        defaultValues: { role: UserRole.User },
+        defaultValues: { role: UserRole.User }
     });
 
     // Form setup for Ban Mode
-    const {
+    const { 
         register: registerBan,
-        control: banControl,
-        handleSubmit: handleBanSubmit,
+        control: banControl, 
+        handleSubmit: handleBanSubmit, 
         reset: resetBan,
-        formState: { errors: banErrors },
+        formState: { errors: banErrors }
     } = useForm<AdminUserBanValues>({
         resolver: zodResolver(banSchema),
-        defaultValues: { banDuration: BanDuration.Day24, banReason: '' },
+        defaultValues: { banDuration: BanDuration.Day24, banReason: '' }
     });
 
     // Reset logic when modal opens
@@ -82,8 +71,8 @@ const UserModal: React.FC<UserModalProps> = ({
         onClose();
     };
 
-    const onBanValid = (_data: AdminUserBanValues) => {
-        // TODO(api): send _data.reason / ban duration to the backend once available.
+    const onBanValid = (data: AdminUserBanValues) => {
+        // In real app, you would pass the reason here
         onSaveBan(user.id);
         onClose();
     };
@@ -104,48 +93,35 @@ const UserModal: React.FC<UserModalProps> = ({
         }
     };
 
-    const roleOptions = Object.values(UserRole).map((r) => ({
+    const roleOptions = Object.values(UserRole).map(r => ({
         value: r,
-        label: t(`admin.users.roles.${r}`),
+        label: t(`admin.users.roles.${r}`)
     }));
 
-    const banOptions = Object.values(BanDuration)
-        .filter((d) => d !== BanDuration.None)
-        .map((d) => ({
-            value: d,
-            label: t(`admin.comments.modal.bans.${d}`),
-        }));
+    const banOptions = Object.values(BanDuration).filter(d => d !== BanDuration.None).map(d => ({
+        value: d,
+        label: t(`admin.comments.modal.bans.${d}`)
+    }));
 
     const getTitle = () => {
         switch (mode) {
-            case 'edit':
-                return t('admin.users.modal.editTitle');
-            case 'delete':
-                return t('admin.users.modal.deleteTitle');
-            case 'ban':
-                return t('admin.users.modal.banTitle');
-            default:
-                return '';
+            case 'edit': return t('admin.users.modal.editTitle');
+            case 'delete': return t('admin.users.modal.deleteTitle');
+            case 'ban': return t('admin.users.modal.banTitle');
+            default: return '';
         }
     };
 
     const getConfirmButtonText = () => {
         if (mode === 'edit') return t('admin.users.modal.confirmSave');
         if (mode === 'delete') return t('admin.users.modal.confirmDelete');
-        return user.status === UserStatus.Banned
-            ? t('admin.users.actions.unban')
-            : t('admin.users.modal.confirmBan');
+        return user.status === UserStatus.Banned ? t('admin.users.actions.unban') : t('admin.users.modal.confirmBan');
     };
 
-    const isDestructive =
-        mode === 'delete' || (mode === 'ban' && user.status === UserStatus.Active);
+    const isDestructive = mode === 'delete' || (mode === 'ban' && user.status === UserStatus.Active);
 
     return (
-        <BaseModal
-            isOpen={isOpen}
-            onClose={onClose}
-            className="max-w-sm relative bg-panel-primary border border-border-medium rounded-3xl p-8 shadow-2xl"
-        >
+        <BaseModal isOpen={isOpen} onClose={onClose} className="max-w-sm relative bg-panel-primary border border-border-medium rounded-3xl p-8 shadow-2xl">
             <DialogTitle as="h3" className="text-xl font-bold text-white mb-6 text-left">
                 {getTitle()}
             </DialogTitle>
@@ -167,7 +143,7 @@ const UserModal: React.FC<UserModalProps> = ({
                             name="role"
                             control={editControl}
                             render={({ field }) => (
-                                <Select
+                                <Select 
                                     label={t('admin.users.modal.roleLabel')}
                                     value={field.value}
                                     onChange={field.onChange}
@@ -179,15 +155,15 @@ const UserModal: React.FC<UserModalProps> = ({
                     </div>
                 )}
 
-                {mode === 'ban' &&
-                    (user.status === UserStatus.Active ? (
+                {mode === 'ban' && (
+                    user.status === UserStatus.Active ? (
                         <>
                             <div>
                                 <Controller
                                     name="banDuration"
                                     control={banControl}
                                     render={({ field }) => (
-                                        <Select
+                                        <Select 
                                             label={t('admin.users.modal.banDurationLabel')}
                                             value={field.value}
                                             onChange={field.onChange}
@@ -201,7 +177,7 @@ const UserModal: React.FC<UserModalProps> = ({
                                 <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 block">
                                     {t('admin.users.modal.reasonLabel')}
                                 </label>
-                                <Input
+                                <Input 
                                     {...registerBan('banReason')}
                                     placeholder="..."
                                     error={banErrors.banReason?.message}
@@ -211,9 +187,7 @@ const UserModal: React.FC<UserModalProps> = ({
                     ) : (
                         <div className="space-y-4">
                             <p className="text-gray-300 text-sm leading-relaxed">
-                                {t('admin.users.modal.confirmUnbanDescription', {
-                                    user: user.username,
-                                })}
+                                {t('admin.users.modal.confirmUnbanDescription', { user: user.username })}
                             </p>
                             {user.banReason && (
                                 <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3">
@@ -226,7 +200,8 @@ const UserModal: React.FC<UserModalProps> = ({
                                 </div>
                             )}
                         </div>
-                    ))}
+                    )
+                )}
 
                 {mode === 'delete' && (
                     <p className="text-gray-300 text-sm leading-relaxed">
@@ -236,10 +211,14 @@ const UserModal: React.FC<UserModalProps> = ({
             </div>
 
             <div className="flex gap-3 w-full justify-center">
-                <Button variant="soft" onClick={onClose} className="flex-1 rounded-xl">
+                <Button 
+                    variant="soft" 
+                    onClick={onClose} 
+                    className="flex-1 rounded-xl"
+                >
                     {t('admin.users.modal.cancel')}
                 </Button>
-                <Button
+                <Button 
                     variant="primary"
                     onClick={handleConfirmAction}
                     className={`flex-[2] rounded-xl ${isDestructive ? '!bg-red-500 !text-white hover:!bg-red-600' : ''}`}

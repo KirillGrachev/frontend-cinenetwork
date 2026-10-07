@@ -27,17 +27,17 @@ const BlogPostSidebar: React.FC<BlogPostSidebarProps> = ({ tocItems, activeId, o
                     {tocItems.map((item) => {
                         const isActive = activeId === item.id;
                         return (
-                            <a
-                                key={item.id}
-                                href={`#${item.id}`}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    onItemClick(item.id);
+                            <a 
+                                key={item.id} 
+                                href={`#${item.id}`} 
+                                onClick={(e) => { 
+                                    e.preventDefault(); 
+                                    onItemClick(item.id); 
                                 }}
                                 className={`block py-2 text-sm transition-all duration-200 border-l-2 -ml-[1px] pl-4 ${
-                                    isActive
-                                        ? 'border-blue-500 text-blue-400 font-medium bg-blue-500/5'
-                                        : 'border-transparent text-gray-500 hover:text-gray-300'
+                                    isActive 
+                                    ? 'border-blue-500 text-blue-400 font-medium bg-blue-500/5' 
+                                    : 'border-transparent text-gray-500 hover:text-gray-300'
                                 }`}
                             >
                                 {item.text}

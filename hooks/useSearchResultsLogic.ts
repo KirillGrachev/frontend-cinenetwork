@@ -1,9 +1,8 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useDebounce } from './useDebounce';
 import { apiService } from '../services/apiService';
-import type { Anime, Collection, NewsItem, SearchFilters } from '../types';
-import { SearchCategory, QueryKey, AppRoute } from '../types';
+import { Anime, Collection, NewsItem, SearchCategory, SearchFilters, QueryKey, AppRoute } from '../types';
 import { useLocale } from '../context/LocaleContext';
 
 export interface SearchResultViewModel {
@@ -22,77 +21,66 @@ export const useSearchResultsLogic = (
     filters: SearchFilters,
     onOpenPost: (id: number) => void,
     onNavigate: (path: string) => void,
-    onClose: () => void,
+    onClose: () => void
 ) => {
     const { t } = useLocale();
     const debouncedQuery = useDebounce(query, 300);
     const [isExpanded, setIsExpanded] = useState(false);
 
-    // Collapse the popup whenever the result-set identity changes
-    // (render-phase adjustment instead of a syncing effect).
-    const resetKey = `${debouncedQuery}|${category}|${JSON.stringify(filters)}`;
-    const [prevResetKey, setPrevResetKey] = useState(resetKey);
-    if (resetKey !== prevResetKey) {
-        setPrevResetKey(resetKey);
+    useEffect(() => {
         setIsExpanded(false);
-    }
+    }, [debouncedQuery, category, filters]);
 
-    const hasActiveFilters = Object.values(filters).some((v) => !!v);
+    const hasActiveFilters = Object.values(filters).some(v => !!v);
     const searchAttempted = debouncedQuery.trim().length > 0 || hasActiveFilters;
 
-    const {
-        data: results,
-        isLoading,
-        error,
-    } = useQuery({
+    const { data: results, isLoading, error } = useQuery({
         queryKey: [QueryKey.SearchResults, debouncedQuery, category, filters],
         queryFn: () => apiService.search(debouncedQuery, category, filters),
         enabled: searchAttempted,
     });
 
-    /**
-     * `apiService.search` overloads guarantee the array element type per
-     * category; the single cast per branch is the narrowing boundary.
-     */
     const viewModels: SearchResultViewModel[] = useMemo(() => {
         if (!results) return [];
 
-        switch (category) {
-            case SearchCategory.Anime:
-                return (results as Anime[]).map((anime) => ({
+        return results.map((item: any) => {
+            if (category === SearchCategory.Anime) {
+                const anime = item as Anime;
+                return {
                     id: anime.id,
                     title: t(anime.title),
                     subtitle: `${anime.year}, ${t(`genres.${anime.genres[0]}`)}`,
                     image: anime.thumbnailUrl,
                     rating: anime.rating,
-                    type: SearchCategory.Anime,
-                }));
-            case SearchCategory.News:
-                return (results as NewsItem[]).map((news) => ({
+                    type: SearchCategory.Anime
+                };
+            } else if (category === SearchCategory.News) {
+                const news = item as NewsItem;
+                return {
                     id: news.id,
                     title: t(news.title),
                     subtitle: news.date,
                     image: null,
                     type: SearchCategory.News,
-                    icon: 'fa-newspaper',
-                }));
-            case SearchCategory.Collections:
-                return (results as Collection[]).map((col) => ({
+                    icon: 'fa-newspaper'
+                };
+            } else {
+                const col = item as Collection;
+                return {
                     id: col.id,
                     title: t(col.title),
                     subtitle: t('collections.animeCount', { count: col.count }),
                     image: null,
                     type: SearchCategory.Collections,
-                    icon: 'fa-layer-group',
-                }));
-            default:
-                return [];
-        }
+                    icon: 'fa-layer-group'
+                };
+            }
+        });
     }, [results, category, t]);
 
     const handleItemClick = (item: SearchResultViewModel) => {
         if (item.type === SearchCategory.Anime) {
-            onNavigate(`/anime/${item.id}`);
+             console.log('Open anime', item.id); /** Placeholder for anime details page */
         } else if (item.type === SearchCategory.News) {
             onOpenPost(item.id);
         } else if (item.type === SearchCategory.Collections) {
@@ -111,11 +99,11 @@ export const useSearchResultsLogic = (
             isLoading,
             isNoResults: !isLoading && searchAttempted && results?.length === 0,
             error,
-            isExpanded,
+            isExpanded
         },
         actions: {
             expand: () => setIsExpanded(true),
-            handleClick: handleItemClick,
-        },
+            handleClick: handleItemClick
+        }
     };
 };

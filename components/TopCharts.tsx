@@ -1,8 +1,10 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Virtuoso } from 'react-virtuoso';
 import PageHeader from './ui/PageHeader';
 import Button from './ui/Button';
+import LoadingSpinner from './LoadingSpinner';
 import Select from './ui/Select';
 import TopChartItem from './top-charts/TopChartItem';
 import { useLocale } from '../context/LocaleContext';
@@ -29,7 +31,8 @@ const TopCharts: React.FC = () => {
     ];
 
     const handleItemClick = (id: number) => {
-        navigate(`/anime/${id}`);
+        // Placeholder for navigation
+        console.log('Navigate to anime', id);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent, id: number) => {
@@ -39,22 +42,24 @@ const TopCharts: React.FC = () => {
         }
     };
 
-    if (isLoading) {
-        return <TopChartsSkeleton />;
-    }
+  if (isLoading) {
+    return <TopChartsSkeleton />;
+  }
 
     // Dynamic title based on active metric
-    const pageTitle =
-        metric === TopMetric.Views ? t('topCharts.titleViews') : t('topCharts.titleRating');
+    const pageTitle = metric === TopMetric.Views 
+        ? t('topCharts.titleViews') 
+        : t('topCharts.titleRating');
 
     return (
         <div className="min-h-screen pt-32 pb-20">
             <div className="container mx-auto px-4 md:px-8 h-full flex flex-col">
+                
                 <div className="mb-8">
-                    <Button
-                        variant="ghost"
-                        size="md"
-                        icon="fa-solid fa-arrow-left"
+                    <Button 
+                        variant="ghost" 
+                        size="md" 
+                        icon="fa-solid fa-arrow-left" 
                         onClick={() => navigate(AppRoute.Home)}
                         className="pl-0 hover:!bg-transparent hover:text-white"
                     >
@@ -68,34 +73,30 @@ const TopCharts: React.FC = () => {
                         description={t('topCharts.description')}
                         className="!mb-0"
                     />
-
+                    
                     {/* Metric Selector */}
-                    <div className="w-full md:w-48 page-reveal relative z-30">
+                    <div className="w-full md:w-48 animate-fade-in stagger-1 relative z-30">
                         <Select
                             value={metric}
                             onChange={(val) => actions.setMetric(val as TopMetric)}
                             options={metricOptions}
                             variant="solid"
                             size="md"
-                            prefixIcon={
-                                metric === TopMetric.Views
-                                    ? 'fa-solid fa-eye'
-                                    : 'fa-solid fa-trophy'
-                            }
+                            prefixIcon={metric === TopMetric.Views ? 'fa-solid fa-eye' : 'fa-solid fa-trophy'}
                         />
                     </div>
                 </div>
 
                 {/* Tabs */}
-                <div className="flex overflow-x-auto no-scrollbar gap-2 mb-10 pb-2 page-reveal">
-                    {periods.map((p) => (
+                <div className="flex overflow-x-auto no-scrollbar gap-2 mb-10 pb-2 animate-fade-in stagger-1">
+                    {periods.map(p => (
                         <button
                             key={p.id}
                             onClick={() => actions.setPeriod(p.id)}
                             className={`px-6 py-3 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-300 border ${
-                                period === p.id
-                                    ? 'bg-white text-black border-white'
-                                    : 'bg-panel-primary text-gray-400 border-border-light hover:text-white hover:bg-panel-secondary'
+                                period === p.id 
+                                ? 'bg-white text-black border-white' 
+                                : 'bg-panel-primary text-gray-400 border-border-light hover:text-white hover:bg-panel-secondary'
                             }`}
                         >
                             {p.label}
@@ -104,7 +105,7 @@ const TopCharts: React.FC = () => {
                 </div>
 
                 {/* Virtualized List */}
-                <div className="flex-1 min-h-[600px] page-reveal">
+                <div className="flex-1 min-h-[600px] animate-fade-in stagger-2">
                     <Virtuoso
                         useWindowScroll
                         totalCount={items.length}
@@ -113,7 +114,7 @@ const TopCharts: React.FC = () => {
                             const anime = items[index];
                             return (
                                 <div className="pb-4">
-                                    <TopChartItem
+                                    <TopChartItem 
                                         anime={anime}
                                         rank={index + 1}
                                         metric={metric}
@@ -125,6 +126,7 @@ const TopCharts: React.FC = () => {
                         }}
                     />
                 </div>
+
             </div>
         </div>
     );

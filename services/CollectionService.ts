@@ -1,35 +1,36 @@
-import type { ICollectionService, Anime, Collection, Curator } from '../types';
-import type { ICollectionDataProvider } from './providers/types';
+import { BaseService } from './BaseService';
+import { ICollectionService, Collection, Anime, Curator } from '../types';
+import { ICollectionDataProvider } from './providers/types';
 import { getCollectionDataProvider } from './providers/providerFactory';
-import { resolveTranslationKey } from '../locales/registry';
 
-export class CollectionService implements ICollectionService {
-    constructor(private readonly provider: ICollectionDataProvider = getCollectionDataProvider()) {}
+export class CollectionService extends BaseService implements ICollectionService {
+  constructor(private provider: ICollectionDataProvider = getCollectionDataProvider()) {
+    super();
+  }
 
-    getCollections = (): Promise<Collection[]> => {
-        return this.provider.getCollections();
-    };
+  getCollections = (): Promise<Collection[]> => {
+    return this.cachedRequest('collections', () => this.provider.getCollections());
+  }
 
-    getCollectionById = (id: number): Promise<Collection | undefined> => {
-        return this.provider.getCollectionById(id);
-    };
+  getCollectionById = (id: number): Promise<Collection | undefined> => {
+    return this.cachedRequest(`collection_${id}`, () => this.provider.getCollectionById(id));
+  }
 
-    getAnimeByCollectionId = (id: number): Promise<Anime[]> => {
-        return this.provider.getAnimeByCollectionId(id);
-    };
+  getAnimeByCollectionId = (id: number): Promise<Anime[]> => {
+    return this.cachedRequest(`collection_anime_${id}`, () => this.provider.getAnimeByCollectionId(id));
+  }
 
-    getCuratorsByCollectionId = (id: number): Promise<Curator[]> => {
-        return this.provider.getCuratorsByCollectionId(id);
-    };
+  getCuratorsByCollectionId = (id: number): Promise<Curator[]> => {
+    return this.cachedRequest(`collection_curators_${id}`, () => this.provider.getCuratorsByCollectionId(id));
+  }
 
-    /** Client-side search; fixture titles are i18n keys (see NewsService). */
-    search = async (query: string): Promise<Collection[]> => {
-        const normalized = query.toLowerCase().trim();
-        if (!normalized) return [];
+  search = async (query: string): Promise<Collection[]> => {
+    const collections = await this.getCollections();
+    const lowerCaseQuery = query.toLowerCase().trim();
+    if (!lowerCaseQuery) return [];
 
-        const collections = await this.getCollections();
-        return collections.filter((item) =>
-            resolveTranslationKey(item.title).toLowerCase().includes(normalized),
-        );
-    };
+    return collections.filter(item => 
+        this.getTranslatedString(item.title).toLowerCase().includes(lowerCaseQuery)
+    );
+  }
 }

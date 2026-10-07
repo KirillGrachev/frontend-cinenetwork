@@ -1,3 +1,4 @@
+
 import { ruDocs } from '../docs/ru';
 
 export const info = {
@@ -22,7 +23,7 @@ export const info = {
         confirmTitle: 'Переход по ссылке',
         confirmDescription: 'Вы действительно хотите перейти по внешней ссылке?',
         confirmAction: 'Перейти',
-        cancelAction: 'Отмена',
+        cancelAction: 'Отмена'
     },
     blogPost: {
         backToNews: 'Назад к новостям',
@@ -45,8 +46,7 @@ export const info = {
         subject: 'Тема обращения',
         subjectPlaceholder: 'Кратко суть проблемы',
         detailedDescription: 'Подробное описание',
-        descriptionPlaceholder:
-            'Опишите шаги для воспроизведения проблемы или детали вашего вопроса...',
+        descriptionPlaceholder: 'Опишите шаги для воспроизведения проблемы или детали вашего вопроса...',
         attachFiles: 'Прикрепить материалы',
         files: 'Файлы',
         videoLink: 'Ссылка на видео',
@@ -58,14 +58,13 @@ export const info = {
         faqDescription: 'Решение вашей проблемы может быть описано в документации.',
         goToFaq: 'Перейти в FAQ',
         serviceStatus: 'Статус Сервисов',
-        statusDescription:
-            'Проверьте доступность систем, если испытываете проблемы с подключением.',
+        statusDescription: 'Проверьте доступность систем, если испытываете проблемы с подключением.',
         goToStatus: 'Перейти к статусу',
         contacts: 'Контакты',
         formErrors: {
             required: 'Обязательно',
             validationError: 'Пожалуйста, заполните все обязательные поля.',
-            invalidLink: 'Некорректная ссылка (должна начинаться с http)',
+            invalidLink: 'Некорректная ссылка (должна начинаться с http)'
         },
         ticketSuccess: 'Тикет создан! Мы свяжемся с вами в ближайшее время.',
     },
@@ -84,66 +83,55 @@ export const info = {
         h0ago: '0ч',
     },
     settings: {
-        title: 'Настройки',
-        description: 'Управление профилем, интерфейсом и параметрами воспроизведения.',
+        title: "Настройки",
+        description: "Управление профилем, интерфейсом и параметрами воспроизведения.",
         inDevelopment: {
-            title: 'Раздел в разработке',
-            description:
-                'Мы работаем над тем, чтобы сделать этот раздел максимально полезным для вас. Пожалуйста, загляните сюда позже.',
-            backToHome: 'На главную',
+            title: "Раздел в разработке",
+            description: "Мы работаем над тем, чтобы сделать этот раздел максимально полезным для вас. Пожалуйста, загляните сюда позже.",
+            backToHome: "На главную"
         },
         tabs: {
-            profile: 'Профиль',
-            preferences: 'Интерфейс',
-            player: 'Плеер',
-            subscription: 'Подписка',
+            profile: "Профиль",
+            preferences: "Интерфейс",
+            player: "Плеер",
         },
         profile: {
-            username: 'Имя пользователя',
-            email: 'Email адрес',
-            bio: 'О себе',
-            bioPlaceholder: 'Расскажите о своих любимых жанрах или аниме...',
-            changeAvatar: 'Изменить фото',
-            saveChanges: 'Сохранить изменения',
-            linkedAccounts: 'Привязанные аккаунты',
+            username: "Имя пользователя",
+            email: "Email адрес",
+            bio: "О себе",
+            bioPlaceholder: "Расскажите о своих любимых жанрах или аниме...",
+            changeAvatar: "Изменить фото",
+            saveChanges: "Сохранить изменения",
+            linkedAccounts: "Привязанные аккаунты",
             avatarAlt: 'Аватар',
             socials: {
-                google: 'Google',
-                telegram: 'Telegram',
-                discord: 'Discord',
-                yandex: 'Yandex',
+                google: "Google",
+                telegram: "Telegram",
+                discord: "Discord",
+                yandex: "Yandex"
             },
             connectSocial: 'Подключить {provider}',
             disconnectSocial: 'Отключить {provider}',
         },
         preferences: {
-            autoplay: 'Автовоспроизведение',
-            quality: 'Качество видео по умолчанию',
-            interfaceLanguage: 'Язык интерфейса',
-            showSpoilers: 'Показывать спойлеры',
-            showSpoilersDesc: 'Автоматически раскрывать отзывы и комментарии, содержащие спойлеры.',
-            notifications: 'Уведомления',
-            notifyReleases: 'Новые серии',
-            notifyNews: 'Новости платформы',
-            notifyMentions: 'Ответы и упоминания',
+            interfaceLanguage: "Язык интерфейса",
+            showSpoilers: "Показывать спойлеры",
+            showSpoilersDesc: "Автоматически раскрывать отзывы и комментарии, содержащие спойлеры.",
+            notifications: "Уведомления",
+            notifyReleases: "Новые серии",
+            notifyNews: "Новости платформы",
+            notifyMentions: "Ответы и упоминания",
         },
         player: {
-            defaultQuality: 'Качество видео по умолчанию',
-            defaultAudio: 'Язык озвучки по умолчанию',
-            autoSkipIntro: 'Пропускать опенинги',
-            autoNext: 'Автопереключение серий',
+            defaultQuality: "Качество видео по умолчанию",
+            defaultAudio: "Язык озвучки по умолчанию",
+            autoSkipIntro: "Пропускать опенинги",
+            autoNext: "Автопереключение серий",
             titles: {
-                general: 'Воспроизведение',
-                audio: 'Аудио и Субтитры',
-            },
-        },
-        subscription: {
-            currentPlan: 'Текущий план',
-            premium: 'Премиум (4K + HDR)',
-            activeUntil: 'Активна до {date}',
-            manage: 'Управление подпиской',
-            benefits: 'Вам доступны 4K-трансляции, отсутствие рекламы и ранний доступ к релизам.',
-        },
+                general: "Воспроизведение",
+                audio: "Аудио и Субтитры"
+            }
+        }
     },
     profile: {
         tabs: {
@@ -152,14 +140,12 @@ export const info = {
             dynamics: 'Динамика',
             friends: 'Друзья',
             collections: 'Коллекции',
-            lists: 'Списки',
-            comments: 'Комментарии',
-            reviews: 'Оценки и комментарии',
+            reviews: 'Оценки и комментарии'
         },
         reviewsTab: {
             filterAll: 'Все',
             filterRatings: 'Только оценки',
-            filterComments: 'Только комментарии',
+            filterComments: 'Только комментарии'
         },
         level: 'Уровень',
         xp: 'XP',
@@ -169,7 +155,7 @@ export const info = {
             days: 'Дней',
             comments: 'Комментариев',
             reviews: 'Рецензий',
-            avgScore: 'Ср. балл',
+            avgScore: 'Ср. балл'
         },
         activity: {
             title: 'Лента активности',
@@ -179,8 +165,8 @@ export const info = {
                 rated: 'Оценка',
                 commented: 'Комментарий',
                 added_list: 'В список',
-                achievement: 'Достижение',
-            },
+                achievement: 'Достижение'
+            }
         },
         dynamics: {
             title: 'График просмотров',
@@ -188,12 +174,12 @@ export const info = {
             periods: {
                 d14: '14 дней',
                 d30: '30 дней',
-                d90: '90 дней',
-            },
+                d90: '90 дней'
+            }
         },
         achievements: {
             title: 'Достижения',
-            viewAll: 'Все',
+            viewAll: 'Все'
         },
         friends: {
             title: 'Список друзей',
@@ -203,15 +189,15 @@ export const info = {
             findPlaceholder: 'Имя пользователя...',
             add: 'Добавить',
             requestSent: 'Запрос отправлен',
-            searchEmpty: 'Никого не найдено',
+            searchEmpty: 'Никого не найдено'
         },
         collections: {
             title: 'Коллекции пользователя',
-            empty: 'Коллекций пока нет',
+            empty: 'Коллекций пока нет'
         },
         commentsHistory: {
             title: 'Лента отзывов',
-            to: 'к',
+            to: 'к'
         },
         joined: 'С нами с {date}',
         edit: 'Редактировать',
@@ -225,15 +211,15 @@ export const info = {
             report: 'Пожаловаться',
             reportProfile: 'Пожаловаться на профиль',
             copyLink: 'Скопировать ссылку',
-            block: 'Заблокировать',
-        },
+            block: 'Заблокировать'
+        }
     },
     team: {
-        name: 'CineNetwork',
+        name: "CineNetwork"
     },
     docs: {
         backToHome: 'Назад на главную',
-        title: 'Правовая информация',
+        title: 'Документация',
         description: 'Правовая информация и правила использования сервиса.',
         lastUpdated: 'Последнее обновление: 01.02.2026',
         downloadPdf: 'Скачать PDF',
@@ -241,6 +227,6 @@ export const info = {
         prevDoc: 'Предыдущий документ',
         nextDoc: 'Следующий документ',
         selectDoc: 'Выберите документ',
-        sections: ruDocs,
+        sections: ruDocs
     },
 };

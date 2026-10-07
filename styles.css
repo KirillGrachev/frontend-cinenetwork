@@ -1,42 +1,43 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
-    color-scheme: dark;
-    scrollbar-gutter: stable;
-    overflow-y: scroll;
+  color-scheme: dark;
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
 }
 
 body {
-    font-family: 'Inter Variable', 'Inter', sans-serif;
-    background-color: #000000; /* Pure Black */
-    color: white;
-    -webkit-font-smoothing: antialiased;
-    -webkit-tap-highlight-color: transparent;
-    padding-right: 0 !important;
-    margin-right: 0 !important;
-    /* Firefox Scrollbar */
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.05);
+  font-family: 'Inter', sans-serif;
+  background-color: #000000; /* Pure Black */
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+  /* Firefox Scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.05);
 }
 
 /* Global Custom Scrollbar (Webkit) */
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+  width: 10px;
+  height: 10px;
 }
 ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 ::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.35);
-    border-radius: 9999px;
-    border: 2px solid transparent;
-    background-clip: content-box;
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 ::-webkit-scrollbar-button {
     display: none;
@@ -78,17 +79,17 @@ body {
 /* --- UTILITY TO HIDE SCROLLBAR --- */
 /* Strictly hide scrollbar for elements with this class */
 .no-scrollbar {
-    -ms-overflow-style: none !important; /* IE and Edge */
-    scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
 }
 
 /* Chrome, Safari, Edge, Opera */
 .no-scrollbar::-webkit-scrollbar {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    background: transparent !important;
-    -webkit-appearance: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  -webkit-appearance: none !important;
 }
 
 .no-scrollbar::-webkit-scrollbar-track {
@@ -103,13 +104,13 @@ body {
 /* --------------------------------- */
 
 /* Hide number input arrows/spinners */
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
-input[type='number'] {
-    -moz-appearance: textfield;
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 /* Hide default password reveal button (Edge/IE) */
@@ -123,172 +124,178 @@ input[type='number'] {
 }
 
 /* Animations */
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: cardFadeIn 0.25s ease-out forwards;
+}
+
+/* Simple Fade In (for Modals) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
 /* Shimmer Animation for Skeletons */
 @keyframes shimmer {
-    100% {
-        transform: translateX(100%);
-    }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 /* Dropdown Spring Animation */
 @keyframes scaleIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.96) translateY(-4px);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .animate-scale-in {
-    animation: scaleIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scaleIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Modal Center Zoom Animation */
 @keyframes zoomIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .animate-zoom-in {
-    animation: zoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transform-origin: center;
+  animation: zoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: center;
 }
 
 /* Smoother Page Enter Animation */
 @keyframes pageEnter {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .animate-page-enter {
-    animation: pageEnter 0.2s ease-out forwards;
+  animation: pageEnter 0.2s ease-out forwards;
 }
 
 /* Toast Animations */
 @keyframes slideUp {
-    0% {
+    0% { 
         opacity: 0;
         transform: translateY(100%); /* Slide up from bottom */
     }
-    100% {
+    100% { 
         opacity: 1;
         transform: translateY(0);
     }
 }
 
 @keyframes slideDownFade {
-    0% {
-        opacity: 1;
+    0% { 
+        opacity: 1; 
         transform: translateY(0) scale(1);
     }
-    100% {
-        opacity: 0;
+    100% { 
+        opacity: 0; 
         transform: translateY(20px) scale(0.95);
-    }
+    } 
 }
 
 @keyframes shrink {
-    from {
-        width: 100%;
-    }
-    to {
-        width: 0%;
-    }
+    from { width: 100%; }
+    to { width: 0%; }
 }
 
-.animate-slide-up {
-    animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.animate-slide-up { 
+    animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
-.animate-slide-down-fade {
-    animation: slideDownFade 0.3s ease-in forwards;
+.animate-slide-down-fade { 
+    animation: slideDownFade 0.3s ease-in forwards; 
 }
+
+/* Staggered animation delay helper */
+.stagger-1 { animation-delay: 50ms; }
+.stagger-2 { animation-delay: 100ms; }
+.stagger-3 { animation-delay: 150ms; }
+.stagger-4 { animation-delay: 200ms; }
+.stagger-5 { animation-delay: 250ms; }
 
 /* --- Mask for Horizontal Scroll Fade --- */
 .mask-linear-fade {
-    /* Fades 12px on left and right - Updated from 24px */
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent 0,
-        black 12px,
-        black calc(100% - 12px),
-        transparent 100%
-    );
-    mask-image: linear-gradient(
-        to right,
-        transparent 0,
-        black 12px,
-        black calc(100% - 12px),
-        transparent 100%
-    );
+  /* Fades 12px on left and right - Updated from 24px */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 12px, black calc(100% - 12px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, black 12px, black calc(100% - 12px), transparent 100%);
 }
 
 /* Prevent Chrome autofill white/yellow background overlay */
 input:-webkit-autofill,
-input:-webkit-autofill:hover,
+input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #1a1a1a inset !important;
-    -webkit-text-fill-color: #ffffff !important;
-    transition: background-color 5000s ease-in-out 0s;
+  -webkit-box-shadow: 0 0 0 30px #1a1a1a inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /* Custom Text Selection Highlight */
 ::selection {
-    background-color: rgba(255, 255, 255, 0.25);
-    color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
 }
 
 /* Remove default focus outlines and blue tap highlights */
-*,
-*::before,
-*::after {
-    -webkit-tap-highlight-color: transparent !important;
+*, *::before, *::after {
+  -webkit-tap-highlight-color: transparent !important;
 }
 
-*:focus,
-*:focus-visible,
+*:focus, 
+*:focus-visible, 
 *:focus-within,
-a:focus,
-button:focus,
-input:focus,
-select:focus,
+a:focus, 
+button:focus, 
+input:focus, 
+select:focus, 
 textarea:focus,
-[role='button']:focus,
+[role="button"]:focus, 
 [tabindex]:focus {
-    outline: none !important;
-    outline-style: none !important;
-    box-shadow: none !important;
+  outline: none !important;
+  outline-style: none !important;
+  box-shadow: none !important;
 }
 
-a,
-button,
-[role='button'],
-[tabindex],
-input,
-select,
-textarea {
-    -webkit-tap-highlight-color: transparent !important;
+a, button, [role="button"], [tabindex], input, select, textarea {
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 button::-moz-focus-inner,
-[type='button']::-moz-focus-inner,
-[type='reset']::-moz-focus-inner,
-[type='submit']::-moz-focus-inner {
-    border-style: none !important;
-    padding: 0 !important;
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none !important;
+  padding: 0 !important;
 }
 
 /* Hide browser native clear cross button (Edge, Chrome, Safari) */
@@ -298,52 +305,9 @@ input::-webkit-search-results-button,
 input::-webkit-search-results-decoration,
 input::-ms-clear,
 input::-ms-reveal {
-    -webkit-appearance: none !important;
-    appearance: none !important;
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-}
-
-/* ------------------------------------------------------------------ */
-/* Canonical content-reveal animation.                                 */
-/*                                                                     */
-/* The ONE and only entrance animation used when a page's skeleton     */
-/* resolves into content (and for skeleton mount). Same duration,      */
-/* easing and offset everywhere — no per-page stagger variants.        */
-/* ------------------------------------------------------------------ */
-@keyframes pageReveal {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.page-reveal {
-    animation: pageReveal 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .page-reveal {
-        animation: none;
-    }
-}
-
-/* Unified skeleton motion: one shimmer sweep for every loading placeholder. */
-.skeleton-shimmer {
-    position: relative;
-    overflow: hidden;
-}
-.skeleton-shimmer::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    transform: translateX(-100%);
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-    animation: shimmer 1.5s infinite;
-    pointer-events: none;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }

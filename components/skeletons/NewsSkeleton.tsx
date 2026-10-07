@@ -10,13 +10,10 @@ const NewsSkeleton: React.FC = () => {
         <div className="min-h-screen pt-32 pb-20">
             <div className="container mx-auto px-4 md:px-8">
                 {/* Header */}
-                <PageHeader
-                    title={NEWS_PAGE_CONFIG.title}
-                    description={NEWS_PAGE_CONFIG.description}
-                />
+                <PageHeader title={NEWS_PAGE_CONFIG.title} description={NEWS_PAGE_CONFIG.description} />
 
                 {/* Featured Post Skeleton */}
-                <div className="mb-6 w-full h-full min-h-[350px] bg-background-secondary border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col justify-between skeleton-shimmer">
+                <div className="mb-6 w-full h-full min-h-[350px] bg-background-secondary border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col justify-between animate-pulse">
                     <div className="flex gap-3 mb-4">
                         <div className="h-[28px] w-32 bg-white/5 rounded-lg"></div>
                         <div className="h-[28px] w-20 bg-white/5 rounded-lg"></div>
@@ -38,13 +35,10 @@ const NewsSkeleton: React.FC = () => {
                 {/* Grid Skeleton */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
                     {Array.from({
-                        length: 6,
+                        length: 6
                     }).map((_, i) => (
-                        <div
-                            key={i}
-                            className="h-full min-h-[280px] bg-background-secondary border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col justify-between skeleton-shimmer"
-                        >
-                            <div className="flex gap-3 mb-4">
+                        <div key={i} className="h-full min-h-[280px] bg-background-secondary border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col justify-between animate-pulse"> 
+                             <div className="flex gap-3 mb-4">
                                 <div className="h-[28px] w-32 bg-white/5 rounded-lg"></div>
                                 <div className="h-[28px] w-20 bg-white/5 rounded-lg"></div>
                             </div>

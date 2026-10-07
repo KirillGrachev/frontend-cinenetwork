@@ -1,14 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { matchesSelection, toggleArrayItem } from './catalogUtils';
-import type { Anime } from '../types';
-import { CatalogSelection, AnimeType } from '../types';
+import { Anime, CatalogSelection, AnimeType } from '../types';
 
 describe('catalogUtils', () => {
     describe('matchesSelection', () => {
         const mockAnime: Partial<Anime> = {
             rating: 9.2,
             year: 2024,
-            type: AnimeType.TV,
+            type: AnimeType.TV
         };
 
         it('should return true for Trending if rating > 9.0', () => {
@@ -16,9 +15,7 @@ describe('catalogUtils', () => {
         });
 
         it('should return false for Trending if rating <= 9.0', () => {
-            expect(
-                matchesSelection({ ...mockAnime, rating: 9.0 } as Anime, CatalogSelection.Trending),
-            ).toBe(false);
+            expect(matchesSelection({ ...mockAnime, rating: 9.0 } as Anime, CatalogSelection.Trending)).toBe(false);
         });
 
         it('should return true for New if year >= 2024', () => {
@@ -26,12 +23,7 @@ describe('catalogUtils', () => {
         });
 
         it('should return true for Movies if type is Movie', () => {
-            expect(
-                matchesSelection(
-                    { ...mockAnime, type: AnimeType.Movie } as Anime,
-                    CatalogSelection.Movies,
-                ),
-            ).toBe(true);
+            expect(matchesSelection({ ...mockAnime, type: AnimeType.Movie } as Anime, CatalogSelection.Movies)).toBe(true);
         });
     });
 

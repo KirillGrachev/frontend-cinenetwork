@@ -1,168 +1,130 @@
+
 import { z } from 'zod';
-import type { TFunction } from './i18n';
 import { AttachmentType, UserRole, BanDuration } from '../types';
 
 // --- Auth Schemas ---
 
-export const createLoginSchema = (t: TFunction) =>
-    z.object({
-        email: z
-            .string()
-            .min(1, t('auth.formErrors.required'))
-            .email(t('auth.formErrors.invalidEmail')),
-        password: z.string().min(1, t('auth.formErrors.required')),
-    });
+export const createLoginSchema = (t: any) => z.object({
+  email: z.string().min(1, t('auth.formErrors.required')).email(t('auth.formErrors.invalidEmail')),
+  password: z.string().min(1, t('auth.formErrors.required')),
+});
 
-export const createRegistrationSchema = (t: TFunction) =>
-    z
-        .object({
-            email: z
-                .string()
-                .min(1, t('auth.formErrors.required'))
-                .email(t('auth.formErrors.invalidEmail')),
-            password: z.string().min(8, t('auth.formErrors.passwordTooShort')),
-            confirmPassword: z.string().min(1, t('auth.formErrors.required')),
-        })
-        .refine((data) => data.password === data.confirmPassword, {
-            message: t('auth.formErrors.passwordsDoNotMatch'),
-            path: ['confirmPassword'],
-        });
+export const createRegistrationSchema = (t: any) => z.object({
+  email: z.string().min(1, t('auth.formErrors.required')).email(t('auth.formErrors.invalidEmail')),
+  password: z.string().min(8, t('auth.formErrors.passwordTooShort')),
+  confirmPassword: z.string().min(1, t('auth.formErrors.required')),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: t('auth.formErrors.passwordsDoNotMatch'),
+  path: ["confirmPassword"],
+});
 
 // Forgot Password - Step 1
-export const createRecoveryEmailSchema = (t: TFunction) =>
-    z.object({
-        email: z
-            .string()
-            .min(1, t('auth.formErrors.required'))
-            .email(t('auth.formErrors.invalidEmail')),
-    });
+export const createRecoveryEmailSchema = (t: any) => z.object({
+    email: z.string().min(1, t('auth.formErrors.required')).email(t('auth.formErrors.invalidEmail')),
+});
 
 // Forgot Password - Step 2 (Code) & Verify Email
-export const createCodeSchema = (t: TFunction) =>
-    z.object({
-        code: z.string().length(6, t('auth.formErrors.invalidCode')),
-    });
+export const createCodeSchema = (t: any) => z.object({
+    code: z.string().length(6, t('auth.formErrors.invalidCode')),
+});
 
 // Forgot Password - Step 3 (New Password)
-export const createResetPasswordSchema = (t: TFunction) =>
-    z
-        .object({
-            password: z.string().min(8, t('auth.formErrors.passwordTooShort')),
-            confirmPassword: z.string().min(1, t('auth.formErrors.required')),
-        })
-        .refine((data) => data.password === data.confirmPassword, {
-            message: t('auth.formErrors.passwordsDoNotMatch'),
-            path: ['confirmPassword'],
-        });
+export const createResetPasswordSchema = (t: any) => z.object({
+    password: z.string().min(8, t('auth.formErrors.passwordTooShort')),
+    confirmPassword: z.string().min(1, t('auth.formErrors.required')),
+}).refine((data) => data.password === data.confirmPassword, {
+    message: t('auth.formErrors.passwordsDoNotMatch'),
+    path: ["confirmPassword"],
+});
 
 // --- User & Profile Schemas ---
 
-export const createProfileSchema = (t: TFunction) =>
-    z.object({
-        username: z.string().min(3, t('auth.formErrors.required')),
-        email: z.string().email(t('auth.formErrors.invalidEmail')),
-        bio: z.string().optional(),
-    });
+export const createProfileSchema = (t: any) => z.object({
+    username: z.string().min(3, t('auth.formErrors.required')),
+    email: z.string().email(t('auth.formErrors.invalidEmail')),
+    bio: z.string().optional(),
+});
 
-export const createCuratorSchema = (t: TFunction) =>
-    z.object({
-        name: z.string().min(2, t('support.formErrors.required')),
-        email: z.string().email(t('auth.formErrors.invalidEmail')),
-        motivation: z.string().min(10, t('support.formErrors.required')),
-    });
+export const createCuratorSchema = (t: any) => z.object({
+    name: z.string().min(2, t('support.formErrors.required')),
+    email: z.string().email(t('auth.formErrors.invalidEmail')),
+    motivation: z.string().min(10, t('support.formErrors.required'))
+});
 
 // --- Support & Report Schemas ---
 
-export const createSupportSchema = (t: TFunction) =>
-    z
-        .object({
-            name: z.string().min(2, t('support.formErrors.required')),
-            email: z
-                .string()
-                .min(1, t('support.formErrors.required'))
-                .email(t('auth.formErrors.invalidEmail')),
-            topic: z.string(),
-            subject: z.string().min(5, t('support.formErrors.required')),
-            message: z.string().min(10, t('support.formErrors.required')),
-            attachmentType: z.nativeEnum(AttachmentType).optional(),
-            link: z.string().optional(),
-        })
-        .superRefine((data, ctx) => {
-            // If "Link" type is selected, the link field becomes mandatory and must be a valid URL
-            if (data.attachmentType === AttachmentType.Link) {
-                if (!data.link || data.link.trim().length === 0) {
-                    ctx.addIssue({
-                        code: z.ZodIssueCode.custom,
-                        message: t('support.formErrors.required'),
-                        path: ['link'],
-                    });
-                } else if (!data.link.startsWith('http')) {
-                    ctx.addIssue({
-                        code: z.ZodIssueCode.custom,
-                        message: t('support.formErrors.invalidLink'),
-                        path: ['link'],
-                    });
-                }
-            }
-        });
+export const createSupportSchema = (t: any) => z.object({
+    name: z.string().min(2, t('support.formErrors.required')),
+    email: z.string().min(1, t('support.formErrors.required')).email(t('auth.formErrors.invalidEmail')),
+    topic: z.string(),
+    subject: z.string().min(5, t('support.formErrors.required')),
+    message: z.string().min(10, t('support.formErrors.required')),
+    attachmentType: z.nativeEnum(AttachmentType).optional(),
+    link: z.string().optional()
+}).superRefine((data, ctx) => {
+    // If "Link" type is selected, the link field becomes mandatory and must be a valid URL
+    if (data.attachmentType === AttachmentType.Link) {
+        if (!data.link || data.link.trim().length === 0) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: t('support.formErrors.required'),
+                path: ["link"]
+            });
+        } else if (!data.link.startsWith('http')) {
+             ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: t('support.formErrors.invalidLink'),
+                path: ["link"]
+            });
+        }
+    }
+});
 
-export const createReportSchema = (t: TFunction) =>
-    z
-        .object({
-            reason: z.string(),
-            description: z.string().optional(),
-        })
-        .superRefine((data, ctx) => {
-            // Description is required if reason is 'other'
-            if (
-                data.reason === 'other' &&
-                (!data.description || data.description.trim().length === 0)
-            ) {
-                ctx.addIssue({
-                    code: z.ZodIssueCode.custom,
-                    message: t('support.formErrors.required'),
-                    path: ['description'],
-                });
-            }
+export const createReportSchema = (t: any) => z.object({
+    reason: z.string(),
+    description: z.string().optional()
+}).superRefine((data, ctx) => {
+    // Description is required if reason is 'other'
+    if (data.reason === 'other' && (!data.description || data.description.trim().length === 0)) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: t('support.formErrors.required'),
+            path: ["description"]
         });
+    }
+});
 
 // --- Content Interaction Schemas ---
 
-export const createReviewSchema = (t: TFunction) =>
-    z.object({
-        rating: z.number().min(1, t('media.anime.reviews.ratingRequired')),
-        content: z.string().min(3, t('media.anime.reviews.textRequired')),
-        isSpoiler: z.boolean().optional(),
-    });
+export const createReviewSchema = (t: any) => z.object({
+    rating: z.number().min(1, t('media.anime.reviews.ratingRequired')),
+    content: z.string().min(3, t('media.anime.reviews.textRequired')),
+    isSpoiler: z.boolean().optional()
+});
 
-export const createCommentSchema = (t: TFunction) =>
-    z.object({
-        content: z.string().min(1, t('media.anime.reviews.textRequired')),
-    });
+export const createCommentSchema = (t: any) => z.object({
+    content: z.string().min(1, t('media.anime.reviews.textRequired'))
+});
 
 // --- Admin Schemas ---
 
-export const createTicketReplySchema = (t: TFunction) =>
-    z.object({
-        content: z.string().min(1, t('support.formErrors.required')),
-    });
+export const createTicketReplySchema = (t: any) => z.object({
+    content: z.string().min(1, t('support.formErrors.required'))
+});
 
-export const createAdminUserEditSchema = () =>
-    z.object({
-        role: z.nativeEnum(UserRole),
-    });
+export const createAdminUserEditSchema = () => z.object({
+    role: z.nativeEnum(UserRole)
+});
 
-export const createAdminUserBanSchema = (t: TFunction) =>
-    z.object({
-        banDuration: z.nativeEnum(BanDuration),
-        banReason: z.string().min(1, t('support.formErrors.required')),
-    });
+export const createAdminUserBanSchema = (t: any) => z.object({
+    banDuration: z.nativeEnum(BanDuration),
+    banReason: z.string().min(1, t('support.formErrors.required'))
+});
 
-export const createModerationRejectSchema = (t: TFunction) =>
-    z.object({
-        reason: z.string().min(1, t('support.formErrors.required')),
-        duration: z.nativeEnum(BanDuration).optional(),
-    });
+export const createModerationRejectSchema = (t: any) => z.object({
+    reason: z.string().min(1, t('support.formErrors.required')),
+    duration: z.nativeEnum(BanDuration).optional(),
+});
 
 // --- Type Exports ---
 

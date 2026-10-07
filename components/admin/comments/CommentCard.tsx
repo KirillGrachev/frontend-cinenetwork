@@ -1,5 +1,6 @@
+
 import React from 'react';
-import type { Comment } from '../../../types/admin';
+import { Comment } from '../../../hooks/useAdminComments';
 import { useLocale } from '../../../context/LocaleContext';
 import { CommentStatus, FlagReason } from '../../../types';
 
@@ -44,11 +45,11 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment, onApprove, onReject 
         }
 
         return (
-            <div
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border ${bgColor} ${borderColor} ${textColor} text-xs font-bold uppercase tracking-wide w-fit mt-3`}
-            >
+            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border ${bgColor} ${borderColor} ${textColor} text-xs font-bold uppercase tracking-wide w-fit mt-3`}>
                 <i className={`fa-solid ${icon}`}></i>
-                <span>{t(`admin.comments.reasons.${comment.flagReason}`)}</span>
+                <span>
+                    {t(`admin.comments.reasons.${comment.flagReason}`)}
+                </span>
             </div>
         );
     };
@@ -60,9 +61,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment, onApprove, onReject 
             if (rating5 >= i) {
                 stars.push(<i key={i} className="fa-solid fa-star text-yellow-500"></i>);
             } else if (rating5 >= i - 0.5) {
-                stars.push(
-                    <i key={i} className="fa-solid fa-star-half-stroke text-yellow-500"></i>,
-                );
+                stars.push(<i key={i} className="fa-solid fa-star-half-stroke text-yellow-500"></i>);
             } else {
                 stars.push(<i key={i} className="fa-regular fa-star text-gray-600"></i>);
             }
@@ -76,11 +75,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment, onApprove, onReject 
                 <div className="flex-shrink-0">
                     <div className="w-10 h-10 rounded-full bg-item-primary flex items-center justify-center text-gray-500 font-bold overflow-hidden ">
                         {comment.avatar ? (
-                            <img
-                                src={comment.avatar}
-                                alt={t('admin.comments.avatarAlt', { username: comment.username })}
-                                className="w-full h-full object-cover"
-                            />
+                            <img src={comment.avatar} alt={t('admin.comments.avatarAlt', { username: comment.username })} className="w-full h-full object-cover" />
                         ) : (
                             comment.username.charAt(0).toUpperCase()
                         )}
@@ -97,10 +92,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment, onApprove, onReject 
                             <span className="text-gray-500 text-xs font-mono">{comment.time}</span>
                         </div>
                         <div className="text-xs text-gray-500 font-medium bg-item-primary px-2 py-1 rounded  truncate max-w-full">
-                            {t(comment.animeTitle)}{' '}
-                            {comment.episode
-                                ? `• ${t('media.schedule.episodeShort')} ${comment.episode}`
-                                : ''}
+                            {t(comment.animeTitle)} {comment.episode ? `• ${t('media.schedule.episodeShort')} ${comment.episode}` : ''}
                         </div>
                     </div>
 
@@ -109,9 +101,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment, onApprove, onReject 
                             <div className="flex text-xs space-x-0.5">
                                 {renderRating(comment.rating)}
                             </div>
-                            <span className="text-xs font-bold text-white ml-1">
-                                {(comment.rating / 2).toFixed(1)}
-                            </span>
+                            <span className="text-xs font-bold text-white ml-1">{(comment.rating / 2).toFixed(1)}</span>
                         </div>
                     )}
 
@@ -124,7 +114,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment, onApprove, onReject 
 
                 <div className="flex flex-col justify-center gap-2 ml-2">
                     {comment.type === 'ticket' ? (
-                        <button
+                        <button 
                             onClick={() => onApprove(comment.id)}
                             className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500 hover:text-white hover:border-blue-500 flex items-center justify-center transition-all duration-200 shadow-sm active:opacity-80"
                             title={t('admin.comments.ticket.chatTitle')}
@@ -134,7 +124,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment, onApprove, onReject 
                     ) : (
                         <>
                             {comment.status !== CommentStatus.Approved && (
-                                <button
+                                <button 
                                     onClick={() => onApprove(comment.id)}
                                     className="w-9 h-9 rounded-xl bg-green-500/10 text-green-500 border border-green-500/20 hover:bg-green-500 hover:text-black hover:border-green-500 flex items-center justify-center transition-all duration-200 shadow-sm active:opacity-80"
                                     title={t('admin.comments.actions.approve')}
@@ -143,7 +133,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ comment, onApprove, onReject 
                                 </button>
                             )}
                             {comment.status !== CommentStatus.Rejected && (
-                                <button
+                                <button 
                                     onClick={() => onReject(comment.id)}
                                     className="w-9 h-9 rounded-xl bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white hover:border-red-500 flex items-center justify-center transition-all duration-200 shadow-sm active:opacity-80"
                                     title={t('admin.comments.actions.reject')}

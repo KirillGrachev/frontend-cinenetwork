@@ -1,11 +1,13 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
-import type { AnimeDetails } from '../types';
+
+import { useState, useMemo } from 'react';
+import { useSearchParams, useNavigate } from 'react-router';
+import { AnimeDetails } from '../types';
 import { useLocale } from '../context/LocaleContext';
 
-export const useAnimeContentLogic = (anime: AnimeDetails) => {
+export const useAnimeContentLogic = (anime: AnimeDetails, setActiveTabExternal: (tab: string) => void) => {
     const { t } = useLocale();
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     // --- Viewer State ---
     const [isViewerOpen, setIsViewerOpen] = useState(false);
@@ -32,14 +34,14 @@ export const useAnimeContentLogic = (anime: AnimeDetails) => {
     const formatDuration = (val?: string) => {
         if (!val) return '—';
         const num = parseInt(val);
-        if (isNaN(num)) return val;
+        if (isNaN(num)) return val; 
         return t('media.anime.details.durationMin', { count: num });
     };
 
     const tabs = [
         { id: 'overview', label: t('media.anime.details.overview') },
         { id: 'episodes', label: t('media.anime.details.episodes') },
-        { id: 'photos', label: t('media.anime.details.photos') },
+        { id: 'photos', label: t('media.anime.details.photos') }, 
         { id: 'characters', label: t('media.anime.details.characters') },
         { id: 'related', label: t('media.anime.details.related') },
     ];
@@ -47,7 +49,7 @@ export const useAnimeContentLogic = (anime: AnimeDetails) => {
     return {
         // Data
         tabs,
-
+        
         // Lists
         episodesList,
         screenshots,
@@ -68,6 +70,6 @@ export const useAnimeContentLogic = (anime: AnimeDetails) => {
         formatSource,
         formatDuration,
         t,
-        navigate,
+        navigate
     };
 };

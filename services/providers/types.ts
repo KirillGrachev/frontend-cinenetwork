@@ -1,37 +1,20 @@
-import type {
-    AdminSection,
-    AuthCredentials,
-    AuthSession,
-    AdminStats,
-    AdminUser,
-    Anime,
-    AnimeDetails,
-    BannerItem,
-    CharacterDetails,
-    Collection,
-    Comment,
-    Curator,
-    Incident,
-    LogEntry,
-    NewsItem,
-    Notification,
-    SearchFilters,
-    ServiceGroup,
-    UserSettings,
+import { 
+    Anime, 
+    BannerItem, 
+    AnimeDetails, 
+    CharacterDetails, 
+    NewsItem, 
+    Collection, 
+    Curator, 
+    UserSettings, 
     UserProfileData,
+    AdminPeriod,
+    AdminUser,
+    Incident
 } from '../../types';
-import type { AdminPeriod } from '../../types';
-
-/**
- * Data-provider contracts.
- *
- * A provider is the single source of truth for *where data comes from*
- * (mock fixtures vs. real REST API). Services depend on these interfaces
- * only — never on a concrete provider.
- *
- * NOTE: all domain types are imported from `types/` — services must not
- * import from UI hooks (that inverts the dependency graph).
- */
+import { StatMetric, Transaction, TopContent, ActivityLogItem } from '../../hooks/useAdminStats';
+import { Comment } from '../../hooks/useAdminComments';
+import { LogEntry } from '../../hooks/useActivityLogLogic';
 
 export interface IAnimeDataProvider {
     getFeaturedAnime(): Promise<Anime>;
@@ -43,7 +26,7 @@ export interface IAnimeDataProvider {
     getAnimeDetails(id: number): Promise<AnimeDetails | undefined>;
     getCharacterDetails(id: number): Promise<CharacterDetails | undefined>;
     getStudioAnime(studioName: string): Promise<Anime[]>;
-    search(query: string, filters?: SearchFilters): Promise<Anime[]>;
+    search(query: string, filters?: any): Promise<Anime[]>;
 }
 
 export interface INewsDataProvider {
@@ -63,25 +46,21 @@ export interface IUserDataProvider {
     getUserProfile(id?: string | number): Promise<UserProfileData>;
 }
 
-export interface INotificationDataProvider {
-    getNotifications(): Promise<Notification[]>;
-}
-
 export interface IAdminDataProvider {
-    getStats(period: AdminPeriod): Promise<AdminStats>;
+    getStats(period: AdminPeriod): Promise<{
+        metrics: StatMetric[];
+        trafficHistory: number[];
+        contentDistribution: { label: string; value: number; color: string }[];
+        transactions: Transaction[];
+        topContent: TopContent[];
+        serverStats: { cpu: number; ram: number; storage: number; net: number };
+        activityLog: ActivityLogItem[];
+    }>;
     getUsers(): Promise<AdminUser[]>;
-    getComments(section: AdminSection): Promise<Comment[]>;
+    getComments(): Promise<Comment[]>;
     getActivityLogs(): Promise<LogEntry[]>;
 }
 
 export interface IStatusDataProvider {
     getIncidents(): Promise<Incident[]>;
-    getSystemStatus(): Promise<ServiceGroup[]>;
-}
-
-export interface IAuthDataProvider {
-    login(credentials: AuthCredentials): Promise<AuthSession>;
-    logout(): Promise<void>;
-    /** Validates the current session server-side and returns the profile. */
-    getCurrentUser(): Promise<UserProfileData>;
 }

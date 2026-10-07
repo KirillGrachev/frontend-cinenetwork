@@ -1,49 +1,44 @@
-import type React from 'react';
-import { useState } from 'react';
-import type { SearchFilters } from '../types';
+import React, { useState, useEffect } from 'react';
+import { SearchFilters } from '../types';
 
 export const useNavbarDesktopLogic = (
-    isSearchOpen: boolean,
+    isSearchOpen: boolean, 
     searchQuery: string,
-    searchInputRef: React.RefObject<HTMLInputElement | null>,
+    searchInputRef: React.RefObject<HTMLInputElement | null>
 ) => {
-    const [searchFilters, setSearchFilters] = useState<SearchFilters>({});
-    const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
-    /** Identity of a result set the user explicitly dismissed via closeResults. */
-    const [dismissedKey, setDismissedKey] = useState<string | null>(null);
+  const [isResultsVisible, setIsResultsVisible] = useState(false);
+  const [searchFilters, setSearchFilters] = useState<SearchFilters>({});
+  const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
 
-    const hasFilters = Boolean(searchFilters.genre || searchFilters.studio || searchFilters.year);
+  useEffect(() => {
+    /** Show results if there is a query OR filters are active */
+    /** BUT only if the filter menu is CLOSED (user finished configuring) */
+    const hasFilters = searchFilters.genre || searchFilters.studio || searchFilters.year;
+    
+    if (isSearchOpen && !isFilterMenuOpen && (searchQuery.trim().length > 0 || hasFilters)) {
+      setIsResultsVisible(true);
+    } else {
+      setIsResultsVisible(false);
+    }
+  }, [isSearchOpen, searchQuery, searchFilters, isFilterMenuOpen]);
 
-    /**
-     * Derived visibility (no effect): results show when the search UI is open,
-     * the filter menu is closed and there is something to search for — unless
-     * the user dismissed exactly this result set. Any change to the inputs
-     * produces a new key, so new results re-appear automatically.
-     */
-    const resultsKey = `${isSearchOpen}|${searchQuery}|${isFilterMenuOpen}|${searchFilters.genre ?? ''}|${searchFilters.studio ?? ''}|${searchFilters.year ?? ''}`;
-    const isResultsVisible =
-        isSearchOpen &&
-        !isFilterMenuOpen &&
-        (searchQuery.trim().length > 0 || hasFilters) &&
-        dismissedKey !== resultsKey;
+  const actions = {
+      closeResults: () => setIsResultsVisible(false),
+      setFilters: setSearchFilters,
+      setIsFilterMenuOpen: setIsFilterMenuOpen,
+      handleSearchSubmit: (e: React.FormEvent) => {
+        e.preventDefault();
+        if(searchInputRef.current) searchInputRef.current.blur();
+        setIsFilterMenuOpen(false);
+      }
+  };
 
-    const actions = {
-        closeResults: () => setDismissedKey(resultsKey),
-        setFilters: setSearchFilters,
-        setIsFilterMenuOpen: setIsFilterMenuOpen,
-        handleSearchSubmit: (e: React.FormEvent) => {
-            e.preventDefault();
-            if (searchInputRef.current) searchInputRef.current.blur();
-            setIsFilterMenuOpen(false);
-        },
-    };
-
-    return {
-        state: {
-            isResultsVisible,
-            searchFilters,
-            isFilterMenuOpen,
-        },
-        actions,
-    };
+  return {
+      state: {
+          isResultsVisible,
+          searchFilters,
+          isFilterMenuOpen
+      },
+      actions
+  };
 };

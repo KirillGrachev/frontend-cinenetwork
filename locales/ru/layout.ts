@@ -1,3 +1,4 @@
+
 export const layout = {
     navbar: {
         home: 'Главная',
@@ -7,9 +8,9 @@ export const layout = {
         news: 'Новости',
         searchPlaceholder: 'Поиск {category}...',
         searchCategories: {
-            anime: 'аниме',
-            collections: 'коллекций',
-            news: 'новостей',
+          anime: 'аниме',
+          collections: 'коллекций',
+          news: 'новостей',
         },
         searchCategoryLabels: {
             anime: 'Аниме',
@@ -32,15 +33,15 @@ export const layout = {
             empty: 'Новых уведомлений нет',
         },
         userMenu: {
-            admin: 'Админ. панель',
-            profile: 'Профиль',
-            favorites: 'Избранное',
-            history: 'История',
-            settings: 'Настройки',
-            logout: 'Выйти',
-            toggle: 'Открыть меню пользователя',
-            avatarAlt: 'Аватар пользователя',
-        },
+          admin: 'Админ. панель',
+          profile: 'Профиль',
+          favorites: 'Избранное',
+          history: 'История',
+          settings: 'Настройки',
+          logout: 'Выйти',
+          toggle: 'Открыть меню пользователя',
+          avatarAlt: 'Аватар пользователя',
+        }
     },
     footer: {
         slogan: 'Так звучит аниме!',
@@ -55,21 +56,21 @@ export const layout = {
             vk: 'VK',
             telegram: 'Telegram',
             discord: 'Discord',
-            youtube: 'YouTube',
+            youtube: 'YouTube'
         },
         navLinks: {
-            home: 'Главная',
-            catalog: 'Каталог',
-            schedule: 'Расписание',
-            news: 'Новости',
-            docs: 'Документы',
+            home: "Главная",
+            catalog: "Каталог",
+            schedule: "Расписание",
+            news: "Новости",
+            docs: "Документация"
         },
         userLinks: {
-            login: 'Авторизация',
-            register: 'Регистрация',
-            settings: 'Настройки',
-            status: 'Мониторинг сервисов',
-            support: 'Техническая поддержка',
-        },
-    },
+            login: "Авторизация",
+            register: "Регистрация",
+            settings: "Настройки",
+            status: "Мониторинг сервисов",
+            support: "Техническая поддержка"
+        }
+    }
 };

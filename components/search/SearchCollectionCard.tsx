@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-import type { Collection } from '../../types';
-import { AppRoute } from '../../types';
+import { Collection, AppRoute } from '../../types';
 import { useLocale } from '../../context/LocaleContext';
 
 interface SearchCollectionCardProps {
@@ -11,7 +10,7 @@ interface SearchCollectionCardProps {
 const SearchCollectionCard: React.FC<SearchCollectionCardProps> = ({ collection }) => {
     const { t } = useLocale();
     const navigate = useNavigate();
-
+    
     const handleCardClick = () => navigate(`${AppRoute.Collections}/${collection.id}`);
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -22,7 +21,7 @@ const SearchCollectionCard: React.FC<SearchCollectionCardProps> = ({ collection 
     };
 
     return (
-        <div
+        <div 
             onClick={handleCardClick}
             onKeyDown={handleKeyDown}
             role="button"
@@ -34,9 +33,7 @@ const SearchCollectionCard: React.FC<SearchCollectionCardProps> = ({ collection 
                 <i className="fa-solid fa-layer-group text-gray-400 group-hover:text-white"></i>
             </div>
             <h3 className="font-bold text-white text-lg mb-1">{t(collection.title)}</h3>
-            <p className="text-sm text-gray-500 font-medium">
-                {t('collections.animeCount', { count: collection.count })}
-            </p>
+            <p className="text-sm text-gray-500 font-medium">{t('collections.animeCount', { count: collection.count })}</p>
         </div>
     );
 };

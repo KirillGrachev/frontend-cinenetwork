@@ -1,3 +1,4 @@
+
 import { enDocs } from '../docs/en';
 
 export const info = {
@@ -22,7 +23,7 @@ export const info = {
         confirmTitle: 'External Link Navigation',
         confirmDescription: 'Are you sure you want to navigate to the external link?',
         confirmAction: 'Proceed',
-        cancelAction: 'Cancel',
+        cancelAction: 'Cancel'
     },
     blogPost: {
         backToNews: 'Back to News',
@@ -45,8 +46,7 @@ export const info = {
         subject: 'Subject',
         subjectPlaceholder: 'Briefly describe the issue',
         detailedDescription: 'Detailed Description',
-        descriptionPlaceholder:
-            'Describe the steps to reproduce the problem or the details of your question...',
+        descriptionPlaceholder: 'Describe the steps to reproduce the problem or the details of your question...',
         attachFiles: 'Attach Materials',
         files: 'Files',
         videoLink: 'Video Link',
@@ -64,7 +64,7 @@ export const info = {
         formErrors: {
             required: 'Required',
             validationError: 'Please fill in all required fields.',
-            invalidLink: 'Invalid link (must start with http)',
+            invalidLink: 'Invalid link (must start with http)'
         },
         ticketSuccess: 'Ticket created! We will contact you shortly.',
     },
@@ -83,82 +83,60 @@ export const info = {
         h0ago: '0h',
     },
     settings: {
-        title: 'Settings',
-        description: 'Manage your profile and application preferences.',
+        title: "Settings",
+        description: "Manage your profile and application preferences.",
         inDevelopment: {
-            title: 'Under Development',
-            description:
-                'We are working on making this section as useful as possible for you. Please check back later.',
-            backToHome: 'Back to Home',
+            title: "Under Development",
+            description: "We are working on making this section as useful as possible for you. Please check back later.",
+            backToHome: "Back to Home"
         },
         tabs: {
-            profile: 'Profile',
-            preferences: 'Preferences',
-            player: 'Player',
-            subscription: 'Subscription',
+            profile: "Profile",
+            preferences: "Preferences",
+            subscription: "Subscription",
         },
         profile: {
-            username: 'Username',
-            email: 'Email Address',
-            bio: 'About Me',
-            bioPlaceholder: 'Tell everyone about your favorite genres or anime...',
-            changeAvatar: 'Change Avatar',
-            saveChanges: 'Save Changes',
-            linkedAccounts: 'Linked Accounts',
+            username: "Username",
+            email: "Email Address",
+            changeAvatar: "Change Avatar",
+            saveChanges: "Save Changes",
+            linkedAccounts: "Linked Accounts",
             avatarAlt: 'Avatar',
             socials: {
-                google: 'Google',
-                telegram: 'Telegram',
-                discord: 'Discord',
-                yandex: 'Yandex',
+                google: "Google",
+                telegram: "Telegram",
+                discord: "Discord",
+                yandex: "Yandex"
             },
             connectSocial: 'Connect {provider}',
             disconnectSocial: 'Disconnect {provider}',
         },
         preferences: {
-            autoplay: 'Autoplay',
-            quality: 'Default Video Quality',
-            notifications: 'New Release Notifications',
-            interfaceLanguage: 'Interface Language',
-            showSpoilers: 'Show Spoilers',
-            showSpoilersDesc: 'Automatically expand reviews and comments marked as spoilers.',
-            notifyReleases: 'New Episodes',
-            notifyNews: 'Platform News',
-            notifyMentions: 'Replies & Mentions',
-        },
-        player: {
-            defaultQuality: 'Default Video Quality',
-            defaultAudio: 'Default Voiceover Language',
-            autoSkipIntro: 'Skip Openings',
-            autoNext: 'Auto-play Next Episode',
-            titles: {
-                general: 'Playback',
-                audio: 'Audio & Subtitles',
-            },
+            autoplay: "Autoplay",
+            quality: "Default Video Quality",
+            notifications: "New Release Notifications",
+            interfaceLanguage: "Interface Language",
         },
         subscription: {
-            currentPlan: 'Current Plan',
-            premium: 'Premium (4K + HDR)',
-            activeUntil: 'Active until {date}',
-            manage: 'Manage Subscription',
-            benefits: 'You have access to 4K streaming, no ads, and early access releases.',
-        },
+            currentPlan: "Current Plan",
+            premium: "Premium (4K + HDR)",
+            activeUntil: "Active until {date}",
+            manage: "Manage Subscription",
+            benefits: "You have access to 4K streaming, no ads, and early access releases.",
+        }
     },
     profile: {
         tabs: {
             overview: 'Overview',
-            activity: 'Activity',
-            dynamics: 'Dynamics',
-            friends: 'Friends',
             lists: 'Lists',
             collections: 'Collections',
             comments: 'Comments',
-            reviews: 'Ratings & Comments',
+            reviews: 'Ratings & Comments'
         },
         reviewsTab: {
             filterAll: 'All',
             filterRatings: 'Ratings Only',
-            filterComments: 'Comments Only',
+            filterComments: 'Comments Only'
         },
         level: 'Level',
         xp: 'XP',
@@ -168,7 +146,7 @@ export const info = {
             days: 'Days',
             comments: 'Comments',
             reviews: 'Reviews',
-            avgScore: 'Avg Score',
+            avgScore: 'Avg Score'
         },
         activity: {
             title: 'Recent Activity',
@@ -178,39 +156,29 @@ export const info = {
                 rated: 'Rated',
                 commented: 'Commented',
                 added_list: 'Listed',
-                achievement: 'Achievement',
-            },
+                achievement: 'Achievement'
+            }
         },
         dynamics: {
             title: 'Viewing Dynamics',
-            subtitle: 'Last 14 days',
-            periods: {
-                d14: '14 days',
-                d30: '30 days',
-                d90: '90 days',
-            },
+            subtitle: 'Last 14 days'
         },
         achievements: {
             title: 'Achievements',
-            viewAll: 'All',
+            viewAll: 'All'
         },
         friends: {
             title: 'Friends',
             all: 'All',
-            empty: 'No friends yet',
-            find: 'Find Friends',
-            findPlaceholder: 'Username...',
-            add: 'Add',
-            requestSent: 'Request Sent',
-            searchEmpty: 'No one found',
+            empty: 'No friends yet'
         },
         collections: {
             title: 'User Collections',
-            empty: 'No collections yet',
+            empty: 'No collections yet'
         },
         commentsHistory: {
             title: 'Reviews Feed',
-            to: 'to',
+            to: 'to'
         },
         joined: 'Joined {date}',
         edit: 'Edit',
@@ -224,15 +192,15 @@ export const info = {
             report: 'Report',
             reportProfile: 'Report Profile',
             copyLink: 'Copy Link',
-            block: 'Block',
-        },
+            block: 'Block'
+        }
     },
     team: {
-        name: 'CineNetwork',
+        name: "CineNetwork"
     },
     docs: {
         backToHome: 'Back to Home',
-        title: 'Legal Information',
+        title: 'Documentation',
         description: 'Legal information and terms of service.',
         lastUpdated: 'Last updated: 01.02.2026',
         downloadPdf: 'Download PDF',
@@ -240,6 +208,6 @@ export const info = {
         prevDoc: 'Previous document',
         nextDoc: 'Next document',
         selectDoc: 'Select document',
-        sections: enDocs,
+        sections: enDocs
     },
 };
